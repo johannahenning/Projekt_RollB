@@ -103,6 +103,8 @@ Cylon.robot({
                     counter--
                     if (counter === 0) {
                         console.log("HAPPY NEW YEAR!!");
+                    } else if (counter < 0) {
+                        break;
                     }
                 }, 1000);
                 break;
