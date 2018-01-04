@@ -4,16 +4,16 @@ var Cylon = require('cylon');
 var keypress = require("keypress");
 
 
-    Cylon.robot({
-      connections: {
-        bluetooth: { adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
-      },
+Cylon.robot({
+    connections: {
+        bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
+    },
 
-      devices: {
-        bb8: { driver: 'bb8', module: 'cylon-sphero-ble'}
-      },
+    devices: {
+        bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
+    },
 
-      work: function(my) {
+    work: function (my) {
 
         function handle(ch, key) {
 
@@ -73,10 +73,10 @@ var keypress = require("keypress");
             break;
           }
 
-          keypress(process.stdin);
-          process.stdin.on("keypress", handle);
+        keypress(process.stdin);
+        process.stdin.on("keypress", handle);
 
-          process.stdin.setRawMode(true);
-          process.stdin.resume();
-      }
-    }).start();
+        process.stdin.setRawMode(true);
+        process.stdin.resume();
+    }
+}).start();
