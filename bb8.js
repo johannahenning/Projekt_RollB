@@ -79,11 +79,11 @@ Cylon.robot({
                         console.log("drive to direction: " + dir);
                         my.bb8.roll(30, dir);
                         dir = dir + 5;
-                        if (dir === 365) {
+                        if (dir < 361) {
                             console.log("STOP!");
-                            dir = 0;
+
                             clearInterval(interval);
-                        }
+                        } dir = 0;
                     }, 100);
                 }
                 my.bb8.stop();
