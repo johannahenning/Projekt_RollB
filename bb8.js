@@ -83,8 +83,9 @@ Cylon.robot({
                             for (var i = 0; i <= 2; i++) {
                                 console.log("Zurück auf 0! " + i + "mal");
                                 dir = 0;
+                                clearInterval(interval);
                             }
-                            clearInterval(interval);
+
                         }
                     }, 100);
                 console.log("ENDE!");
