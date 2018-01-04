@@ -59,6 +59,7 @@ Cylon.robot({
             break;
 
             case "q":
+              console.log("drive square");
               my.bb8.roll(30, 0);
               after(3000, function() {
                 my.bb8.roll(30, 90);
@@ -71,6 +72,7 @@ Cylon.robot({
               });
               after(12000, function() {
                 my.bb8.stop();
+                console.log("stop square");
               });
             break;
 
