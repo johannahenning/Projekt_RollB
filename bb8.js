@@ -97,13 +97,13 @@ Cylon.robot({
             break;
 
               case "u":
-                var counter = 0;
-                my.bb8.roll(10, counter);
+                var dir = 0;
+                my.bb8.roll(30, dir);
                 var interval = setInterval(function(){
-                    console.log(counter);
-                    my.bb8.roll(10, counter);
-                    counter = counter + 90;
-                    if (counter === 450) {
+                    console.log("drive to direction: " + dir);
+                    my.bb8.roll(30, dir);
+                    dir = dir + 90;
+                    if (dir === 450) {
                         console.log("STOP!");
                         my.bb8.stop();
                         clearInterval(interval);
