@@ -97,11 +97,11 @@ Cylon.robot({
             break;
 
               case "u":
-                var counter = 10;
-                  var interval = setInterval(function(){
+                var counter = 0;
+                var interval = setInterval(function(){
                     console.log(counter);
-                    counter--
-                    if (counter === 0) {
+                    counter = counter + 90;
+                    if (counter === 270) {
                         console.log("HAPPY NEW YEAR!!");
                         clearInterval(interval);
                     }
