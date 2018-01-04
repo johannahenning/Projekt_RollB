@@ -83,7 +83,7 @@ Cylon.robot({
                   my.bb8.stop();
                   clearInterval(interval);
                   }
-              }, 500);
+              }, 300);
             break;
 
 
