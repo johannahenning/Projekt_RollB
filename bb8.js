@@ -98,13 +98,12 @@ Cylon.robot({
 
               case "u":
                 var counter = 10;
-                setInterval(function(){
+                  var interval = setInterval(function(){
                     console.log(counter);
                     counter--
                     if (counter === 0) {
                         console.log("HAPPY NEW YEAR!!");
-                    } else if (counter < 0) {
-                        break;
+                        clearInterval(interval);
                     }
                 }, 1000);
                 break;
