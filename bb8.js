@@ -96,8 +96,20 @@ Cylon.robot({
                 });
               }
             break;
+
+              case "u":
+                var counter = 10;
+                setInterval(function(){
+                    console.log(counter);
+                    counter--
+                    if (counter === 0) {
+                        console.log("HAPPY NEW YEAR!!");
+                    }
+                }, 1000);
+                break;
           }
         }
+
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
