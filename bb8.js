@@ -98,6 +98,7 @@ Cylon.robot({
 
               case "u":
                 var counter = 0;
+                my.bb8.roll(10, counter);
                 var interval = setInterval(function(){
                     console.log(counter);
                     my.bb8.roll(10, counter);
