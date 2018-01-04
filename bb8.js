@@ -98,7 +98,6 @@ Cylon.robot({
 
               case "u":
                 var dir = 0;
-                my.bb8.roll(30, dir);
                 var interval = setInterval(function(){
                     console.log("drive to direction: " + dir);
                     my.bb8.roll(30, dir);
