@@ -85,11 +85,13 @@ Cylon.robot({
                                 dir = 0;
                                 clearInterval(interval);
                             }
+                            console.log("Stop");
+                            my.bb8.stop();
 
                         }
                     }, 100);
                 console.log("ENDE!");
-                my.bb8.stop();
+
             break;
 
 
