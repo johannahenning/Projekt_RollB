@@ -70,8 +70,12 @@ Cylon.robot({
               after(4500, function() {
                 my.bb8.roll(50, 270);
               });
+              after(6000, function() {
+                my.bb8.stop();
+              });
             break;
           }
+        }
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
