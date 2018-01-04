@@ -78,17 +78,14 @@ Cylon.robot({
             case "l":
               var timer = 0;
               var dir = 0;
-              while(true) {
-                if(dir > 360) {
-                  after(timer, function() {
-                    my.bb8.toll(30, dir);
-                    timer = timer + 500;
-                    dir = dir + 5;
-                  });
-                } else
-                  my.bb8.stop();
-
-            }
+              while(dir < 360) {
+                after(timer, function() {
+                  my.bb8.toll(30, dir);
+                  timer = timer + 500;
+                  dir = dir + 20;
+                  if(dir >= 360)  my.bb8.stop();
+                });
+              }
             break;
           }
         }
