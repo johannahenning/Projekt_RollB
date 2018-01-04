@@ -73,17 +73,19 @@ Cylon.robot({
             break;
 
             case "o":
-              var dir = 0;
-              var interval = setInterval(function(){
-                console.log("drive to direction: " + dir);
-                my.bb8.roll(30, dir);
-                dir = dir + 5;
-                if (dir === 365) {
-                  console.log("STOP!");
-                  my.bb8.stop();
-                  clearInterval(interval);
-                  }
-              }, 100);
+                for (var i = 0; i <= 4; i++) {
+                    var dir = 0;
+                    var interval = setInterval(function () {
+                        console.log("drive to direction: " + dir);
+                        my.bb8.roll(30, dir);
+                        dir = dir + 5;
+                        if (dir === 365) {
+                            console.log("STOP!");
+                            clearInterval(interval);
+                        }
+                    }, 100);
+                }
+                my.bb8.stop();
             break;
 
 
