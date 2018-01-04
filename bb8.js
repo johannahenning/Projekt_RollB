@@ -61,16 +61,16 @@ Cylon.robot({
 
             case "q":
               my.bb8.roll(50, 0);
-              after(1500, function() {
+              after(2000, function() {
                 my.bb8.roll(50, 90);
               });
-              after(3000, function() {
+              after(4000, function() {
                 my.bb8.roll(50, 180);
               });
-              after(4500, function() {
+              after(6000, function() {
                 my.bb8.roll(50, 270);
               });
-              after(6000, function() {
+              after(8000, function() {
                 my.bb8.stop();
               });
             break;
