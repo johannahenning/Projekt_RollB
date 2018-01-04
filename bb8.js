@@ -74,6 +74,22 @@ Cylon.robot({
                 my.bb8.stop();
               });
             break;
+
+              case "o":
+                  my.bb8.roll(30, 0);
+                  after(3000, function() {
+                      my.bb8.roll(30, 30);
+                  });
+                  after(3100, function() {
+                      my.bb8.roll(30, 40);
+                  });
+                  after(3200, function() {
+                      my.bb8.roll(30, 90);
+                  });
+                  after(6000, function() {
+                      my.bb8.stop();
+                  });
+                  break;
           }
         }
 
