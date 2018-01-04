@@ -100,6 +100,7 @@ Cylon.robot({
                 var counter = 0;
                 var interval = setInterval(function(){
                     console.log(counter);
+                    my.bb8.roll(10, counter);
                     counter = counter + 90;
                     if (counter === 270) {
                         console.log("HAPPY NEW YEAR!!");
