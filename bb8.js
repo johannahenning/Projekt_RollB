@@ -80,10 +80,12 @@ Cylon.robot({
               var dir = 0;
               while(dir < 360) {
                 after(timer, function() {
-                  my.bb8.toll(30, dir);
-                  timer = timer + 500;
-                  dir = dir + 20;
                   if(dir >= 360)  my.bb8.stop();
+                  else {
+                    my.bb8.toll(30, dir);
+                    timer = timer + 500;
+                    dir = dir + 20;
+                  }
                 });
               }
             break;
