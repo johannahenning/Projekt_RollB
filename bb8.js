@@ -102,12 +102,12 @@ Cylon.robot({
                     console.log(counter);
                     my.bb8.roll(10, counter);
                     counter = counter + 90;
-                    if (counter === 360) {
+                    if (counter === 450) {
                         console.log("STOP!");
                         my.bb8.stop();
                         clearInterval(interval);
                     }
-                }, 3000);
+                }, 8000);
                 break;
           }
         }
