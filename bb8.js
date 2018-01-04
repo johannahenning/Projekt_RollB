@@ -81,9 +81,9 @@ Cylon.robot({
                         dir = dir + 5;
                         if (dir >= 365) {
                             console.log("STOP!");
-                            dir = 0;
+
                             clearInterval(interval);
-                        }
+                        } dir = 0;
                     }, 100);
                 }
                 my.bb8.stop();
