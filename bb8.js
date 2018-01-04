@@ -58,10 +58,19 @@ var keypress = require("keypress");
             case "space":
               my.bb8.stop();
             break;
-            }
-            //
-            // my.bb8.detectCollisions();
-            // my.bb8.stopOnDisconnect();
+
+            case "q":
+              my.bb8.roll(50, 0);
+              after(1500, function() {
+                my.bb8.roll(50, 90);
+              });
+              after(3000, function() {
+                my.bb8.roll(50, 180);
+              });
+              after(4500, function() {
+                my.bb8.roll(50, 270);
+              });
+            break;
           }
 
           keypress(process.stdin);
