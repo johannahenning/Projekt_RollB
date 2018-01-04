@@ -39,9 +39,9 @@ Cylon.robot({
                         my.bb8.roll(100, counter);
                         if (counter === 180) {
                             my.bb8.stop();
+                            break;
                         }
                     }, 1000);
-                    break;
 
                 case "k":
                     my.bb8.randomColor();
