@@ -60,17 +60,17 @@ Cylon.robot({
             break;
 
             case "q":
-              my.bb8.roll(50, 0);
-              after(2000, function() {
-                my.bb8.roll(50, 90);
-              });
-              after(4000, function() {
-                my.bb8.roll(50, 180);
+              my.bb8.roll(30, 0);
+              after(3000, function() {
+                my.bb8.roll(30, 90);
               });
               after(6000, function() {
-                my.bb8.roll(50, 270);
+                my.bb8.roll(30, 180);
               });
-              after(8000, function() {
+              after(9000, function() {
+                my.bb8.roll(30, 270);
+              });
+              after(12000, function() {
                 my.bb8.stop();
               });
             break;
