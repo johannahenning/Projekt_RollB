@@ -28,7 +28,6 @@ Cylon.robot({
             var myColor = setInterval(function () {
               my.bb8.randomColor();
             }, 1000);
-              // my.bb8.randomColor();
             break;
 
             case "k":
@@ -76,11 +75,15 @@ Cylon.robot({
             break;
 
             case "l":
+              console.log("drive circle");
               var timer = 0;
               var dir = 0;
               while(dir < 360) {
                 after(timer, function() {
-                  if(dir >= 360)  my.bb8.stop();
+                  if(dir >= 360)  {
+                    my.bb8.stop();
+                    console.log("stop circle");
+                  }
                   else {
                     my.bb8.toll(30, dir);
                     timer = timer + 500;
