@@ -81,17 +81,17 @@ Cylon.robot({
               var timer = 0;
               var dir = 0;
               var drive = new Boolean("true");
-              while(drive = true) {
+              while(drive = "true") {
                 after(timer, function() {
-                  if(dir >= 360)  {
+                  if(dir >= 359)  {
                     my.bb8.stop();
                     console.log("stop circle");
-                    drive = false;
+                    drive = "false";
                   } else {
                     my.bb8.toll(30, dir);
                     timer =+ 500;
                     dir =+ 20;
-                    drive = true;
+                    drive = "true";
                   }
                 });
               }
