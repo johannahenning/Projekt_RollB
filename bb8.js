@@ -107,7 +107,7 @@ Cylon.robot({
                         my.bb8.stop();
                         clearInterval(interval);
                     }
-                }, 8000);
+                }, 3000);
                 break;
           }
         }
