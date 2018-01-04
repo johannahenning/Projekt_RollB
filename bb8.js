@@ -78,7 +78,7 @@ Cylon.robot({
                 console.log("drive to direction: " + dir);
                 my.bb8.roll(30, dir);
                 dir = dir + 5;
-                if (dir === 400) {
+                if (dir === 365) {
                   console.log("STOP!");
                   my.bb8.stop();
                   clearInterval(interval);
