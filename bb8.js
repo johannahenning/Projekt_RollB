@@ -76,42 +76,7 @@ Cylon.robot({
               });
             break;
 
-            case "l":
-              console.log("drive circle");
-              var timer = 500;
-              var dir = 0;
-              var drive = new Boolean("true");
-              while(drive = "true") {
-                after(timer, function() {
-                  if(dir >= 359)  {
-                    my.bb8.stop();
-                    console.log("stop circle");
-                    drive = "false";
-                  } else {
-                    my.bb8.toll(30, dir);
-                    dir =+ 20;
-                    drive = "true";
-                  }
-                });
-              }
-            break;
-
-              case "u":
-                var dir = 0;
-                my.bb8.roll(30, dir);
-                var interval = setInterval(function(){
-                    console.log("drive to direction: " + dir);
-                    my.bb8.roll(30, dir);
-                    dir = dir + 90;
-                    if (dir === 450) {
-                        console.log("STOP!");
-                        my.bb8.stop();
-                        clearInterval(interval);
-                    }
-                }, 8000);
-                break;
-          }
-        }
+        
 
 
         keypress(process.stdin);
