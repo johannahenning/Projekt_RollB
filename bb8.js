@@ -77,13 +77,13 @@ Cylon.robot({
               var interval = setInterval(function(){
                 console.log("drive to direction: " + dir);
                 my.bb8.roll(30, dir);
-                dir = dir + 10;
-                if (dir === 370) {
+                dir = dir + 5;
+                if (dir === 365) {
                   console.log("STOP!");
                   my.bb8.stop();
                   clearInterval(interval);
                   }
-              }, 300);
+              }, 100);
             break;
 
 
