@@ -78,7 +78,7 @@ Cylon.robot({
 
             case "l":
               console.log("drive circle");
-              var timer = 0;
+              var timer = 500;
               var dir = 0;
               var drive = new Boolean("true");
               while(drive = "true") {
@@ -89,7 +89,6 @@ Cylon.robot({
                     drive = "false";
                   } else {
                     my.bb8.toll(30, dir);
-                    timer =+ 500;
                     dir =+ 20;
                     drive = "true";
                   }
