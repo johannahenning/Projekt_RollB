@@ -92,8 +92,10 @@ Cylon.robot({
             break;
 
               case "m":
-                  var audio = new Audio('test.mp3');
-                  audio.play();
+                  var player = require('play-sound')(opts = {})
+                  player.play('test.mp3', function(err){
+                      if (err) throw err
+                  })
                   break;
           }
 
