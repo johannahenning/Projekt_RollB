@@ -2,6 +2,7 @@
 
 var Cylon = require('cylon');
 var keypress = require("keypress");
+var SoundPlayer = require('soundplayer');
 
 
 Cylon.robot({
@@ -92,10 +93,15 @@ Cylon.robot({
             break;
 
               case "m":
-                  var player = require('play-sound')(opts = {})
-                  player.play('test.mp3', function(err){
-                      if (err) throw err
-                  })
+
+                  var player=new SoundPlayer();
+
+                  player.sound('test.mp3', function(){
+
+                      player.sound('test.mp3');
+
+                  });
+
                   break;
           }
 
