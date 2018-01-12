@@ -82,7 +82,7 @@ Cylon.robot({
                         dir = dir + 5;
                         if (dir >= 365) {
                                 dir = 0;
-                            if(count > 5) clearInterval(interval);
+                            if(count > 2) clearInterval(interval);
                             count++;
                             console.log("Stop");
                         }
