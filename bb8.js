@@ -81,14 +81,13 @@ Cylon.robot({
                         my.bb8.roll(30, dir);
                         dir = dir + 5;
                         if (dir >= 365) {
-                                dir = 0;
+                            dir = 0;
                             if(count > 2) clearInterval(interval);
-                            count++;
                             console.log("Stop");
                         }
+                        count++;
                     }, 100);
                 console.log("ENDE!");
-
             break;
 
 
