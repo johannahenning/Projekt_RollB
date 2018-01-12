@@ -74,6 +74,7 @@ Cylon.robot({
 
             case "o":
 
+                var count = 0;
                     var dir = 0;
                     var interval = setInterval(function () {
                         console.log("drive to direction: " + dir);
@@ -82,10 +83,9 @@ Cylon.robot({
                         if (dir >= 365) {
                                 console.log("Zurück auf 0! " + i + "mal");
                                 dir = 0;
-                                clearInterval(interval);
+                            if(count > 5) clearInterval(interval);
+                            count++;
                             console.log("Stop");
-                            my.bb8.stop();
-
                         }
                     }, 100);
                 console.log("ENDE!");
