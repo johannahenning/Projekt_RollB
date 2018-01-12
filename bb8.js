@@ -81,7 +81,6 @@ Cylon.robot({
                         my.bb8.roll(30, dir);
                         dir = dir + 5;
                         if (dir >= 365) {
-                                console.log("Zurück auf 0! " + i + "mal");
                                 dir = 0;
                             if(count > 5) clearInterval(interval);
                             count++;
