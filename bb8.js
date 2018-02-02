@@ -92,13 +92,13 @@ Cylon.robot({
                 console.log("ENDE!");
             break;
 
-              case "m":
+              case "1":
 
                   var player=new SoundPlayer();
 
-                  player.sound('test.mp3', function(){
+                  player.sound('1.mp3', function(){
 
-                      player.sound('test.mp3');
+                     // player.sound('test.mp3');
 
                   });
 
