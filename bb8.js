@@ -25,7 +25,7 @@ Cylon.robot({
 
             switch (key.keyCode) {
 
-                case "80":
+                case 80:
                     for (var i = 0; i <= 1000; i++) {
                         my.bb8.randomColor();
                         i++;
