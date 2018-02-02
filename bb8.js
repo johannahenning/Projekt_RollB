@@ -87,12 +87,12 @@ Cylon.robot({
                             count++;
                         }
                         if(count > 4) clearInterval(interval);
-
                     }, 100);
+                my.bb8.stop();
                 console.log("ENDE!");
             break;
 
-              case (key.keyModifierStateNumLock == 49):
+              case ("one"):
 
                   var player=new SoundPlayer();
 
