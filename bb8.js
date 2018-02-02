@@ -23,19 +23,18 @@ Cylon.robot({
                 process.exit();
             }
 
-            if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||key.name === "s"
-                ||key.name === "space" || key.name === "q" ||key.name === "o"
+            if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||
+                key.name === "s" ||key.name === "space" || key.name === "o"
                 ||key.name === "m" ||key.name === "y" ||key.name === "x" ||key.name === "c" ||key.name === "v" ||key.name === "b" ||key.name === "n") {
 
                 switch (key.name) {
 
                     case "r":
                         console.log("Start random color");
-                        for (var i = 0; i <= 300; i++) {
+                        for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
                         }
-                        console.log("Stop Random Color");
                         break;
 
                     case "k":
@@ -74,21 +73,6 @@ Cylon.robot({
                     case "space":
                         console.log("Stop");
                         my.bb8.stop();
-                        break;
-
-                    case "q":
-                        console.log("Start drive square");
-                        var dir = 0;
-                        var interval = setInterval(function () {
-                            console.log("drive to direction: " + dir);
-                            my.bb8.roll(30, dir);
-                            dir = dir + 90;
-                            if (dir === 450) {
-                                console.log("STOP!");
-                                my.bb8.stop();
-                                clearInterval(interval);
-                            }
-                        }, 3000);
                         break;
 
                     case "o":
@@ -164,9 +148,12 @@ Cylon.robot({
                 }
             }
             else {
-                console.log("Key unknown");
+                console.log("Key unknown, ROLLB SAYS NO");
                 var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
+                });
+                orb.color({ red: 255, green: 0, blue: 0 }, function(err, data) {
+                console.log(err || "Color RED!");
                 });
             }
 
