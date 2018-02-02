@@ -44,25 +44,21 @@ Cylon.robot({
 
                     case "w":
                         console.log("Drive to front");
-                        my.bb8.randomColor();
                         my.bb8.roll(100, 90);
                         break;
 
                     case "d":
                         console.log("Drive right");
-                        my.bb8.randomColor();
                         my.bb8.roll(100, 180);
                         break;
 
                     case "s":
                         console.log("Drive back");
-                        my.bb8.randomColor();
                         my.bb8.roll(100, 270);
                         break;
 
                     case "a":
                         console.log("Drive left");
-                        my.bb8.randomColor();
                         my.bb8.roll(100, 0);
                         break;
 
