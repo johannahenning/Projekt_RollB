@@ -26,10 +26,11 @@ Cylon.robot({
             switch (key.name) {
 
                 case "p":
-                    for (var i = 0; i <= 10; i++) {
+                    for (var i = 0; i <= 100; i++) {
                         my.bb8.randomColor();
                         i++;
                     }
+                    console.log("Stop Random Color");
                     break;
 
                 case "k":
