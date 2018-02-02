@@ -25,10 +25,11 @@ Cylon.robot({
 
             switch (key.name) {
 
-                case "c":
-                    var myColor = setInterval(function () {
+                case "p":
+                    for (var i = 0; i <= 10; i++) {
                         my.bb8.randomColor();
-                    }, 1000);
+                        i++;
+                    }
                     break;
 
                 case "k":
@@ -100,15 +101,45 @@ Cylon.robot({
                     break;
 
                 case ("y"):
-
                     var player=new SoundPlayer();
-
                     player.sound('1.mp3', function(){
-
-                        // player.sound('test.mp3');
-
                     });
+                    break;
 
+                case ("x"):
+                    var player=new SoundPlayer();
+                    player.sound('2.mp3', function(){
+                    });
+                    break;
+
+                case ("c"):
+                    var player=new SoundPlayer();
+                    player.sound('3.mp3', function(){
+                    });
+                    break;
+
+                case ("v"):
+                    var player=new SoundPlayer();
+                    player.sound('4.mp3', function(){
+                    });
+                    break;
+
+                case ("b"):
+                    var player=new SoundPlayer();
+                    player.sound('5.mp3', function(){
+                    });
+                    break;
+
+                case ("n"):
+                    var player=new SoundPlayer();
+                    player.sound('6.mp3', function(){
+                    });
+                    break;
+
+                case ("m"):
+                    var player=new SoundPlayer();
+                    player.sound('7.mp3', function(){
+                    });
                     break;
             }
 
