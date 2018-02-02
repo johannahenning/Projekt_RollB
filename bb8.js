@@ -26,7 +26,6 @@ Cylon.robot({
             if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||key.name === "s"
                 ||key.name === "space" || key.name === "q" ||key.name === "o" ) {
 
-
                 switch (key.name) {
 
                     case "r":
@@ -150,6 +149,9 @@ Cylon.robot({
             }
             else {
                 console.log("Key unknown");
+                var player = new SoundPlayer();
+                player.sound('15.mp3', function () {
+                });
             }
 
         }
