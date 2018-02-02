@@ -24,13 +24,13 @@ Cylon.robot({
             }
 
             if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||key.name === "s"
-                ||key.name === "space" || key.name === "q" ||key.name === "o" 
+                ||key.name === "space" || key.name === "q" ||key.name === "o"
                 ||key.name === "m" ||key.name === "y" ||key.name === "x" ||key.name === "c" ||key.name === "v" ||key.name === "b" ||key.name === "n") {
 
                 switch (key.name) {
 
                     case "r":
-                        for (var i = 0; i <= 1000; i++) {
+                        for (var i = 0; i <= 300; i++) {
                             my.bb8.randomColor();
                             i++;
                         }
