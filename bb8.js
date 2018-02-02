@@ -152,7 +152,7 @@ Cylon.robot({
                 var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
-                orb.color({ red: 255, green: 0, blue: 0 }, function(err, data) {
+                my.bb8.color({ red: 255, green: 0, blue: 0 }, function(err, data) {
                 console.log(err || "Color RED!");
                 });
             }
