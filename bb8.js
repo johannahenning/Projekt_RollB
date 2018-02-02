@@ -24,7 +24,8 @@ Cylon.robot({
             }
 
             if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||key.name === "s"
-                ||key.name === "space" || key.name === "q" ||key.name === "o" ) {
+                ||key.name === "space" || key.name === "q" ||key.name === "o" 
+                ||key.name === "m" ||key.name === "y" ||key.name === "x" ||key.name === "c" ||key.name === "v" ||key.name === "b" ||key.name === "n") {
 
                 switch (key.name) {
 
