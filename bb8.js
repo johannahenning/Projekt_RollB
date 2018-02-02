@@ -23,9 +23,9 @@ Cylon.robot({
                 process.exit();
             }
 
-            switch (key.keyCode) {
+            switch (key.name) {
 
-                case 80:
+                case "r":
                     for (var i = 0; i <= 1000; i++) {
                         my.bb8.randomColor();
                         i++;
@@ -37,7 +37,7 @@ Cylon.robot({
                     my.bb8.randomColor();
                     break;
 
-                case "onkeyup":
+                case "w":
                     my.bb8.randomColor();
                     my.bb8.roll(100, 90);
                     break;
@@ -47,7 +47,7 @@ Cylon.robot({
                     my.bb8.roll(100, 180);
                     break;
 
-                case "onkeydown":
+                case "s":
                     my.bb8.randomColor();
                     my.bb8.roll(100, 270);
                     break;
