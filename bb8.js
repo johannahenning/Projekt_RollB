@@ -30,6 +30,7 @@ Cylon.robot({
                 switch (key.name) {
 
                     case "r":
+                        console.log("Start random color");
                         for (var i = 0; i <= 300; i++) {
                             my.bb8.randomColor();
                             i++;
@@ -38,25 +39,30 @@ Cylon.robot({
                         break;
 
                     case "k":
+                        console.log("Random color");
                         my.bb8.randomColor();
                         break;
 
                     case "w":
+                        console.log("Drive to front");
                         my.bb8.randomColor();
                         my.bb8.roll(100, 90);
                         break;
 
                     case "d":
+                        console.log("Drive right");
                         my.bb8.randomColor();
                         my.bb8.roll(100, 180);
                         break;
 
                     case "s":
+                        console.log("Drive back");
                         my.bb8.randomColor();
                         my.bb8.roll(100, 270);
                         break;
 
                     case "a":
+                        console.log("Drive left");
                         my.bb8.randomColor();
                         my.bb8.roll(100, 0);
                         break;
@@ -66,10 +72,12 @@ Cylon.robot({
                         break;
 
                     case "space":
+                        console.log("Stop");
                         my.bb8.stop();
                         break;
 
                     case "q":
+                        console.log("Start drive square");
                         var dir = 0;
                         var interval = setInterval(function () {
                             console.log("drive to direction: " + dir);
@@ -84,7 +92,7 @@ Cylon.robot({
                         break;
 
                     case "o":
-
+                        console.log("Start drive in a circle");
                         var count = 0;
                         var dir = 0;
                         var interval = setInterval(function () {
@@ -93,55 +101,62 @@ Cylon.robot({
                             dir = dir + 5;
                             if (dir >= 365) {
                                 dir = 0;
-                                console.log("Wieder auf 0");
+                                console.log("Reset direction");
                                 count++;
                             }
                             if (count > 4) {
                                 clearInterval(interval);
                                 my.bb8.stop();
-                                console.log("ENDE!");
+                                console.log("STOP!");
                             }
                         }, 100);
 
                         break;
 
                     case ("y"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('1.mp3', function () {
                         });
                         break;
 
                     case ("x"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('2.mp3', function () {
                         });
                         break;
 
                     case ("c"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('3.mp3', function () {
                         });
                         break;
 
                     case ("v"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('4.mp3', function () {
                         });
                         break;
 
                     case ("b"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('5.mp3', function () {
                         });
                         break;
 
                     case ("n"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('6.mp3', function () {
                         });
                         break;
 
                     case ("m"):
+                        console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('7.mp3', function () {
                         });
@@ -153,7 +168,6 @@ Cylon.robot({
                 var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
-                my.bb8.setRgbLed(0xff0000);
             }
 
         }
