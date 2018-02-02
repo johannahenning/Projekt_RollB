@@ -92,7 +92,7 @@ Cylon.robot({
                 console.log("ENDE!");
             break;
 
-              case "1":
+              case "49":
 
                   var player=new SoundPlayer();
 
