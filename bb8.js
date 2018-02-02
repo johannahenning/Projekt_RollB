@@ -153,6 +153,7 @@ Cylon.robot({
                 var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
+                my.bb8.setRgbLed(0xff0000);
             }
 
         }

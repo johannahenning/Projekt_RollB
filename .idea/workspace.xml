@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3679351-7a56-47bf-b0a8-07903ff56c39" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bb8.js" afterPath="$PROJECT_DIR$/bb8.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +17,38 @@
       <file leaf-file-name="bb8.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bb8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="34" column="32" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            <state relative-caret-position="605">
+              <caret line="161" column="32" lean-forward="true" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/colors.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="118" column="33" lean-forward="false" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sphero.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/sphero.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6137">
+              <caret line="361" column="33" lean-forward="true" selection-start-line="361" selection-start-column="33" selection-end-line="361" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/custom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="310" column="23" lean-forward="true" selection-start-line="310" selection-start-column="23" selection-end-line="310" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -29,6 +60,7 @@
     <findStrings>
       <find>\&quot;use strict\&quot;\n\nvar Cylon \= require\(\'cylon\'\)\;\nvar keypress \= require\(\&quot;keypress\&quot;\)\;\n\n\n    Cylon\.robot\(\{\n      connections\: \{\n        bluetooth\: \{ adaptor\: \'central\'\, uuid\: \'ef5b943330b9\'\, module\: \'cylon\-ble\'\}\n      \}\,\n\n      devices\: \{\n        bb8\: \{ driver\: \'bb8\'\, module\: \'cylon\-sphero\-ble\'\}\n      \}\,\n\n      work\: function\(my\) \{\n\n        function handle\(ch\, key\) \{\n\n          if \(key\.ctrl \&amp;\&amp; key\.name \=\=\= \&quot;c\&quot;\) \{\n              process\.stdin\.pause\(\)\;\n              process\.exit\(\)\;\n          \}\n\n          switch \(key\.name\) \{\n\n            case \&quot;c\&quot;\:\n            var myColor \= setInterval\(function \(\) \{\n              my\.bb8\.randomColor\(\)\;\n            \}\, 1000\)\;\n              \/\/ my\.bb8\.randomColor\(\)\;\n            break\;\n            \n              case \&quot;q\&quot;\:\n                var square \= setInterval\(function \(\) \{\n                  my\.bb8\.roll\(100\, 90\)\;\n                \}\, 2000\)\;\n                break\;\n\n            case \&quot;k\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n            break\;\n\n            case \&quot;w\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 90\)\;\n            break\;\n\n            case \&quot;d\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 180\)\;\n            break\;\n\n            case \&quot;s\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 270\)\;\n            break\;\n\n            case \&quot;a\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 0\)\;\n            break\;\n\n            case \&quot;space\&quot;\:\n              my\.bb8\.stop\(\)\;\n            break\;\n            \}\n            \/\/\n            \/\/ my\.bb8\.detectCollisions\(\)\;\n            \/\/ my\.bb8\.stopOnDisconnect\(\)\;\n          \}\n\n          keypress\(process\.stdin\)\;\n          process\.stdin\.on\(\&quot;keypress\&quot;\, handle\)\;\n\n          process\.stdin\.setRawMode\(true\)\;\n          process\.stdin\.resume\(\)\;\n      \}\n    \}\)\.start\(\)\;\n</find>
       <find>\&quot;use strict\&quot;\n\nvar Cylon \= require\(\'cylon\'\)\;\nvar keypress \= require\(\&quot;keypress\&quot;\)\;\n\n\n    Cylon\.robot\(\{\n      connections\: \{\n        bluetooth\: \{ adaptor\: \'central\'\, uuid\: \'ef5b943330b9\'\, module\: \'cylon\-ble\'\}\n      \}\,\n\n      devices\: \{\n        bb8\: \{ driver\: \'bb8\'\, module\: \'cylon\-sphero\-ble\'\}\n      \}\,\n\n      work\: function\(my\) \{\n\n        function handle\(ch\, key\) \{\n\n          if \(key\.ctrl \&amp;\&amp; key\.name \=\=\= \&quot;c\&quot;\) \{\n              process\.stdin\.pause\(\)\;\n              process\.exit\(\)\;\n          \}\n\n          switch \(key\.name\) \{\n\n            case \&quot;c\&quot;\:\n            var myColor \= setInterval\(function \(\) \{\n              my\.bb8\.randomColor\(\)\;\n            \}\, 1000\)\;\n              \/\/ my\.bb8\.randomColor\(\)\;\n            break\;\n            \n            case \&quot;q\&quot;\:\n\n                  var counter \= 0\;\n                  setInterval\(function\(\)\{\n                      console\.log\(counter\)\;\n                      counter \= counter \+ 90\;\n                      my\.bb8\.roll\(100\, counter\)\;\n                      if \(counter \=\=\= 180\) \{\n                          my\.bb8\.stop\(\)\;\n                      \}\n                  \}\, 1000\)\;\n                  break\;\n                  \n            case \&quot;k\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n            break\;\n\n            case \&quot;w\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 90\)\;\n            break\;\n\n            case \&quot;d\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 180\)\;\n            break\;\n\n            case \&quot;s\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 270\)\;\n            break\;\n\n            case \&quot;a\&quot;\:\n              my\.bb8\.randomColor\(\)\;\n              my\.bb8\.roll\(100\, 0\)\;\n            break\;\n\n            case \&quot;space\&quot;\:\n              my\.bb8\.stop\(\)\;\n            break\;\n            \}\n            \/\/\n            \/\/ my\.bb8\.detectCollisions\(\)\;\n            \/\/ my\.bb8\.stopOnDisconnect\(\)\;\n          \}\n\n          keypress\(process\.stdin\)\;\n          process\.stdin\.on\(\&quot;keypress\&quot;\, handle\)\;\n\n          process\.stdin\.setRawMode\(true\)\;\n          process\.stdin\.resume\(\)\;\n      \}\n    \}\)\.start\(\)\;\n</find>
+      <find>set</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -55,7 +87,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
     <option name="width" value="1536" />
@@ -209,15 +241,15 @@
       <workItem from="1515744418699" duration="5435000" />
       <workItem from="1516103805420" duration="112000" />
       <workItem from="1516103949866" duration="799000" />
-      <workItem from="1517577546366" duration="3129000" />
+      <workItem from="1517577546366" duration="3652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16363000" />
+    <option name="totallyTimeSpent" value="16886000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
+    <frame x="-6" y="-6" width="1513" height="973" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -419,24 +451,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3077">
-          <caret line="181" column="23" lean-forward="false" selection-start-line="181" selection-start-column="23" selection-end-line="181" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/cylon-ollie/lib/driver.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1309">
           <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/sphero.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7650">
-          <caret line="450" column="65" lean-forward="false" selection-start-line="450" selection-start-column="61" selection-end-line="450" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -447,10 +465,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="310" column="23" lean-forward="true" selection-start-line="310" selection-start-column="23" selection-end-line="310" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/devices/sphero.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6137">
+          <caret line="361" column="33" lean-forward="true" selection-start-line="361" selection-start-column="33" selection-end-line="361" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/sphero/lib/colors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="118" column="33" lean-forward="false" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bb8.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="34" column="32" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        <state relative-caret-position="605">
+          <caret line="161" column="32" lean-forward="true" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
           <folding />
         </state>
       </provider>
