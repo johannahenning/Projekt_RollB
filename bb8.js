@@ -86,10 +86,13 @@ Cylon.robot({
                             console.log("Wieder auf 0");
                             count++;
                         }
-                        if(count > 4) clearInterval(interval);
+                        if(count > 4) {
+                            clearInterval(interval);
+                            my.bb8.stop();
+                            console.log("ENDE!");
+                        }
                     }, 100);
-                my.bb8.stop();
-                console.log("ENDE!");
+
             break;
 
               case ("one"):
