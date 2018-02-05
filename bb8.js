@@ -26,7 +26,14 @@ pubnub.addListener({
     },
     message: function(message) {
      console.log(message);
-     console.log("Ich fuehre die message function aus");
+    // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
+    // var filtered_json = find_in_object(JSON.parse(my_json), {type: messageType});
+        message.forEach(function (element, index) {
+            if(element['type'] === 'Drehung'){
+                console.log('found', element)
+            }
+        })
+          console.log("Ich fuehre die message function aus");
     },
     presence: function(presenceEvent) {
         console.log("presece function");
