@@ -25,18 +25,14 @@ pubnub.addListener({
         }
     },
     message: function(message) {
+
      console.log(message);
     // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
-          console.log("Ich fuehre die message function aus");
+        // console.log("Ich fuehre die message function aus");
+       if ( message.DrehungMessage.type == "Drehung") {
+           console.log("ich logge Drehung");
+       }
 
-        var jsonMessage = JSON.parse(message);
-        message.each(JSON.parse(jsonMessage), function(idx, obj){
-
-            if (obj.type == "Drehung") {
-                console.log("blabliblub");
-            }
-
-        })
     },
     presence: function(presenceEvent) {
         console.log("presece function");
