@@ -4,7 +4,7 @@ var keypress = require("keypress");
 var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
-var pubnub = new PubNub( {
+var pubnub = new PubNub({
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade",
 });
 
@@ -17,7 +17,7 @@ Cylon.robot({
     },
     work: function (my) {
         pubnub.addListener({
-            status: function(statusEvent) {
+            status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
                     var payload = {
                         my: 'payload'
@@ -32,27 +32,26 @@ Cylon.robot({
                     );
                 }
             },
-            message: function(message) {
-
+            message: function (message) {
                 console.log(message);
                 // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
                 // console.log("Ich fuehre die message function aus");
-                if ( message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "links") {
-                    console.log("Drive left");
-                    my.bb8.roll(100, 0);
-                } else if (message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "rechts") {
+                if (message.message.DrehungMessage.type == "Drehung") {
+                    if (message.message.DrehungMessage.befehl == "links") {
+                        console.log("Drive left");
+                        my.bb8.roll(100, 0);
+                    }
                     console.log("Drive right");
                     my.bb8.stop();
-                } else if (message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "vorwärts") {
-                    console.log("Drive forward");
-                    my.bb8.roll(100, 90);
-                } else if (message.message.DrehungMessage.type == "stop" && message.message.DrehungMessage.befehl == "vorwärts") {
-                    console.log("Drive forward");
-                    my.bb8.roll(100, 90);
+                }
+                else if (message.message.DrehungMessage.type == "stop") {
+                    if (message.message.DrehungMessage.befehl == "stop") {
+                        my.bb8.stop();
+                    }
                 }
 
             },
-            presence: function(presenceEvent) {
+            presence: function (presenceEvent) {
                 console.log("presece function");
             }
         })
@@ -65,9 +64,9 @@ Cylon.robot({
                 process.stdin.pause();
                 process.exit();
             }
-            if (key.name === "r" || key.name === "k" ||key.name === "w" ||key.name === "d" ||key.name === "a" ||
-                key.name === "s" ||key.name === "space" || key.name === "o"
-                ||key.name === "m" ||key.name === "y" ||key.name === "x" ||key.name === "c" ||key.name === "v" ||key.name === "b" ||key.name === "n") {
+            if (key.name === "r" || key.name === "k" || key.name === "w" || key.name === "d" || key.name === "a" ||
+                key.name === "s" || key.name === "space" || key.name === "o"
+                || key.name === "m" || key.name === "y" || key.name === "x" || key.name === "c" || key.name === "v" || key.name === "b" || key.name === "n") {
                 switch (key.name) {
                     case "r":
                         console.log("Start random color");
@@ -172,11 +171,12 @@ Cylon.robot({
                 var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
-                my.bb8.color({ red: 255, green: 0, blue: 0 }, function(err, data) {
+                my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                     console.log(err || "Color RED!");
                 });
             }
         }
+
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
         process.stdin.setRawMode(true);
