@@ -26,19 +26,7 @@ pubnub.addListener({
     },
     message: function(message) {
      console.log(message);
-     var jsonMessage = JSON.parse(message);
-        jsonMessage.each(JSON.parse(jsonMessage), function (idx, obj) {
-            if (obj.type == "Drehung") {
-                console.log("blabliblub");
-            }
-        }
     // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
-    // var filtered_json = find_in_object(JSON.parse(my_json), {type: messageType});
-        //message.forEach(function (element, index) {
-           // if(element['type'] === 'Drehung'){
-              //  console.log('found', element)
-         //   }
-       // })
           console.log("Ich fuehre die message function aus");
     },
     presence: function(presenceEvent) {
