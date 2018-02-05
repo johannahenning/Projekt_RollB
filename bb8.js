@@ -31,6 +31,24 @@ pubnub.addListener({
         // console.log("Ich fuehre die message function aus");
        if ( message.message.DrehungMessage.type == "Drehung") {
            console.log("ich logge Drehung");
+           console.log("Start drive in a circle");
+           var count = 0;
+           var dir = 0;
+           var interval = setInterval(function () {
+               console.log("drive to direction: " + dir);
+               my.bb8.roll(30, dir);
+               dir = dir + 5;
+               if (dir >= 365) {
+                   dir = 0;
+                   console.log("Reset direction");
+                   count++;
+               }
+               if (count > 4) {
+                   clearInterval(interval);
+                   my.bb8.stop();
+                   console.log("STOP!");
+               }
+           }, 100);
        }
 
     },
