@@ -29,7 +29,7 @@ pubnub.addListener({
      console.log(message);
     // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
         // console.log("Ich fuehre die message function aus");
-       if ( message.DrehungMessage.type == "Drehung") {
+       if ( message.message.DrehungMessage.type == "Drehung") {
            console.log("ich logge Drehung");
        }
 
