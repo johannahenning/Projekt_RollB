@@ -8,6 +8,7 @@ var pubnub = new PubNub( {
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade",
 });
 
+/*
 pubnub.addListener({
     status: function(statusEvent) {
         if (statusEvent.category === "PNConnectedCategory") {
@@ -26,30 +27,12 @@ pubnub.addListener({
     },
     message: function(message) {
 
-     console.log(message);
-    // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
+        console.log(message);
+        // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
         // console.log("Ich fuehre die message function aus");
-       if ( message.message.DrehungMessage.type == "Drehung") {
-           console.log("ich logge Drehung");
-           console.log("Start drive in a circle");
-           var count = 0;
-           var dir = 0;
-           var interval = setInterval(function () {
-               console.log("drive to direction: " + dir);
-               my.bb8.roll(30, dir);
-               dir = dir + 5;
-               if (dir >= 365) {
-                   dir = 0;
-                   console.log("Reset direction");
-                   count++;
-               }
-               if (count > 4) {
-                   clearInterval(interval);
-                   my.bb8.stop();
-                   console.log("STOP!");
-               }
-           }, 100);
-       }
+        if ( message.message.DrehungMessage.type == "Drehung") {
+            console.log("ich logge Drehung");
+        }
 
     },
     presence: function(presenceEvent) {
@@ -60,6 +43,7 @@ pubnub.subscribe({
     channels: ['RollB'],
 });
 
+ */
 
 Cylon.robot({
     connections: {
@@ -69,6 +53,58 @@ Cylon.robot({
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
     work: function (my) {
+        pubnub.addListener({
+            status: function(statusEvent) {
+                if (statusEvent.category === "PNConnectedCategory") {
+                    var payload = {
+                        my: 'payload'
+                    };
+                    pubnub.publish(
+                        {
+                            message: payload
+                        },
+                        function (status) {
+                            console.log("handle publish response");
+                        }
+                    );
+                }
+            },
+            message: function(message) {
+
+                console.log(message);
+                // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
+                // console.log("Ich fuehre die message function aus");
+                if ( message.message.DrehungMessage.type == "Drehung") {
+                    console.log("Start drive in a circle");
+                    var count = 0;
+                    var dir = 0;
+                    var interval = setInterval(function () {
+                        console.log("drive to direction: " + dir);
+                        my.bb8.roll(30, dir);
+                        dir = dir + 5;
+                        if (dir >= 365) {
+                            dir = 0;
+                            console.log("Reset direction");
+                            count++;
+                        }
+                        if (count > 4) {
+                            clearInterval(interval);
+                            my.bb8.stop();
+                            console.log("STOP!");
+                        }
+                    }, 100);
+                    console.log("ich logge Drehung");
+                }
+
+            },
+            presence: function(presenceEvent) {
+                console.log("presece function");
+            }
+        })
+        pubnub.subscribe({
+            channels: ['RollB'],
+        });
+
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
