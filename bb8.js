@@ -27,7 +27,7 @@ pubnub.addListener({
     message: function(message) {
      console.log(message);
      var jsonMessage = JSON.parse(message);
-        jsonMessage.each(JSON.parse(jsonMessage), function (idx, obj)) {
+        jsonMessage.each(JSON.parse(jsonMessage), function (idx, obj) {
             if (obj.type == "Drehung") {
                 console.log("blabliblub");
             }
