@@ -8,43 +8,6 @@ var pubnub = new PubNub( {
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade",
 });
 
-/*
-pubnub.addListener({
-    status: function(statusEvent) {
-        if (statusEvent.category === "PNConnectedCategory") {
-            var payload = {
-                my: 'payload'
-            };
-            pubnub.publish(
-                {
-                    message: payload
-                },
-                function (status) {
-                    console.log("handle publish response");
-                }
-            );
-        }
-    },
-    message: function(message) {
-
-        console.log(message);
-        // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
-        // console.log("Ich fuehre die message function aus");
-        if ( message.message.DrehungMessage.type == "Drehung") {
-            console.log("ich logge Drehung");
-        }
-
-    },
-    presence: function(presenceEvent) {
-        console.log("presece function");
-    }
-})
-pubnub.subscribe({
-    channels: ['RollB'],
-});
-
- */
-
 Cylon.robot({
     connections: {
         bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
@@ -74,26 +37,12 @@ Cylon.robot({
                 console.log(message);
                 // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
                 // console.log("Ich fuehre die message function aus");
-                if ( message.message.DrehungMessage.type == "Drehung") {
-                    console.log("Start drive in a circle");
-                    var count = 0;
-                    var dir = 0;
-                    var interval = setInterval(function () {
-                        console.log("drive to direction: " + dir);
-                        my.bb8.roll(30, dir);
-                        dir = dir + 5;
-                        if (dir >= 365) {
-                            dir = 0;
-                            console.log("Reset direction");
-                            count++;
-                        }
-                        if (count > 4) {
-                            clearInterval(interval);
-                            my.bb8.stop();
-                            console.log("STOP!");
-                        }
-                    }, 100);
-                    console.log("ich logge Drehung");
+                if ( message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "links") {
+                    console.log("Drive left");
+                    my.bb8.roll(100, 0);
+                } else if (message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "rechts") {
+                    console.log("Drive right");
+                    my.bb8.roll(100, 180);
                 }
 
             },
