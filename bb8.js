@@ -25,7 +25,8 @@ pubnub.addListener({
         }
     },
     message: function(message) {
-        console.log("Ich fuehre die message function aus");
+     console.log(message);
+     console.log("Ich fuehre die message function aus");
     },
     presence: function(presenceEvent) {
         console.log("presece function");
