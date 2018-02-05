@@ -42,7 +42,13 @@ Cylon.robot({
                     my.bb8.roll(100, 0);
                 } else if (message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "rechts") {
                     console.log("Drive right");
-                    my.bb8.roll(100, 180);
+                    my.bb8.stop();
+                } else if (message.message.DrehungMessage.type == "Drehung" && message.message.DrehungMessage.befehl == "vorwärts") {
+                    console.log("Drive forward");
+                    my.bb8.roll(100, 90);
+                } else if (message.message.DrehungMessage.type == "stop" && message.message.DrehungMessage.befehl == "vorwärts") {
+                    console.log("Drive forward");
+                    my.bb8.roll(100, 90);
                 }
 
             },
