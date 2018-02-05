@@ -28,6 +28,15 @@ pubnub.addListener({
      console.log(message);
     // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
           console.log("Ich fuehre die message function aus");
+
+        var jsonMessage = JSON.parse(message);
+        message.each(JSON.parse(jsonMessage), function(idx, obj){
+
+            if (obj.type == "Drehung") {
+                console.log("blabliblub");
+            }
+
+        })
     },
     presence: function(presenceEvent) {
         console.log("presece function");
@@ -36,6 +45,8 @@ pubnub.addListener({
 pubnub.subscribe({
     channels: ['RollB'],
 });
+
+
 Cylon.robot({
     connections: {
         bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
