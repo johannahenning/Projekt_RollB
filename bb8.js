@@ -99,14 +99,14 @@ Cylon.robot({
                 || key.name === "m" || key.name === "y" || key.name === "x" || key.name === "c" || key.name === "v" || key.name === "b" || key.name === "n") {
                 switch (key.name) {
                     case "r":
-                        console.log("Start random color");
+                        console.log("Start random LED show");
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
                         }
                         break;
                     case "k":
-                        console.log("Random color");
+                        console.log("Change to random color");
                         my.bb8.randomColor();
                         break;
                     case "w":
