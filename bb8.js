@@ -104,6 +104,10 @@ Cylon.robot({
                             my.bb8.randomColor();
                             i++;
                         }
+                        console.log("Play Sound File");
+                        var player = new SoundPlayer();
+                        player.sound('2.mp3', function () {
+                        });
                         break;
                     case "k":
                         console.log("Change to random color");
