@@ -36,7 +36,7 @@ Cylon.robot({
                                 i++;
                             }
                             setTimeout(function () {
-                                my.bb8.setHeading(270, function(err, data) {
+                                my.bb8.setHeading(0, function(err, data) {
                                 console.log("SET HEADING");
                                 });
                             }, 1000);
@@ -49,17 +49,17 @@ Cylon.robot({
                 if (message.message.Message.type == "Richtung") {
                     if (message.message.Message.befehl == "links") {
                         console.log("Drive left");
-                        my.bb8.roll(100, 0);
+                        my.bb8.roll(100, 270);
                     } else if (message.message.Message.befehl == "rechts") {
                         console.log("Drive right");
-                        my.bb8.roll(100, 180);
+                        my.bb8.roll(100, 90);
                     } else if (message.message.Message.befehl == "vorwärts") {
                         console.log("Drive to front");
-                        my.bb8.roll(100, 90);
+                        my.bb8.roll(100, 0);
                     }
                     else if (message.message.Message.befehl == "rückwärts") {
                         console.log("Drive back");
-                        my.bb8.roll(100, 270);
+                        my.bb8.roll(100, 180);
                     }
                     else if (message.message.Message.befehl == "kreis") {
                         console.log("Start drive in a circle");
@@ -150,19 +150,19 @@ Cylon.robot({
                         break;
                     case "w":
                         console.log("Drive to front");
-                        my.bb8.roll(100, 90);
+                        my.bb8.roll(100, 0);
                         break;
                     case "d":
                         console.log("Drive right");
-                        my.bb8.roll(100, 180);
+                        my.bb8.roll(100, 90);
                         break;
                     case "s":
                         console.log("Drive back");
-                        my.bb8.roll(100, 270);
+                        my.bb8.roll(100, 180);
                         break;
                     case "a":
                         console.log("Drive left");
-                        my.bb8.roll(100, 0);
+                        my.bb8.roll(100, 270);
                         break;
                     case "w":
                         my.bb8.setBackLed();
