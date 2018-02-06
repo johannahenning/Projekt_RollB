@@ -95,7 +95,7 @@ Cylon.robot({
                 process.exit();
             }
             if (key.name === "r" || key.name === "k" || key.name === "w" || key.name === "d" || key.name === "a" ||
-                key.name === "s" || key.name === "space" || key.name === "o"
+                key.name === "s" || key.name === "space" || key.name === "o" || key.name === "p"
                 || key.name === "m" || key.name === "y" || key.name === "x" || key.name === "c" || key.name === "v" || key.name === "b" || key.name === "n") {
                 switch (key.name) {
                     case "r":
