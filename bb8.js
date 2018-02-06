@@ -52,6 +52,26 @@ Cylon.robot({
                         console.log("Drive back");
                         my.bb8.roll(100, 270);
                     }
+                    else if (message.message.RichtungMessage.befehl == "kreis") {
+                        console.log("Start drive in a circle");
+                        var count = 0;
+                        var dir = 0;
+                        var interval = setInterval(function () {
+                            console.log("drive to direction: " + dir);
+                            my.bb8.roll(30, dir);
+                            dir = dir + 5;
+                            if (dir >= 365) {
+                                dir = 0;
+                                console.log("Reset direction");
+                                count++;
+                            }
+                            if (count > 2) {
+                                clearInterval(interval);
+                                my.bb8.stop();
+                                console.log("STOP!");
+                            }
+                        }, 100);
+                    }
                 } else if (message.message.stopMessage.type == "stop") {
                     if (message.message.stopMessage.befehl == "stop" && message.message.stopMessage.befehl == "beenden") {
                         console.log("Stop!")
