@@ -36,7 +36,7 @@ Cylon.robot({
                                 i++;
                             }
                             setTimeout(function () {
-                                my.bb8.setHeading(180, function(err, data) {
+                                my.bb8.setHeading(150, function(err, data) {
                                 console.log("SET HEADING");
                                 });
                             }, 1000);
