@@ -150,19 +150,19 @@ Cylon.robot({
                         break;
                     case "w":
                         console.log("Drive to front");
-                        my.bb8.roll(100, 90);
+                        my.bb8.roll(100, 45);
                         break;
                     case "d":
                         console.log("Drive right");
-                        my.bb8.roll(100, 180);
+                        my.bb8.roll(100, 135);
                         break;
                     case "s":
                         console.log("Drive back");
-                        my.bb8.roll(100, 270);
+                        my.bb8.roll(100, 225);
                         break;
                     case "a":
                         console.log("Drive left");
-                        my.bb8.roll(100, 0);
+                        my.bb8.roll(100, 315);
                         break;
                     case "w":
                         my.bb8.setBackLed();
