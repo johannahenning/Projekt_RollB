@@ -31,11 +31,13 @@ Cylon.robot({
                             var player = new SoundPlayer();
                             player.sound('5.mp3', function () {
                             });
-                            my.bb8.setHeading(0);
-                            for (var i = 0; i <= 200; i++) {
+                            for (var i = 0; i <= 50; i++) {
                                 my.bb8.randomColor();
                                 i++;
                             }
+                            setTimeout(function () {
+                                my.bb8.setHeading(0);
+                            }, 1000);
                         }
                     );
                 }
