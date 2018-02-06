@@ -194,6 +194,11 @@ Cylon.robot({
                         player.sound('7.mp3', function () {
                         });
                         break;
+                    case ("p"):
+                        my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
+                            console.log("LED OFF!");
+                        });
+                        break;
                 }
             }
             else {
@@ -206,7 +211,7 @@ Cylon.robot({
                 });
                 setTimeout(function () {
                     my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
-                        console.log(err || "Color RED");
+                        console.log("LED OFF!");
                     });
                 }, 6000);
 
