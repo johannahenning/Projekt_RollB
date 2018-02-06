@@ -27,7 +27,10 @@ Cylon.robot({
                             message: payload
                         },
                         function (status) {
-                            console.log("handle publish response");
+                            console.log("Wake up RollB");
+                            var player = new SoundPlayer();
+                            player.sound('5.mp3', function () {
+                            });
                         }
                     );
                 }
@@ -70,7 +73,6 @@ Cylon.robot({
                         });
                     }
                 }
-
             },
             presence: function (presenceEvent) {
                 console.log("presece function");
@@ -218,10 +220,8 @@ Cylon.robot({
                         console.log("LED OFF!");
                     });
                 }, 6000);
-
             }
         }
-
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
         process.stdin.setRawMode(true);
