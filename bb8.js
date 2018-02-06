@@ -34,19 +34,40 @@ Cylon.robot({
             },
             message: function (message) {
                 console.log(message);
-                // message: { DrehungMessage: { type: 'Drehung', command: 'links' } } }
-                // console.log("Ich fuehre die message function aus");
-                if (message.message.DrehungMessage.type == "Drehung") {
-                    if (message.message.DrehungMessage.befehl == "links") {
+                if (message.message.RichtungMessage.type == "Richtung") {
+                    if (message.message.RichtungMessage.befehl == "links") {
                         console.log("Drive left");
                         my.bb8.roll(100, 0);
+                    } else if (message.message.RichtungMessage.befehl == "rechts") {
+                        console.log("Drive right");
+                        my.bb8.roll(100, 180);
+                    } else if (message.message.RichtungMessage.befehl == "vorwärts") {
+                        console.log("Drive to front");
+                        my.bb8.roll(100, 90);
                     }
-                    console.log("Drive right");
-                    my.bb8.stop();
-                }
-                else if (message.message.DrehungMessage.type == "stop") {
-                    if (message.message.DrehungMessage.befehl == "stop") {
+                    else if (message.message.RichtungMessage.befehl == "rückwärts") {
+                        console.log("Drive back");
+                        my.bb8.roll(100, 270);
+                    }
+                } else if (message.message.stopMessage.type == "stop") {
+                    if (message.message.stopMessage.befehl == "stop" && message.message.stopMessage.befehl == "beenden") {
+                        console.log("Stop!")
                         my.bb8.stop();
+                    }
+                } else if (message.message.FarbeMessage.type == "Farbe") {
+                    if (message.message.FarbeMessage.befehl == "rot") {
+                        my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                            console.log(err || "Color RED");
+                        });
+                    } else if (message.message.FarbeMessage.befehl == "grün") {
+                        my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                            console.log(err || "Color GREEN");
+                        });
+                    }
+                    else if (message.message.FarbeMessage.befehl == "blau") {
+                        my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
+                            console.log(err || "Color BLUE");
+                        });
                     }
                 }
 
@@ -58,6 +79,15 @@ Cylon.robot({
         pubnub.subscribe({
             channels: ['RollB'],
         });
+
+
+
+
+
+
+
+
+
 
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
@@ -174,6 +204,12 @@ Cylon.robot({
                 my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                     console.log(err || "Color RED!");
                 });
+                setTimeout(function () {
+                    my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
+                        console.log(err || "Color RED");
+                    });
+                }, 6000);
+
             }
         }
 
