@@ -49,17 +49,17 @@ Cylon.robot({
                 if (message.message.Message.type == "Richtung") {
                     if (message.message.Message.befehl == "links") {
                         console.log("Drive left");
-                        my.bb8.roll(100, 0);
+                        my.bb8.roll(100, 315);
                     } else if (message.message.Message.befehl == "rechts") {
                         console.log("Drive right");
-                        my.bb8.roll(100, 180);
+                        my.bb8.roll(100, 135);
                     } else if (message.message.Message.befehl == "vorwärts") {
                         console.log("Drive to front");
-                        my.bb8.roll(100, 90);
+                        my.bb8.roll(100, 45);
                     }
                     else if (message.message.Message.befehl == "rückwärts") {
                         console.log("Drive back");
-                        my.bb8.roll(100, 270);
+                        my.bb8.roll(100, 225);
                     }
                     else if (message.message.Message.befehl == "kreis") {
                         console.log("Start drive in a circle");
