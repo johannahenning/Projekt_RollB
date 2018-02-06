@@ -151,7 +151,7 @@ Cylon.robot({
                                 console.log("Reset direction");
                                 count++;
                             }
-                            if (count > 4) {
+                            if (count > 2) {
                                 clearInterval(interval);
                                 my.bb8.stop();
                                 console.log("STOP!");
