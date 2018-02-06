@@ -73,8 +73,8 @@ Cylon.robot({
                         }, 100);
                     }
                 } else if (message.message.Message.type == "stop") {
-                    if (message.message.Message.befehl == "stop" && message.message.stopMessage.befehl == "beenden") {
-                        console.log("Stop!")
+                    if (message.message.Message.befehl == "stop" || message.message.Message.befehl == "beenden") {
+                        console.log("Stop!");
                         my.bb8.stop();
                     }
                 } else if (message.message.Message.type == "Farbe") {
