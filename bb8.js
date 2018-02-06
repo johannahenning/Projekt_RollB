@@ -86,8 +86,7 @@ Cylon.robot({
                         my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                             console.log(err || "Color GREEN");
                         });
-                    }
-                    else if (message.message.Message.befehl == "blau") {
+                    } else if (message.message.Message.befehl == "blau") {
                         my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                             console.log(err || "Color BLUE");
                         });
