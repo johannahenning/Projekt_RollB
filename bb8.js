@@ -99,7 +99,7 @@ Cylon.robot({
                         my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                             console.log(err || "Color BLUE");
                         });
-                    }else if (message.message.Message.befehl == "ton") {
+                    }else if (message.message.Message.befehl == "tonausgabe") {
                         console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('7.mp3', function () {
