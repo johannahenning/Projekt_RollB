@@ -44,24 +44,24 @@ Cylon.robot({
                     );
                 }
             },
-            message: function (message) {
-                console.log(message);
-                if (message.message.Message.type == "Richtung") {
-                    if (message.message.Message.befehl == "links") {
+            message: function (PubNubMessage) {
+                console.log(PubNubMessage);
+                if (PubNubMessage.message.Message.type == "Richtung") {
+                    if (PubNubMessage.message.Message.befehl == "links") {
                         console.log("Drive left");
                         my.bb8.roll(100, 270);
-                    } else if (message.message.Message.befehl == "rechts") {
+                    } else if (PubNubMessage.message.Message.befehl == "rechts") {
                         console.log("Drive right");
                         my.bb8.roll(100, 90);
-                    } else if (message.message.Message.befehl == "vorwärts") {
+                    } else if (PubNubMessage.message.Message.befehl == "vorwärts") {
                         console.log("Drive to front");
                         my.bb8.roll(100, 0);
                     }
-                    else if (message.message.Message.befehl == "rückwärts") {
+                    else if (PubNubMessage.message.Message.befehl == "rückwärts") {
                         console.log("Drive back");
                         my.bb8.roll(100, 180);
                     }
-                    else if (message.message.Message.befehl == "kreis") {
+                    else if (PubNubMessage.message.Message.befehl == "kreis") {
                         console.log("Start drive in a circle");
                         var count = 0;
                         var dir = 0;
@@ -81,25 +81,25 @@ Cylon.robot({
                             }
                         }, 100);
                     }
-                } else if (message.message.Message.type == "stop") {
-                    if (message.message.Message.befehl == "anhalten" || message.message.Message.befehl == "halt") {
+                } else if (PubNubMessage.message.Message.type == "stop") {
+                    if (PubNubMessage.message.Message.befehl == "anhalten" || PubNubMessage.message.Message.befehl == "halt") {
                         console.log("Stop!");
                         my.bb8.stop();
                     }
-                } else if (message.message.Message.type == "Farbe") {
-                    if (message.message.Message.befehl == "rot") {
+                } else if (PubNubMessage.message.Message.type == "Farbe") {
+                    if (PubNubMessage.message.Message.befehl == "rot") {
                         my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                             console.log(err || "Color RED");
                         });
-                    } else if (message.message.Message.befehl == "grün") {
+                    } else if (PubNubMessage.message.Message.befehl == "grün") {
                         my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                             console.log(err || "Color GREEN");
                         });
-                    } else if (message.message.Message.befehl == "blau") {
+                    } else if (PubNubMessage.message.Message.befehl == "blau") {
                         my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                             console.log(err || "Color BLUE");
                         });
-                    } else if (message.message.Message.befehl == "tonausgabe") {
+                    } else if (PubNubMessage.message.Message.befehl == "tonausgabe") {
                         console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('7.mp3', function () {
