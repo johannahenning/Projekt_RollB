@@ -5,7 +5,7 @@ var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
 var pubnub = new PubNub({
-    subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade",
+    subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade"
 });
 
 Cylon.robot({
@@ -36,8 +36,8 @@ Cylon.robot({
                                 i++;
                             }
                             setTimeout(function () {
-                                my.bb8.setHeading(0, function(err, data) {
-                                console.log("SET HEADING");
+                                my.bb8.setHeading(0, function (err, data) {
+                                    console.log("SET HEADING");
                                 });
                             }, 1000);
                         }
@@ -99,7 +99,7 @@ Cylon.robot({
                         my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                             console.log(err || "Color BLUE");
                         });
-                    }else if (message.message.Message.befehl == "tonausgabe") {
+                    } else if (message.message.Message.befehl == "tonausgabe") {
                         console.log("Play Sound File");
                         var player = new SoundPlayer();
                         player.sound('7.mp3', function () {
@@ -117,21 +117,13 @@ Cylon.robot({
 
 
 
-
-
-
-
-
-
-
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
                 process.exit();
             }
-            if (key.name === "r" || key.name === "k" || key.name === "w" || key.name === "d" || key.name === "a" ||
-                key.name === "s" || key.name === "space" || key.name === "o" || key.name === "p"
-                || key.name === "m" || key.name === "y" || key.name === "x" || key.name === "c" || key.name === "v" || key.name === "b" || key.name === "n") {
+            var definedKeys = ["r", "k", "w", "d", "a", "s", "space", "o", "p", "m", "y", "x", "c", "v", "b", "n"];
+            if (definedKeys.contains(key.name)) {
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
@@ -200,7 +192,7 @@ Cylon.robot({
                     case ("x"):
                         console.log("Play Sound File");
                         var player = new SoundPlayer();
-                        player.sound('2.mp3', function () {
+                        player.sound('2.mp3', function () {y
                         });
                         break;
                     case ("c"):
@@ -255,6 +247,7 @@ Cylon.robot({
                 }, 6000);
             }
         }
+
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
         process.stdin.setRawMode(true);
