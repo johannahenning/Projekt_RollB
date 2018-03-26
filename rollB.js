@@ -82,9 +82,16 @@ Cylon.robot({
                         }, 100);
                     }
                 } else if (PubNubMessage.message.Message.type == "stop") {
-                    if (PubNubMessage.message.Message.befehl == "anhalten" || PubNubMessage.message.Message.befehl == "halt") {
+                    if (PubNubMessage.message.Message.befehl == "anhalten" || PubNubMessage.message.Message.befehl == "halt" || PubNubMessage.message.Message.befehl == "stop") {
                         console.log("Stop!");
                         my.bb8.stop();
+                    }
+                } else if (PubNubMessage.message.Message.type == "Tonausgabe") {
+                    if (PubNubMessage.message.Message.befehl == "tonausgabe" || PubNubMessage.message.Message.befehl == "sound") {
+                        console.log("Play Sound File");
+                        var player = new SoundPlayer();
+                        player.sound('7.mp3', function () {
+                        });
                     }
                 } else if (PubNubMessage.message.Message.type == "Farbe") {
                     if (PubNubMessage.message.Message.befehl == "rot") {
@@ -99,11 +106,6 @@ Cylon.robot({
                         my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                             console.log(err || "Color BLUE");
                         });
-                    } else if (PubNubMessage.message.Message.befehl == "tonausgabe") {
-                        console.log("Play Sound File");
-                        var player = new SoundPlayer();
-                        player.sound('7.mp3', function () {
-                        });
                     }
                 }
             },
@@ -116,14 +118,19 @@ Cylon.robot({
         });
 
 
-
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
                 process.exit();
             }
-            var definedKeys = ["r", "k", "w", "d", "a", "s", "space", "o", "p", "m", "y", "x", "c", "v", "b", "n"];
-            if (definedKeys.contains(key.name)) {
+            var definedKeys = {
+                "r": 1, "k": 1, "w": 1,
+                "d": 1, "a": 1, "s": 1,
+                "space": 1, "o": 1, "p": 1,
+                "m": 1, "y": 1, "x": 1,
+                "c": 1, "v": 1, "b": 1, "n": 1
+            };
+            if (definedKeys[key.name] !== undefined) {
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
@@ -192,7 +199,8 @@ Cylon.robot({
                     case ("x"):
                         console.log("Play Sound File");
                         var player = new SoundPlayer();
-                        player.sound('2.mp3', function () {y
+                        player.sound('2.mp3', function () {
+                            y
                         });
                         break;
                     case ("c"):
