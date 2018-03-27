@@ -8,9 +8,6 @@ var pubnub = new PubNub({
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade"
 });
 
-const messageType = PubNubMessage.message.Message.type;
-const messageBefehl = PubNubMessage.message.Message.befehl;
-
 const STOP = "stop";
 const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
@@ -54,6 +51,9 @@ Cylon.robot({
                 }
             },
             message: function (PubNubMessage) {
+                const messageType = PubNubMessage.message.Message.type;
+                const messageBefehl = PubNubMessage.message.Message.befehl;
+
                 console.log(PubNubMessage);
                 switch (messageType) {
                     case RICHTUNG:
