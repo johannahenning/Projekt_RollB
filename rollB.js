@@ -97,8 +97,7 @@ Cylon.robot({
                         }
                         break;
 
-                    case
-                    STOP:
+                    case STOP:
                         switch (messageBefehl) {
                             case "anhalten":
                             case "halt":
@@ -108,8 +107,7 @@ Cylon.robot({
                                 break;
                         }
                         break;
-                    case
-                    FARBE:
+                    case FARBE:
                         switch (messageBefehl) {
                             case "rot":
                                 my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
@@ -130,8 +128,7 @@ Cylon.robot({
 
                         break;
 
-                    case
-                    TONAUSGABE:
+                    case TONAUSGABE:
                         if (messageBefehl === "tonausgabe" || messageBefehl === "sound") {
                             console.log("Play Sound File");
                             var player = new SoundPlayer();
@@ -162,6 +159,8 @@ Cylon.robot({
                 "c": 1, "v": 1, "b": 1, "n": 1
             };
             if (definedKeys[key.name] !== undefined) {
+                var player = new SoundPlayer();
+
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
@@ -170,7 +169,6 @@ Cylon.robot({
                             i++;
                         }
                         console.log("Play Sound File");
-                        var player = new SoundPlayer();
                         player.sound('2.mp3', function () {
                         });
                         break;
