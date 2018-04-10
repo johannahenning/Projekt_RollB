@@ -260,6 +260,7 @@ Cylon.robot({
             }
             else {
                 console.log("Key unknown, ROLLB SAYS NO");
+                var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
                 my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
