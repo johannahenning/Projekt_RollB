@@ -178,7 +178,6 @@ Cylon.robot({
                         break;
                     case "w":
                         console.log("Drive to front");
-                        my.bb8.setBackLed();
                         my.bb8.roll(100, 0);
                         break;
                     case "d":
