@@ -158,8 +158,8 @@ Cylon.robot({
                 "m": 1, "y": 1, "x": 1,
                 "c": 1, "v": 1, "b": 1, "n": 1
             };
+            var player = new SoundPlayer();
             if (definedKeys[key.name] !== undefined) {
-                var player = new SoundPlayer();
 
                 switch (key.name) {
                     case "r":
@@ -260,7 +260,6 @@ Cylon.robot({
             }
             else {
                 console.log("Key unknown, ROLLB SAYS NO");
-                var player = new SoundPlayer();
                 player.sound('15.mp3', function () {
                 });
                 my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
