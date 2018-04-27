@@ -13,6 +13,22 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 
+var http = require('http');
+
+
+function onRequest(request, response) {
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hallo Alina :))))))))))");
+    console.log(request.url);
+    //console.log(request.getParameter(url));
+    response.end();
+
+}
+
+http.createServer(onRequest).listen(8888);
+
+console.log('Server running');
+
 
 Cylon.robot({
     connections: {
