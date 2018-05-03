@@ -291,12 +291,16 @@ Cylon.robot({
                     });
                 }, 6000);
             }
+            setTimeout(machenWas, 2000);
+
+            function machenWas() {
+                if (uebermittelterString.includes("Hin") === true) {
+                    my.bb8.randomColor();
+                    console.log("ICH MACHEN WAS")
+                }
+            }
         }
 
-       // if (uebermittelterString.includes("Hin") === true) {
-        my.bb8.randomColor();
-        console.log("ICH MACHEN WAS")
-      //  }
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
