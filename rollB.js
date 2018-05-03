@@ -163,7 +163,7 @@ Cylon.robot({
             channels: ['RollB']
         });
 
-        if (uebermittelterString.contains("Hin")) {
+        if (uebermittelterString.includes("Hin") === true) {
             my.bb8.randomColor();
             console.log("ICH MACHEN WAS")
         }
