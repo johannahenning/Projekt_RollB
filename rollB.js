@@ -296,9 +296,11 @@ Cylon.robot({
         }
 
         function machenWas() {
-            if (uebermittelterString.includes("Hin") === true) {
+            if (uebermittelterString.includes("Hin")) {
                 my.bb8.randomColor();
                 console.log("ICH MACHEN WAS" + uebermittelterString)
+            } else {
+                console.log("WEEEEEEEG" + uebermittelterString)
             }
         }
 
