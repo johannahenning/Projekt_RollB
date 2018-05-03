@@ -163,6 +163,10 @@ Cylon.robot({
             channels: ['RollB']
         });
 
+        if (uebermittelterString.contains("Hin")) {
+            my.bb8.randomColor();
+            console.log("ICH MACHEN WAS")
+        }
 
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
@@ -170,10 +174,6 @@ Cylon.robot({
                 process.exit();
             }
 
-            if (uebermittelterString.contains("Hin")) {
-                my.bb8.randomColor();
-                console.log("ICH MACHEN WAS")
-            }
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
                 "d": 1, "a": 1, "s": 1,
