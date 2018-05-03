@@ -169,10 +169,7 @@ Cylon.robot({
                 process.exit();
             }
 
-            //if (uebermittelterString.includes("Hin") === true) {
-                my.bb8.randomColor();
-                console.log("ICH MACHEN WAS")
-            //}
+
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
                 "d": 1, "a": 1, "s": 1,
@@ -295,6 +292,11 @@ Cylon.robot({
                 }, 6000);
             }
         }
+
+       // if (uebermittelterString.includes("Hin") === true) {
+        my.bb8.randomColor();
+        console.log("ICH MACHEN WAS")
+      //  }
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
