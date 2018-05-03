@@ -22,7 +22,6 @@ function onRequest(request, response) {
     response.write("Hallo Alina :))))))))))");
     uebermittelterString = request.url;
     //console.log(uebermittelterString);
-    //console.log(request.getParameter(url));
     response.end();
 
 }
@@ -163,10 +162,6 @@ Cylon.robot({
             channels: ['RollB']
         });
 
-        if (uebermittelterString.includes("Hin") === true) {
-            my.bb8.randomColor();
-            console.log("ICH MACHEN WAS")
-        }
 
         function handle(ch, key) {
             if (key.ctrl && key.name === "c") {
@@ -174,6 +169,10 @@ Cylon.robot({
                 process.exit();
             }
 
+            //if (uebermittelterString.includes("Hin") === true) {
+                my.bb8.randomColor();
+                console.log("ICH MACHEN WAS")
+            //}
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
                 "d": 1, "a": 1, "s": 1,
@@ -187,6 +186,7 @@ Cylon.robot({
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
+                        console.log(uebermittelterString);
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
