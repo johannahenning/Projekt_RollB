@@ -293,15 +293,16 @@ Cylon.robot({
             }
 
 
-            function machenWas() {
-                //if (uebermittelterString.includes("Hin") === true) {
-                    my.bb8.randomColor();
-                    console.log("ICH MACHEN WAS")
-               // }
+        }
+
+        function machenWas() {
+            if (uebermittelterString.includes("Hin") === true) {
+                my.bb8.randomColor();
+                console.log("ICH MACHEN WAS" + uebermittelterString)
             }
         }
 
-        handle = setTimeout(machenWas, 2000);
+        setInterval(machenWas, 200);
 
 
         keypress(process.stdin);
