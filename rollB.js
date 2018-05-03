@@ -15,11 +15,12 @@ const TONAUSGABE = "Tonausgabe";
 
 var http = require('http');
 
-
+var uebermittelterString = "";
 function onRequest(request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.write("Hallo Alina :))))))))))");
-    console.log(request.url);
+     uebermittelterString = request.url;
+    //console.log(uebermittelterString);
     //console.log(request.getParameter(url));
     response.end();
 
@@ -166,6 +167,11 @@ Cylon.robot({
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
                 process.exit();
+            }
+
+            if (uebermittelterString === "Hin") {
+                my.bb8.randomColor();
+                console.log("ICH MACHEN WAS")
             }
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
