@@ -291,15 +291,17 @@ Cylon.robot({
                     });
                 }, 6000);
             }
-            setTimeout(machenWas, 2000);
+
 
             function machenWas() {
-                if (uebermittelterString.includes("Hin") === true) {
+                //if (uebermittelterString.includes("Hin") === true) {
                     my.bb8.randomColor();
                     console.log("ICH MACHEN WAS")
-                }
+               // }
             }
         }
+
+        handle = setTimeout(machenWas, 2000);
 
 
         keypress(process.stdin);
