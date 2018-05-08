@@ -295,8 +295,9 @@ Cylon.robot({
 
         }
 
+        var direction = 0;
+
         function machenWas() {
-            var direction;
             if (uebermittelterString.includes("forward")) {
                 my.bb8.roll(20, direction);
                 // my.bb8.randomColor();
@@ -304,8 +305,8 @@ Cylon.robot({
             } else if (uebermittelterString.includes("rotate")) {
                 //my.bb8.stop();
                 direction += 30;
-                my.bb8.roll(20, direction);
-                direction += 30;
+                my.bb8.roll(0, direction);
+                //direction += 30;
                 // my.bb8.roll(10, direction);
                 console.log("WEEEEEEEG" + uebermittelterString);
             } else {
@@ -313,7 +314,7 @@ Cylon.robot({
             }
         }
 
-        setInterval(machenWas, 200);
+        setInterval(machenWas, 2000);
 
 
         keypress(process.stdin);
