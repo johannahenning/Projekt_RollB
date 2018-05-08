@@ -300,13 +300,15 @@ Cylon.robot({
         function machenWas() {
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
-                    my.bb8.roll(20, direction);
+                    my.bb8.roll(10, direction);
                     // my.bb8.randomColor();
                     console.log("ICH MACHEN WAS" + uebermittelterString)
                 } else if (uebermittelterString.includes("rotate")) {
                     //my.bb8.stop();
                     direction += 30;
-                    my.bb8.roll(0, direction);
+                    //my.bb8.roll(0, direction);
+                    my.bb8.roll(10, direction);
+
                     //direction += 30;
                     // my.bb8.roll(10, direction);
                     console.log("WEEEEEEEG" + uebermittelterString);
