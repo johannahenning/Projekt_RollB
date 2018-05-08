@@ -296,20 +296,24 @@ Cylon.robot({
         }
 
         function machenWas() {
-            var direction = 0;
+            var direction;
             if (uebermittelterString.includes("forward")) {
-                my.bb8.roll(10, direction);
-                my.bb8.randomColor();
+                my.bb8.roll(20, direction);
+                // my.bb8.randomColor();
                 console.log("ICH MACHEN WAS" + uebermittelterString)
             } else if (uebermittelterString.includes("rotate")) {
-                my.bb8.stop();
-                my.bb8.setHeading(30);
+                //my.bb8.stop();
                 direction += 30;
+                my.bb8.roll(20, direction);
+                direction += 30;
+                // my.bb8.roll(10, direction);
                 console.log("WEEEEEEEG" + uebermittelterString);
+            } else {
+                my.bb8.randomColor();
             }
         }
 
-        setInterval(machenWas, 2000);
+        setInterval(machenWas, 200);
 
 
         keypress(process.stdin);
