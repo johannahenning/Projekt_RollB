@@ -296,14 +296,16 @@ Cylon.robot({
         }
 
         var direction = 0;
+        var oldString = "rotate";
 
         function machenWas() {
             if (direction < 360) {
-                if (uebermittelterString.includes("forward")) {
+                if (uebermittelterString.includes("forward") && oldString.includes("rotate")) {
                     my.bb8.roll(10, direction);
                     // my.bb8.randomColor();
-                    console.log("ICH MACHEN WAS" + uebermittelterString)
-                } else if (uebermittelterString.includes("rotate")) {
+                    console.log("ICH MACHEN WAS" + uebermittelterString);
+                    oldString = "forward";
+                } else if (uebermittelterString.includes("rotate") && oldString.includes("forward")) {
                     //my.bb8.stop();
                     direction += 90;
                     //my.bb8.roll(0, direction);
@@ -312,6 +314,7 @@ Cylon.robot({
                     //direction += 30;
                     // my.bb8.roll(20, direction);
                     console.log("WEEEEEEEG" + uebermittelterString);
+                    oldString = "rotate";
                 } else {
                     my.bb8.randomColor();
                 }
