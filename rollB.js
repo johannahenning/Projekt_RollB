@@ -4,6 +4,21 @@ var keypress = require("keypress");
 var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
+var express = require('express');
+var app = express();
+
+app.get('/movement/:direction', function (req, res) {
+    res.send('Hello World!');
+    uebermittelterString = req.params.direction;
+    res.end();
+});
+
+app.use(express.static('public'));
+
+app.listen(8888, function () {
+    console.log('Example app listening on port 8888!');
+});
+
 var pubnub = new PubNub({
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade"
 });
@@ -13,31 +28,33 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 
-var http = require('http');
+//var http = require('http');
 
 var uebermittelterString = "";
 
-function onRequest(request, response) {
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Hallo Alina :))))))))))");
-    uebermittelterString = request.url;
-    //console.log(uebermittelterString);
-    response.end();
+//function onRequest(request, response) {
+//  response.writeHead(200, {"Content-Type": "text/plain"});
+//   response.write("Hallo Alina :))))))))))");
+//   uebermittelterString = request.url;
+//   response.end();
+//}
 
-}
-
-http.createServer(onRequest).listen(8888);
+//http.createServer(onRequest).listen(8888);
 
 console.log('Server running');
 
 
 Cylon.robot({
-    connections: {
+   connections: {
         bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
     },
+
+
     devices: {
-        bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
+       bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
+
+
     work: function (my) {
         pubnub.addListener({
             status: function (statusEvent) {
@@ -292,7 +309,6 @@ Cylon.robot({
                 }, 6000);
             }
 
-
         }
 
         var direction = 0;
@@ -302,20 +318,15 @@ Cylon.robot({
             if (direction < 360) {
                 if (uebermittelterString.includes("forward") && oldString.includes("rotate")) {
                     my.bb8.roll(10, direction);
-                    // my.bb8.randomColor();
                     console.log("ICH MACHEN WAS" + uebermittelterString);
                     oldString = "forward";
                 } else if (uebermittelterString.includes("rotate") && oldString.includes("forward")) {
-                    //my.bb8.stop();
                     direction += 90;
-                    //my.bb8.roll(0, direction);
                     my.bb8.roll(30, direction);
-
-                    //direction += 30;
-                    // my.bb8.roll(20, direction);
                     console.log("WEEEEEEEG" + uebermittelterString);
                     oldString = "rotate";
                 } else {
+                    console.log("ELSE");
                     my.bb8.randomColor();
                 }
             } else {
@@ -324,7 +335,6 @@ Cylon.robot({
         }
 
         setInterval(machenWas, 2000);
-
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
