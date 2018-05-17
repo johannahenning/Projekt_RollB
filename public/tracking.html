@@ -102,9 +102,12 @@
                         console.log("forward");
                         sendGetRequest("/movement/forward");
                     }
-                    else {
+                    else if (distance > oldDistance) {
                         console.log("rotate");
                         sendGetRequest("/movement/rotate");
+                    } else if (koordinateX > 700 || koordinateX < 20 || koordinateY < 20 || koordinateY > 700) {
+                        console.log("zu weit weg");
+                        sendGetRequest("/movement/outOfBorder");
                     }
                     oldDistance = (4 * oldDistance + distance) / 5;
                 }

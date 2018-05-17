@@ -316,18 +316,19 @@ Cylon.robot({
 
         function machenWas() {
             if (direction < 360) {
-                if (uebermittelterString.includes("forward") && oldString.includes("rotate")) {
+                if (uebermittelterString.includes("forward")) {
                     my.bb8.roll(10, direction);
                     console.log("ICH MACHEN WAS" + uebermittelterString);
                     oldString = "forward";
-                } else if (uebermittelterString.includes("rotate") && oldString.includes("forward")) {
+                } else if (uebermittelterString.includes("rotate")) {
                     direction += 90;
                     my.bb8.roll(30, direction);
                     console.log("WEEEEEEEG" + uebermittelterString);
                     oldString = "rotate";
-                } else {
-                    console.log("ELSE");
+                } else if (uebermittelterString.includes("outOfBorder") && !(oldString === "outOfBorder")) {
+                    console.log("outOfBorder");
                     my.bb8.roll(30, (direction + 180));
+                    oldString = "outOfBorder";
                     my.bb8.randomColor();
                 }
             } else {
