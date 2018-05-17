@@ -318,18 +318,24 @@ Cylon.robot({
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
                     my.bb8.roll(10, direction);
-                    console.log("ICH MACHEN WAS" + uebermittelterString);
+                    console.log(uebermittelterString);
                     oldString = "forward";
                 } else if (uebermittelterString.includes("rotate")) {
                     direction += 90;
                     my.bb8.roll(30, direction);
-                    console.log("WEEEEEEEG" + uebermittelterString);
+                    console.log(y);
                     oldString = "rotate";
                 } else if (uebermittelterString.includes("outOfBorder") && !(oldString === "outOfBorder")) {
-                    console.log("outOfBorder");
+                    console.log(uebermittelterString);
                     my.bb8.roll(30, (direction + 180));
+                    setTimeout(function () {
+                        my.bb8.stop();
+                        console.log("Back in field!");
+                    }, 3000);
                     oldString = "outOfBorder";
                     my.bb8.randomColor();
+                } else {
+                    console.log("KEIN BEFEHL");
                 }
             } else {
                 direction = 90;
