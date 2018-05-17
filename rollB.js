@@ -327,6 +327,7 @@ Cylon.robot({
                     oldString = "rotate";
                 } else {
                     console.log("ELSE");
+                    my.bb8.roll(30, (direction + 180));
                     my.bb8.randomColor();
                 }
             } else {
