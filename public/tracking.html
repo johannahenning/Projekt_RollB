@@ -60,7 +60,7 @@
             return false;
         });
 
-        var tracker = new tracking.ColorTracker(["grey"]);
+        var tracker = new tracking.ColorTracker(["yellow"]);
 
         var oldDistance = 1000;
 
@@ -82,7 +82,6 @@
                     rect.color = tracker.customColor;
                 }
 
-
                 context.strokeStyle = rect.color;
                 context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                 context.font = '11px Helvetica';
@@ -97,25 +96,25 @@
                 var distance = Math.sqrt(dx * dx + dy * dy);
                 i = 0;
 
-                if (distance > 50) {
-
-                    console.log(koordinateX);
-                    if (distance < oldDistance) {
-                       // console.log("forward");
-                        sendGetRequest("/movement/forward");
+                if ((koordinateX < 800 && koordinateX > 100) && (koordinateY > 100 && koordinateY < 700)) {
+                    if (distance > 50) {
+                        // console.log(koordinateX);
+                        if (distance < oldDistance) {
+                            // console.log("forward");
+                            sendGetRequest("/movement/forward");
+                        } else if (distance > oldDistance) {
+                            sendGetRequest("/movement/rotate");
+                        } else {
+                            console.log("KEINE AHNUNG")
+                        }
+                        oldDistance = (4 * oldDistance + distance) / 5;
                     }
-                    else if (distance > oldDistance) {
-                      //  console.log("rotate");
-                        sendGetRequest("/movement/rotate");
-                    } else if (koordinateX > 700 || koordinateX < 20 || koordinateY < 20 || koordinateY > 700) {
-                       // console.log("zu weit weg");
-                        sendGetRequest("/movement/outOfBorder");
-                    } else {
-                        console.log("KEINE AHNUNG")
-                    }
-                    oldDistance = (4 * oldDistance + distance) / 5;
 
+                } else {
+                    sendGetRequest("/movement/outOfBorder");
+                    console.log("STOP");
                 }
+                //  console.log(koordinateX);
             });
         });
     };

@@ -45,13 +45,13 @@ console.log('Server running');
 
 
 Cylon.robot({
-   connections: {
+    connections: {
         bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
     },
 
 
     devices: {
-       bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
+        bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
 
 
@@ -325,7 +325,7 @@ Cylon.robot({
                     my.bb8.roll(30, direction);
                     oldString = "rotate";
                 }
-                /* else if (uebermittelterString.includes("outOfBorder") && !(oldString === "outOfBorder")) {
+                else if (uebermittelterString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
                     my.bb8.roll(30, (direction + 180));
                     setTimeout(function () {
@@ -334,14 +334,6 @@ Cylon.robot({
                     }, 3000);
                     oldString = "outOfBorder";
                     my.bb8.randomColor();
-
-                } */else {
-                    my.bb8.roll(30, (direction + 180));
-                    setTimeout(function () {
-                        my.bb8.stop();
-                        console.log("Back in field!");
-                    }, 3000);
-                    console.log("KEIN BEFEHL");
                 }
             } else {
                 direction = 90;
