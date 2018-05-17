@@ -323,9 +323,9 @@ Cylon.robot({
                 } else if (uebermittelterString.includes("rotate")) {
                     direction += 90;
                     my.bb8.roll(30, direction);
-                    console.log(y);
                     oldString = "rotate";
-                } else if (uebermittelterString.includes("outOfBorder") && !(oldString === "outOfBorder")) {
+                }
+                /* else if (uebermittelterString.includes("outOfBorder") && !(oldString === "outOfBorder")) {
                     console.log(uebermittelterString);
                     my.bb8.roll(30, (direction + 180));
                     setTimeout(function () {
@@ -334,7 +334,13 @@ Cylon.robot({
                     }, 3000);
                     oldString = "outOfBorder";
                     my.bb8.randomColor();
-                } else {
+
+                } */else {
+                    my.bb8.roll(30, (direction + 180));
+                    setTimeout(function () {
+                        my.bb8.stop();
+                        console.log("Back in field!");
+                    }, 3000);
                     console.log("KEIN BEFEHL");
                 }
             } else {

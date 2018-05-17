@@ -60,7 +60,7 @@
             return false;
         });
 
-        var tracker = new tracking.ColorTracker(["yellow"]);
+        var tracker = new tracking.ColorTracker(["grey"]);
 
         var oldDistance = 1000;
 
@@ -98,15 +98,17 @@
                 i = 0;
 
                 if (distance > 50) {
+
+                    console.log(koordinateX);
                     if (distance < oldDistance) {
-                        console.log("forward");
+                       // console.log("forward");
                         sendGetRequest("/movement/forward");
                     }
                     else if (distance > oldDistance) {
-                        console.log("rotate");
+                      //  console.log("rotate");
                         sendGetRequest("/movement/rotate");
                     } else if (koordinateX > 700 || koordinateX < 20 || koordinateY < 20 || koordinateY > 700) {
-                        console.log("zu weit weg");
+                       // console.log("zu weit weg");
                         sendGetRequest("/movement/outOfBorder");
                     } else {
                         console.log("KEINE AHNUNG")
