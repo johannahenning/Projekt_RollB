@@ -60,7 +60,7 @@
             return false;
         });
 
-        var tracker = new tracking.ColorTracker(["yellow"]);
+        var tracker = new tracking.ColorTracker(["grey"]);
 
         var oldDistance = 1000;
 
@@ -69,8 +69,8 @@
         tracker.on('track', function (event) {
             context.clearRect(0, 0, canvas.width, canvas.height);
 
-            var targetx = 600;
-            var targety = 600;
+            var targetx = 400;
+            var targety = 400;
 
 
             event.data.forEach(function (rect) {

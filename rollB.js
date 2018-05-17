@@ -330,8 +330,7 @@ Cylon.robot({
                     my.bb8.roll(30, (direction + 180));
                     setTimeout(function () {
                         my.bb8.stop();
-                        console.log("Back in field!");
-                    }, 3000);
+                    }, 1000);
                     oldString = "outOfBorder";
                     my.bb8.randomColor();
                 }
@@ -340,7 +339,7 @@ Cylon.robot({
             }
         }
 
-        setInterval(machenWas, 2000);
+        setInterval(machenWas, 1000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
