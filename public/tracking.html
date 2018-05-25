@@ -62,15 +62,15 @@
 
         var tracker = new tracking.ColorTracker(["grey"]);
 
-        var oldDistance = 1000;
-
         tracking.track('#video', tracker, {camera: true});
+
+        var targetx = 400;
+        var targety = 400;
+        var oldDistance = 5000;
+
 
         tracker.on('track', function (event) {
             context.clearRect(0, 0, canvas.width, canvas.height);
-
-            var targetx = 400;
-            var targety = 400;
 
 
             event.data.forEach(function (rect) {
@@ -93,28 +93,21 @@
 
                 var dx = targetx - koordinateX;
                 var dy = targety - koordinateY;
+
                 var distance = Math.sqrt(dx * dx + dy * dy);
-                i = 0;
 
                 if ((koordinateX < 800 && koordinateX > 100) && (koordinateY > 100 && koordinateY < 700)) {
                     if (distance > 50) {
-                        // console.log(koordinateX);
                         if (distance < oldDistance) {
-                            // console.log("forward");
                             sendGetRequest("/movement/forward");
                         } else if (distance > oldDistance) {
                             sendGetRequest("/movement/rotate");
-                        } else {
-                            console.log("KEINE AHNUNG")
                         }
                         oldDistance = (4 * oldDistance + distance) / 5;
                     }
-
                 } else {
                     sendGetRequest("/movement/outOfBorder");
-                    console.log("STOP");
                 }
-                //  console.log(koordinateX);
             });
         });
     };

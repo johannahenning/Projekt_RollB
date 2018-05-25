@@ -28,18 +28,7 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 
-//var http = require('http');
-
 var uebermittelterString = "";
-
-//function onRequest(request, response) {
-//  response.writeHead(200, {"Content-Type": "text/plain"});
-//   response.write("Hallo Alina :))))))))))");
-//   uebermittelterString = request.url;
-//   response.end();
-//}
-
-//http.createServer(onRequest).listen(8888);
 
 console.log('Server running');
 
@@ -310,28 +299,24 @@ Cylon.robot({
             }
 
         }
-
         var direction = 0;
-        var oldString = "rotate";
 
-        function machenWas() {
+        function tracking() {
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
                     my.bb8.roll(10, direction);
                     console.log(uebermittelterString);
-                    oldString = "forward";
                 } else if (uebermittelterString.includes("rotate")) {
-                    direction += 90;
-                    my.bb8.roll(30, direction);
-                    oldString = "rotate";
-                }
-                else if (uebermittelterString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
-                    my.bb8.roll(30, (direction + 180));
-                    setTimeout(function () {
-                        my.bb8.stop();
-                    }, 1000);
-                    oldString = "outOfBorder";
+                    direction += 90;
+                    my.bb8.roll(10, direction);
+
+                } else if (uebermittelterString.includes("outOfBorder")) {
+                    console.log(uebermittelterString);
+                    direction += 180;
+
+                    my.bb8.roll(30, direction);
+
                     my.bb8.randomColor();
                 }
             } else {
@@ -339,7 +324,7 @@ Cylon.robot({
             }
         }
 
-        setInterval(machenWas, 1000);
+        setInterval(tracking, 2000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
