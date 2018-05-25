@@ -306,7 +306,7 @@ Cylon.robot({
         function tracking() {
             console.log("OLD: " + oldString);
             if (direction < 360) {
-                if (uebermittelterString.includes("forward")&& !oldString.includes("forward")) {
+                if (uebermittelterString.includes("forward")/*&& !oldString.includes("forward")*/) {
                     my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
 
