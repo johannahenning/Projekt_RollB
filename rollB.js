@@ -299,6 +299,7 @@ Cylon.robot({
             }
 
         }
+
         var direction = 0;
 
         function tracking() {
@@ -313,19 +314,17 @@ Cylon.robot({
 
                 } else if (uebermittelterString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
-
                     my.bb8.stop();
-
                     direction += 180;
                     my.bb8.roll(20, direction);
 
                 }
             } else {
-                direction = 90;
+                direction = direction % 360;
             }
         }
 
-        setInterval(tracking, 5000);
+        setInterval(tracking, 2000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
