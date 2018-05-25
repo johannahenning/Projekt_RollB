@@ -317,9 +317,8 @@ Cylon.robot({
                 my.bb8.roll(40, direction);
                 oldString = "rotate";
             } else if (uebermittelterString.includes("stop")) {
-                console.log(uebermittelterString);
+                console.log("FERTIIIIIIIG");
                 my.bb8.stop();
-                console.log(direction);
                 oldString = "stop";
             }
             else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
