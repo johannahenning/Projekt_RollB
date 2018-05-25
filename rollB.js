@@ -27,6 +27,7 @@ const STOP = "stop";
 const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
+const TRACKING = "Tracking";
 
 var uebermittelterString = "";
 
@@ -44,7 +45,6 @@ Cylon.robot({
     devices: {
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
-
 
 
     work: function (my) {
@@ -82,18 +82,18 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
-                   // case TRACKING:
-                     //   switch (messageBefehl) {
-                       //     case "koordinaten":
-                         //       trackingInterval = setInterval(tracking, 2000);
-                          //  break;
-                       // }
-                       // break;
+                    case TRACKING:
+                        switch (messageBefehl) {
+                            case "koordinaten":
+                                trackingInterval = setInterval(tracking, 2000);
+                                break;
+                        }
+                        break;
                     case RICHTUNG:
                         switch (messageBefehl) {
                             case "links":
-                              //  console.log("Drive left");
-                              //  my.bb8.roll(100, 270);
+                                //  console.log("Drive left");
+                                //  my.bb8.roll(100, 270);
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
