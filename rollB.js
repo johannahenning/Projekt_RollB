@@ -329,6 +329,8 @@ Cylon.robot({
                 direction = (direction + 180) % 360;
                 console.log(direction);
                 my.bb8.roll(20, direction);
+                my.bb8.roll(20, direction);
+                my.bb8.roll(20, direction);
                 oldString = "outOfBorder";
             }
             /*} else {
