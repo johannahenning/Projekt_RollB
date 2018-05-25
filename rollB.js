@@ -301,23 +301,26 @@ Cylon.robot({
         }
 
         var direction = 0;
+        var oldString = "forward";
 
         function tracking() {
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
                     my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
+                    oldString = "forward";
                 } else if (uebermittelterString.includes("rotate")) {
                     console.log(uebermittelterString);
                     direction = (direction + 90) % 360;
                     console.log(direction);
                     my.bb8.roll(20, direction);
-
-                } else if (uebermittelterString.includes("outOfBorder")) {
+                    oldString = "rotate";
+                } else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
                     direction = (direction + 180) % 360;
                     console.log(direction);
                     my.bb8.roll(30, direction);
+                    oldString = "outOfBorder";
                 }
             } else {
                 direction = direction % 360;
