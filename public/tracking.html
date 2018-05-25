@@ -102,15 +102,17 @@
                     var distance = Math.sqrt(dx * dx + dy * dy);
 
                     if ((koordinateX < 700 && koordinateX > 100) && (koordinateY > 100 && koordinateY < 600)) {
-                        if (distance > 50) {
+                        if (distance > 100) {
                             if (distance < oldDistance) {
                                 sendGetRequest("/movement/forward");
                             } else if (distance > oldDistance) {
                                 sendGetRequest("/movement/rotate");
+                                console.log("ROTATE");
                             }
                             oldDistance = (4 * oldDistance + distance) / 5;
                         } else {
                             sendGetRequest("/movement/stop");
+                            console.log("ZIEL ERREICHT");
                         }
 
                     }
