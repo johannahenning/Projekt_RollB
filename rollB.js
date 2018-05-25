@@ -305,11 +305,11 @@ Cylon.robot({
 
         function tracking() {
             if (direction < 360) {
-                if (uebermittelterString.includes("forward")) {
+                if (uebermittelterString.includes("forward")&& !oldString.includes("forward")) {
                     my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
                     oldString = "forward";
-                } else if (uebermittelterString.includes("rotate")) {
+                } else if (uebermittelterString.includes("rotate") && !oldString.includes("rotate")) {
                     console.log(uebermittelterString);
                     direction = (direction + 90) % 360;
                     console.log(direction);
