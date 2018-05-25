@@ -304,27 +304,28 @@ Cylon.robot({
         function tracking() {
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
-                    my.bb8.roll(10, direction);
+                    my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
                 } else if (uebermittelterString.includes("rotate")) {
                     console.log(uebermittelterString);
                     direction += 90;
-                    my.bb8.roll(10, direction);
+                    my.bb8.roll(20, direction);
 
                 } else if (uebermittelterString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
+
+                    my.bb8.stop();
+
                     direction += 180;
+                    my.bb8.roll(20, direction);
 
-                    my.bb8.roll(30, direction);
-
-                    my.bb8.randomColor();
                 }
             } else {
                 direction = 90;
             }
         }
 
-        setInterval(tracking, 2000);
+        setInterval(tracking, 5000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
