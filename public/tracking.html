@@ -96,7 +96,7 @@
 
                     var distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if ((koordinateX < 700 && koordinateX > 200) && (koordinateY > 200 && koordinateY < 600)) {
+                    if ((koordinateX < 700 && koordinateX > 100) && (koordinateY > 100 && koordinateY < 600)) {
                         if (distance > 50) {
                             if (distance < oldDistance) {
                                 sendGetRequest("/movement/forward");
