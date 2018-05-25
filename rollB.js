@@ -301,7 +301,7 @@ Cylon.robot({
         }
 
         var direction = 0;
-        var oldString = "forward";
+        var oldString = "oldString";
 
         function tracking() {
             console.log("OLD: " + oldString);
