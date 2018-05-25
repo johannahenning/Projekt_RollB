@@ -317,9 +317,10 @@ Cylon.robot({
                     oldString = "rotate";
                 } else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
+                    console.log("OLD: " + oldString);
                     direction = (direction + 180) % 360;
                     console.log(direction);
-                    my.bb8.roll(30, direction);
+                    my.bb8.roll(60, direction);
                     oldString = "outOfBorder";
                 }
             } else {
