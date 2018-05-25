@@ -335,7 +335,7 @@ Cylon.robot({
                 console.log(direction);
                 console.log("AusnahmeFall oldString = outOfBorder");
                 my.bb8.roll(50, direction);
-
+                oldString = "oldString";
             }
         }
 
