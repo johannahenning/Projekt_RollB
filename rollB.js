@@ -32,6 +32,8 @@ var uebermittelterString = "";
 
 console.log('Server running');
 
+var trackingInterval;
+
 
 Cylon.robot({
     connections: {
@@ -42,6 +44,7 @@ Cylon.robot({
     devices: {
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
+
 
 
     work: function (my) {
@@ -79,11 +82,19 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
+                   // case TRACKING:
+                     //   switch (messageBefehl) {
+                       //     case "koordinaten":
+                         //       trackingInterval = setInterval(tracking, 2000);
+                          //  break;
+                       // }
+                       // break;
                     case RICHTUNG:
                         switch (messageBefehl) {
                             case "links":
-                                console.log("Drive left");
-                                my.bb8.roll(100, 270);
+                              //  console.log("Drive left");
+                              //  my.bb8.roll(100, 270);
+                                trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
                                 console.log("Drive right");
@@ -174,7 +185,6 @@ Cylon.robot({
                 process.stdin.pause();
                 process.exit();
             }
-
 
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
@@ -306,12 +316,11 @@ Cylon.robot({
 
         function tracking() {
             console.log("OLD: " + oldString);
-            /*if (direction < 360) {*/
-            if (uebermittelterString.includes("forward")/*&& !oldString.includes("forward")*/) {
+            if (uebermittelterString.includes("forward")) {
                 my.bb8.roll(40, direction);
                 console.log(uebermittelterString);
                 oldString = "forward";
-            } else if (uebermittelterString.includes("rotate") /*&& !oldString.includes("rotate")*/) {
+            } else if (uebermittelterString.includes("rotate")) {
                 console.log(uebermittelterString);
                 direction = (direction + 90) % 360;
                 console.log(direction);
@@ -325,11 +334,10 @@ Cylon.robot({
             }
             else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                 console.log(uebermittelterString);
-                //console.log("OLD: " + oldString);
                 direction = (direction + 180 + counter) % 360;
                 console.log(direction);
                 my.bb8.roll(60, direction);
-                counter+= 60;
+                counter += 90;
                 oldString = "outOfBorder";
             }
             else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
@@ -340,7 +348,8 @@ Cylon.robot({
                 oldString = "oldString";
             }
         }
-        var trackingInterval = setInterval(tracking, 2000);
+
+        //var trackingInterval = setInterval(tracking, 2000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
