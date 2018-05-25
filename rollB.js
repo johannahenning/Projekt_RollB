@@ -304,10 +304,12 @@ Cylon.robot({
         var oldString = "forward";
 
         function tracking() {
+            console.log("OLD: " + oldString);
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")&& !oldString.includes("forward")) {
                     my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
+
                     oldString = "forward";
                 } else if (uebermittelterString.includes("rotate") && !oldString.includes("rotate")) {
                     console.log(uebermittelterString);
@@ -317,7 +319,7 @@ Cylon.robot({
                     oldString = "rotate";
                 } else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
-                    console.log("OLD: " + oldString);
+                    //console.log("OLD: " + oldString);
                     direction = (direction + 180) % 360;
                     console.log(direction);
                     my.bb8.roll(60, direction);
