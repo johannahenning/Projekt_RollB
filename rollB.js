@@ -311,7 +311,7 @@ Cylon.robot({
                     console.log(uebermittelterString);
 
                     oldString = "forward";
-                } else if (uebermittelterString.includes("rotate") && !oldString.includes("rotate")) {
+                } else if (uebermittelterString.includes("rotate") /*&& !oldString.includes("rotate")*/) {
                     console.log(uebermittelterString);
                     direction = (direction + 90) % 360;
                     console.log(direction);
