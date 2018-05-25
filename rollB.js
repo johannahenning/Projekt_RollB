@@ -305,19 +305,19 @@ Cylon.robot({
         function tracking() {
             if (direction < 360) {
                 if (uebermittelterString.includes("forward")) {
-                    my.bb8.roll(10, direction);
+                    my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
                 } else if (uebermittelterString.includes("rotate")) {
                     console.log(uebermittelterString);
                     direction = (direction + 90) % 360;
                     console.log(direction);
-                    my.bb8.roll(10, direction);
+                    my.bb8.roll(20, direction);
 
                 } else if (uebermittelterString.includes("outOfBorder")) {
                     console.log(uebermittelterString);
                     direction = (direction + 180) % 360;
                     console.log(direction);
-                    my.bb8.roll(10, direction);
+                    my.bb8.roll(30, direction);
                 }
             } else {
                 direction = direction % 360;
