@@ -70,47 +70,54 @@
 
 
         tracker.on('track', function (event) {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+                context.clearRect(0, 0, canvas.width, canvas.height);
 
 
-            event.data.forEach(function (rect) {
+                event.data.forEach(function (rect) {
 
-                var koordinateX = rect.x + rect.width / 2;
-                var koordinateY = rect.y + rect.height / 2;
+                    var koordinateX = rect.x + rect.width / 2;
+                    var koordinateY = rect.y + rect.height / 2;
 
-                if (rect.color === 'custom') {
-                    rect.color = tracker.customColor;
-                }
-
-                context.strokeStyle = rect.color;
-                context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                context.font = '11px Helvetica';
-                context.fillStyle = "#fff";
-                context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
-
-                middle.fillRect(koordinateX, koordinateY, 10, 10);
-
-                var dx = targetx - koordinateX;
-                var dy = targety - koordinateY;
-
-                var distance = Math.sqrt(dx * dx + dy * dy);
-
-                if ((koordinateX < 700 && koordinateX > 200) && (koordinateY > 200 && koordinateY < 600)) {
-                    if (distance > 50) {
-                        if (distance < oldDistance) {
-                            sendGetRequest("/movement/forward");
-                        } else if (distance > oldDistance) {
-                            sendGetRequest("/movement/rotate");
-                        }
-                        oldDistance = (4 * oldDistance + distance) / 5;
+                    if (rect.color === 'custom') {
+                        rect.color = tracker.customColor;
                     }
-                } else {
-                    sendGetRequest("/movement/outOfBorder");
-                }
-            });
-        });
-    };
+
+                    context.strokeStyle = rect.color;
+                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    context.font = '11px Helvetica';
+                    context.fillStyle = "#fff";
+                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+
+                    middle.fillRect(koordinateX, koordinateY, 10, 10);
+
+                    var dx = targetx - koordinateX;
+                    var dy = targety - koordinateY;
+
+                    var distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if ((koordinateX < 700 && koordinateX > 200) && (koordinateY > 200 && koordinateY < 600)) {
+                        if (distance > 50) {
+                            if (distance < oldDistance) {
+                                sendGetRequest("/movement/forward");
+                            } else if (distance > oldDistance) {
+                                sendGetRequest("/movement/rotate");
+                            }
+                            oldDistance = (4 * oldDistance + distance) / 5;
+                        } else {
+                            sendGetRequest("/movement/stop");
+                        }
+
+                    }
+                    else {
+                        sendGetRequest("/movement/outOfBorder");
+                    }
+                });
+            }
+        )
+        ;
+    }
+    ;
 
     function sendGetRequest(url) {
         var xmlhttp = new XMLHttpRequest();
