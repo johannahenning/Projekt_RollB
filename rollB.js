@@ -305,7 +305,7 @@ Cylon.robot({
 
         function tracking() {
             console.log("OLD: " + oldString);
-            if (direction < 360) {
+            /*if (direction < 360) {*/
                 if (uebermittelterString.includes("forward")/*&& !oldString.includes("forward")*/) {
                     my.bb8.roll(20, direction);
                     console.log(uebermittelterString);
@@ -325,9 +325,9 @@ Cylon.robot({
                     my.bb8.roll(60, direction);
                     oldString = "outOfBorder";
                 }
-            } else {
+            /*} else {
                 direction = direction % 360;
-            }
+            }*/
         }
 
         setInterval(tracking, 3000);
