@@ -322,18 +322,21 @@ Cylon.robot({
                 console.log(direction);
                 oldString = "stop";
             }
-
             else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                 console.log(uebermittelterString);
                 //console.log("OLD: " + oldString);
                 direction = (direction + 180) % 360;
                 console.log(direction);
-                my.bb8.roll(20, direction);
+                my.bb8.roll(60, direction);
                 oldString = "outOfBorder";
             }
-            /*} else {
-                direction = direction % 360;
-            }*/
+            else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(uebermittelterString);
+                direction = (direction + 180) % 360;
+                console.log(direction);
+                console.log("AusnahmeFall oldString = outOfBorder");
+                my.bb8.stop();
+            }
         }
 
         setInterval(tracking, 3000);
