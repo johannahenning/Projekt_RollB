@@ -329,7 +329,7 @@ Cylon.robot({
                 direction = (direction + 180 + counter) % 360;
                 console.log(direction);
                 my.bb8.roll(60, direction);
-                counter+= 10;
+                counter+= 30;
                 oldString = "outOfBorder";
             }
             else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
