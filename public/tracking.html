@@ -31,6 +31,8 @@
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
         var middle = canvas.getContext('2d');
+        var rahmen = canvas.getContext('2d');
+
 
         tracking.ColorTracker.registerColor('green', function (r, g, b) {
             if (r < 50 && g > 200 && b < 50) {
@@ -84,12 +86,15 @@
 
                     context.strokeStyle = rect.color;
                     context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    context.font = '11px Helvetica';
+                    context.font = '40px Helvetica';
                     context.fillStyle = "#fff";
                     context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
 
                     middle.fillRect(koordinateX, koordinateY, 10, 10);
+                    rahmen.strokeRect(100, 150, 800, 550);
+                    rahmen.strokeStyle = "#ffffff";
+
 
                     var dx = targetx - koordinateX;
                     var dy = targety - koordinateY;

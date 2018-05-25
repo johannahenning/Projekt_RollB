@@ -307,14 +307,14 @@ Cylon.robot({
             console.log("OLD: " + oldString);
             /*if (direction < 360) {*/
             if (uebermittelterString.includes("forward")/*&& !oldString.includes("forward")*/) {
-                my.bb8.roll(20, direction);
+                my.bb8.roll(40, direction);
                 console.log(uebermittelterString);
                 oldString = "forward";
             } else if (uebermittelterString.includes("rotate") /*&& !oldString.includes("rotate")*/) {
                 console.log(uebermittelterString);
                 direction = (direction + 90) % 360;
                 console.log(direction);
-                my.bb8.roll(20, direction);
+                my.bb8.roll(40, direction);
                 oldString = "rotate";
             } else if (uebermittelterString.includes("stop")) {
                 console.log(uebermittelterString);
@@ -332,14 +332,14 @@ Cylon.robot({
             }
             else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
                 console.log(uebermittelterString);
-                direction = (direction + 180) % 360;
                 console.log(direction);
                 console.log("AusnahmeFall oldString = outOfBorder");
-                my.bb8.stop();
+                my.bb8.roll(50, direction);
+
             }
         }
 
-        setInterval(tracking, 3000);
+        setInterval(tracking, 2000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
