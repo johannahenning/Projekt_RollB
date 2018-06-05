@@ -90,9 +90,6 @@
                 ziel.strokeStyle = "#ff0000";
                 ziel.fillRect(400, 400, 10, 10);
 
-                var displayRectX = rect.x + rect.width /2;
-                var displayRectY = rect.y + rect.height/2;
-
                 if (event.data.length === 0) {
                     sendGetRequest("/movement/outOfBorder");
                 } else {
