@@ -121,8 +121,8 @@
                         context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                         context.font = '40px Helvetica';
                         //context.fillStyle = "#fff";
-                        context.fillText('x: ' + displayRectX);
-                        context.fillText('y: ' + displayRectY);
+                        context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                        context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
 
                         middle.fillRect(rollBX, rollBY, 10, 10);
 
@@ -140,7 +140,8 @@
                         //sendGetRequest("/winkel/" + winkelRollBToGoal);
 
 
-                        sendGetRequest("/movement/" + rollBX + "/" + rollBY);
+                        sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
+                        sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
 
                         /*
                         if (distanceToMovingObjekt > 50) {

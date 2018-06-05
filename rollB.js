@@ -8,11 +8,18 @@ var express = require('express');
 var app = express();
 var uebermittelterWinkel;
 
-app.get('/movement/:x/:y', function (req, res) {
+app.get('/movementRollB/:x/:y', function (req, res) {
     xKoordRollB = req.params.x;
     yKoordRollB = req.params.y;
     res.end();
 });
+
+app.get('/movementGoal/:x/:y', function (req, res) {
+    xKoordGoal = req.params.x;
+    yKoordGoal = req.params.y;
+    res.end();
+});
+
 
 app.use(express.static('public'));
 
@@ -32,6 +39,8 @@ const TRACKING = "Tracking";
 
 var xKoordRollB = 0;
 var yKoordRollB = 0;
+var xKoordGoal = 0;
+var yKoordGoal = 0;
 
 console.log('Server running');
 
@@ -205,7 +214,6 @@ Cylon.robot({
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
-                        console.log(xKoordRollB);
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
@@ -360,7 +368,8 @@ Cylon.robot({
         //var trackingInterval = setInterval(tracking, 2000);
 
         function test() {
-            console.log (xKoordRollB, yKoordRollB);
+            console.log ("RollB" + xKoordRollB, yKoordRollB);
+            console.log ("Goal" + xKoordRollB, yKoordRollB);
         }
 
         var testInterval = setInterval(test, 1000);
