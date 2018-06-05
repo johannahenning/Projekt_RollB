@@ -6,6 +6,7 @@ var PubNub = require('pubnub');
 
 var express = require('express');
 var app = express();
+var uebermittelterWinkel;
 
 app.get('/movement/:direction', function (req, res) {
     uebermittelterString = req.params.direction;
@@ -102,9 +103,12 @@ Cylon.robot({
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
-                                console.log("Drive right");
-                                my.bb8.roll(100, 90);
-                                break;
+                                setTimeout(function () {
+                                    my.bb8.roll(10, 0);
+                                }, 1500);
+                                //console.log("Drive right");
+                                //my.bb8.roll(100, 90);
+                                //break;
                             case "vorwärts":
                                 console.log("Drive to front");
                                 my.bb8.roll(100, 0);

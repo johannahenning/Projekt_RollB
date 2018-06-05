@@ -67,10 +67,18 @@
 
         var movingTargetY;
 
+        var winkelRollBToGoal = 0;
         var festesTargetX = 400;
         var festesTargetY = 400;
 
         var oldDistance = 5000;
+
+       function nachNullAusrichten(){
+
+
+
+
+        }
 
 
         tracker.on('track', function (event) {
@@ -87,14 +95,23 @@
                 } else {
                     event.data.forEach(function (rect) {
 
-                        var rollBX = rect.x + rect.width / 2;
-                        var rollBY = rect.y + rect.height / 2;
-
-                        var winkelRollBToGoal = Math.atan2((movingTargetY - rollBY)/(movingTargetX - rollBX));
-
                         if (rect.color === "yellow") {
+                            var rollBX = rect.x + rect.width / 2;
+                            var rollBY = rect.y + rect.height / 2;
+                        }
+
+                        if (rect.color === "magenta") {
                             movingTargetX = rect.x + rect.width / 2;
                             movingTargetY = rect.y + rect.height / 2;
+                        }
+
+                        if (rollBY < movingTargetY) {
+                            console.log("IS ABOVE");
+                            winkelRollBToGoal = Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX));
+
+                        } else if (rollBY >= movingTargetY) {
+                            console.log("IS Drunter");
+                            winkelRollBToGoal = - (Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX)));
                         }
 
                         context.strokeStyle = rect.color;
