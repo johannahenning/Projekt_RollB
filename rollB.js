@@ -41,6 +41,10 @@ var xKoordRollB = 0;
 var yKoordRollB = 0;
 var xKoordGoal = 0;
 var yKoordGoal = 0;
+var startCoordsRollBX = 0;
+var startCoordsRollBY = 0;
+var directionCoordsRollBX = 0;
+var directionCoordsRollBY = 0;
 
 console.log('Server running');
 
@@ -108,10 +112,25 @@ Cylon.robot({
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
+                                while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
+                                    if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
+                                        startCoordsRollBX = xKoordRollB;
+                                        startCoordsRollBY = yKoordRollB;
+                                        setTimeout(function () {
+                                            my.bb8.roll(10, 0);
+                                        }, 500);
+                                        setTimeout(function () {
+                                            my.bb8.stop();
+                                        }, 1500);
+                                        setTimeout(function () {
+                                            directionCoordsRollBX = xKoordRollB;
+                                            directionCoordsRollBY = yKoordRollB;
+                                        }, 2000);
+                                    }
+                                }
 
-                                setTimeout(function () {
-                                    my.bb8.roll(10, 0);
-                                }, 1500);
+
+
                                 //console.log("Drive right");
                                 //my.bb8.roll(100, 90);
                                 //break;
@@ -367,10 +386,14 @@ Cylon.robot({
 
         //var trackingInterval = setInterval(tracking, 2000);
 
-        function test() {
+        /*function test() {
             console.log ("RollB" + xKoordRollB, yKoordRollB);
             console.log ("Goal" + xKoordGoal, yKoordGoal);
         }
+        */
+
+
+
 
         var testInterval = setInterval(test, 1000);
 
