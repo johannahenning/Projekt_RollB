@@ -59,7 +59,7 @@
             }
         });
 
-        var tracker = new tracking.ColorTracker(["magenta", "yellow",]);
+        var tracker = new tracking.ColorTracker(["magenta", "yellow"]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -134,7 +134,10 @@
                         var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
 
                         console.log(winkelRollBToGoal);
-                        sendGetRequest("/winkel/" + winkelRollBToGoal);
+                        //sendGetRequest("/winkel/" + winkelRollBToGoal);
+
+
+                        sendGetRequest("/movement/" + rollBX + "/" + rollBY);
 
                         if (distanceToMovingObjekt > 50) {
                             if (distanceToMovingObjekt < oldDistance) {

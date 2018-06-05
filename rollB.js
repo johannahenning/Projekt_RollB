@@ -8,16 +8,11 @@ var express = require('express');
 var app = express();
 var uebermittelterWinkel;
 
-app.get('/movement/:direction', function (req, res) {
-    uebermittelterString = req.params.direction;
+app.get('/movement/:x/:y', function (req, res) {
+    xKoordRollB = req.params.x;
+    yKoordRollB = req.params.y;
     res.end();
 });
-
-app.get("/winkel/:winkelRollBToGoal", function (req, res) {
-    uebermittelterWinkel = req.params.winkelRollBToGoal;
-    res.end();
-});
-
 
 app.use(express.static('public'));
 
@@ -35,7 +30,8 @@ const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 const TRACKING = "Tracking";
 
-var uebermittelterString = "";
+var xKoordRollB = 0;
+var yKoordRollB = 0;
 
 console.log('Server running');
 
@@ -103,6 +99,7 @@ Cylon.robot({
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
+
                                 setTimeout(function () {
                                     my.bb8.roll(10, 0);
                                 }, 1500);
@@ -208,7 +205,7 @@ Cylon.robot({
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
-                        console.log(uebermittelterString);
+                        console.log(xKoordRollB);
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
@@ -323,35 +320,38 @@ Cylon.robot({
         var oldString = "oldString";
         var counter = 0;
 
+        console.log (xKoordRollB, yKoordRollB);
+
         function tracking() {
             console.console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
-            if (uebermittelterString.includes("forward")) {
+
+            if (xKoordRollB.includes("forward")) {
                 my.bb8.roll(40, direction);
-                console.log(uebermittelterString);
+                console.log(xKoordRollB);
                 oldString = "forward";
-            } else if (uebermittelterString.includes("rotate")) {
-                console.log(uebermittelterString);
+            } else if (xKoordRollB.includes("rotate")) {
+                console.log(xKoordRollB);
                 direction = (direction + 90) % 360;
                 console.log(direction);
                 my.bb8.roll(40, direction);
                 oldString = "rotate";
-            } else if (uebermittelterString.includes("stop")) {
+            } else if (xKoordRollB.includes("stop")) {
                 console.log("FERTIIIIIIIG");
                 my.bb8.stop();
                 clearInterval(trackingInterval);
                 oldString = "stop";
             }
-            else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
-                console.log(uebermittelterString);
+            else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
                 direction = (direction + 180 + counter) % 360;
                 console.log(direction);
                 my.bb8.roll(60, direction);
                 counter += 90;
                 oldString = "outOfBorder";
             }
-            else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
-                console.log(uebermittelterString);
+            else if (xKoordRollB.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
                 console.log(direction);
                 console.log("AusnahmeFall oldString = outOfBorder");
                 my.bb8.roll(50, direction);
