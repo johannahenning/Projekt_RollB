@@ -116,6 +116,7 @@ Cylon.robot({
                                     if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
                                         startCoordsRollBX = xKoordRollB;
                                         startCoordsRollBY = yKoordRollB;
+                                        console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
                                         setTimeout(function () {
                                             my.bb8.roll(10, 0);
                                         }, 500);
@@ -125,6 +126,7 @@ Cylon.robot({
                                         setTimeout(function () {
                                             directionCoordsRollBX = xKoordRollB;
                                             directionCoordsRollBY = yKoordRollB;
+                                            console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
                                         }, 2000);
                                     }
                                 }
@@ -393,9 +395,6 @@ Cylon.robot({
         */
 
 
-
-
-        var testInterval = setInterval(test, 1000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
