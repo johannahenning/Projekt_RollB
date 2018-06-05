@@ -200,153 +200,141 @@ Cylon.robot({
                 process.stdin.pause();
                 process.exit();
             }
-
-            var definedKeys = {
-                "r": 1, "k": 1, "w": 1,
-                "d": 1, "a": 1, "s": 1,
-                "space": 1, "o": 1, "p": 1,
-                "m": 1, "y": 1, "x": 1,
-                "c": 1, "v": 1, "b": 1, "n": 1
-            };
+            
             var player = new SoundPlayer();
-            if (definedKeys[key.name] !== undefined) {
 
-                switch (key.name) {
-                    case "r":
-                        console.log("Start random LED show");
-                        for (var i = 0; i <= 200; i++) {
-                            my.bb8.randomColor();
-                            i++;
-                        }
-                        console.log("Play Sound File");
-                        player.sound('2.mp3', function () {
-                        });
-                        break;
-                    case "k":
-                        console.log("Change to random color");
+            switch (key.name) {
+                case "r":
+                    console.log("Start random LED show");
+                    for (var i = 0; i <= 200; i++) {
                         my.bb8.randomColor();
-                        break;
-                    case "w":
-                        console.log("Drive to front");
-                        my.bb8.roll(100, 0);
-                        break;
-                    case "d":
-                        console.log("Drive right");
-                        my.bb8.roll(100, 90);
-                        break;
-                    case "s":
-                        console.log("Drive back");
-                        my.bb8.roll(100, 180);
-                        break;
-                    case "a":
-                        console.log("Drive left");
-                        my.bb8.roll(100, 270);
-                        break;
-                    case "space":
-                        console.log("Stop");
-                        my.bb8.stop();
-                        break;
-                    case "o":
-                        console.log("Start drive in a circle");
-                        var count = 0;
-                        var dir = 0;
-                        var interval = setInterval(function () {
-                            console.log("drive to direction: " + dir);
-                            my.bb8.roll(30, dir);
-                            dir = dir + 5;
-                            if (dir >= 365) {
-                                dir = 0;
-                                console.log("Reset direction");
-                                count++;
-                            }
-                            if (count > 2) {
-                                clearInterval(interval);
-                                my.bb8.stop();
-                                console.log("STOP!");
-                            }
-                        }, 100);
-                        break;
-                    case ("y"):
-                        console.log("Play Sound File");
-                        player.sound('1.mp3', function () {
-                        });
-                        break;
-                    case ("x"):
-
-
-
-                        console.log("Play Sound File");
-                        player.sound('2.mp3', function () {
-                        });
-                        break;
-                    case ("c"):
-                        console.log("Play Sound File");
-                        player.sound('3.mp3', function () {
-                        });
-                        break;
-                    case ("v"):
-                        console.log("Play Sound File");
-                        player.sound('4.mp3', function () {
-                        });
-                        break;
-                    case ("b"):
-                        console.log("Play Sound File");
-                        player.sound('5.mp3', function () {
-                        });
-                        break;
-                    case ("n"):
-
-                        console.log("HIIIIIIIIIIIIIIIIIIIIIII");
-                        while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
-                            if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
-                                startCoordsRollBX = xKoordRollB;
-                                startCoordsRollBY = yKoordRollB;
-                                console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
-                                setTimeout(function () {
-                                    my.bb8.roll(10, 0);
-                                }, 500);
-                                setTimeout(function () {
-                                    my.bb8.stop();
-                                }, 1500);
-                                setTimeout(function () {
-                                    directionCoordsRollBX = xKoordRollB;
-                                    directionCoordsRollBY = yKoordRollB;
-                                    console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
-                                }, 2000);
-                            }
+                        i++;
+                    }
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
+                    break;
+                case "k":
+                    console.log("Change to random color");
+                    my.bb8.randomColor();
+                    break;
+                case "w":
+                    console.log("Drive to front");
+                    my.bb8.roll(100, 0);
+                    break;
+                case "d":
+                    console.log("Drive right");
+                    my.bb8.roll(100, 90);
+                    break;
+                case "s":
+                    console.log("Drive back");
+                    my.bb8.roll(100, 180);
+                    break;
+                case "a":
+                    console.log("Drive left");
+                    my.bb8.roll(100, 270);
+                    break;
+                case "space":
+                    console.log("Stop");
+                    my.bb8.stop();
+                    break;
+                case "o":
+                    console.log("Start drive in a circle");
+                    var count = 0;
+                    var dir = 0;
+                    var interval = setInterval(function () {
+                        console.log("drive to direction: " + dir);
+                        my.bb8.roll(30, dir);
+                        dir = dir + 5;
+                        if (dir >= 365) {
+                            dir = 0;
+                            console.log("Reset direction");
+                            count++;
                         }
-                        break;
+                        if (count > 2) {
+                            clearInterval(interval);
+                            my.bb8.stop();
+                            console.log("STOP!");
+                        }
+                    }, 100);
+                    break;
+                case ("y"):
+                    console.log("Play Sound File");
+                    player.sound('1.mp3', function () {
+                    });
+                    break;
+                case ("x"):
+
+
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
+                    break;
+                case ("c"):
+                    console.log("Play Sound File");
+                    player.sound('3.mp3', function () {
+                    });
+                    break;
+                case ("v"):
+                    console.log("Play Sound File");
+                    player.sound('4.mp3', function () {
+                    });
+                    break;
+                case ("b"):
+                    console.log("Play Sound File");
+                    player.sound('5.mp3', function () {
+                    });
+                    break;
+                case ("n"):
+
+                    console.log("HIIIIIIIIIIIIIIIIIIIIIII");
+
+                    if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
+                        startCoordsRollBX = xKoordRollB;
+                        startCoordsRollBY = yKoordRollB;
+                        console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
+                        setTimeout(function () {
+                            my.bb8.roll(10, 0);
+                        }, 500);
+                        setTimeout(function () {
+                            my.bb8.stop();
+                        }, 1500);
+                        setTimeout(function () {
+                            directionCoordsRollBX = xKoordRollB;
+                            directionCoordsRollBY = yKoordRollB;
+                            console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
+                        }, 2000);
+                    }
+                    break;
 
 
 
-                        /*console.log("Play Sound File");
-                        player.sound('6.mp3', function () {
-                        });
-                        break;*/
-                    case ("m"):
-                        console.log("Play Sound File");
-                        player.sound('7.mp3', function () {
-                        });
-                        break;
-                    case ("p"):
-                        my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
-                            console.log("LED OFF!");
-                        });
-                        break;
-                }
-            }
-            else {
-                console.log("Key unknown, ROLLB SAYS NO");
-                player.sound('15.mp3', function () {
+                /*console.log("Play Sound File");
+                player.sound('6.mp3', function () {
                 });
-                my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
-                    console.log(err || "Color RED!");
-                });
-                setTimeout(function () {
+                break;*/
+                case ("m"):
+                    console.log("Play Sound File");
+                    player.sound('7.mp3', function () {
+                    });
+                    break;
+                case ("p"):
                     my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
                         console.log("LED OFF!");
                     });
-                }, 6000);
+                    break;
+                default:
+                    console.log("Key unknown, ROLLB SAYS NO");
+                    player.sound('15.mp3', function () {
+                    });
+                    my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                        console.log(err || "Color RED!");
+                    });
+                    setTimeout(function () {
+                        my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
+                            console.log("LED OFF!");
+                        });
+                    }, 6000);
             }
 
         }
@@ -399,7 +387,6 @@ Cylon.robot({
             console.log ("Goal" + xKoordGoal, yKoordGoal);
         }
         */
-
 
 
         keypress(process.stdin);
