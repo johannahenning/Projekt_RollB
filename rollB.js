@@ -369,7 +369,7 @@ Cylon.robot({
 
         function test() {
             console.log ("RollB" + xKoordRollB, yKoordRollB);
-            console.log ("Goal" + xKoordRollB, yKoordRollB);
+            console.log ("Goal" + xKoordGoal, yKoordGoal);
         }
 
         var testInterval = setInterval(test, 1000);
