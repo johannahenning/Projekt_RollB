@@ -363,7 +363,7 @@ Cylon.robot({
             console.log (xKoordRollB, yKoordRollB);
         }
 
-        var testInterval = setInterval((test, 1000));
+        var testInterval = setInterval(test, 1000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
