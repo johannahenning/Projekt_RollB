@@ -196,7 +196,7 @@ Cylon.robot({
 
 
         function handle(ch, key) {
-            if (! key)
+            if (!key)
                 return;
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
@@ -289,22 +289,20 @@ Cylon.robot({
                     break;
                 case ("n"):
 
-                    console.log("HIIIIIIIIIIIIIIIIIIIIIII");
-
                     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
                         startCoordsRollBX = xKoordRollB;
                         startCoordsRollBY = yKoordRollB;
-                        console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
+                        console.log("GOT START KOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
                         setTimeout(function () {
-                            my.bb8.roll(10, 0);
-                        }, 500);
+                            my.bb8.roll(30, 0);
+                        }, 1000);
                         setTimeout(function () {
                             my.bb8.stop();
-                        }, 1500);
+                        }, 2500);
                         setTimeout(function () {
                             directionCoordsRollBX = xKoordRollB;
                             directionCoordsRollBY = yKoordRollB;
-                            console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
+                            console.log("GOT DIRECTION KOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
                         }, 2000);
                     }
                     break;

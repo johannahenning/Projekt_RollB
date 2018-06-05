@@ -36,27 +36,21 @@
 
 
         tracking.ColorTracker.registerColor('green', function (r, g, b) {
-            if (r < 50 && g > 200 && b < 50) {
-                return true;
-            }
+            return (r < 50 && g > 200 && b < 50);
         });
 
         tracking.ColorTracker.registerColor('blue', function (r, g, b) {
-            if (r < 50 && g < 50 && b > 200) {
-                return true;
-            }
+            return (r < 50 && g < 50 && b > 200);
+
         });
 
         tracking.ColorTracker.registerColor('white', function (r, g, b) {
-            if (r > 240 && g > 240 && b > 240) {
-                return true;
-            }
+            return (r > 240 && g > 240 && b > 240)
         });
 
         tracking.ColorTracker.registerColor('grey', function (r, g, b) {
-            if (r > 200 && g > 200 && b > 200) {
-                return true;
-            }
+            return (r > 200 && g > 200 && b > 200);
+
         });
 
         var tracker = new tracking.ColorTracker(["magenta", "yellow"]);
@@ -73,13 +67,49 @@
 
         var oldDistance = 5000;
 
-       function nachNullAusrichten(){
+        function track(rect) {
 
+            if (rect.color === "yellow") {
+                var rollBX = rect.x + rect.width / 2;
+                var rollBY = rect.y + rect.height / 2;
+            }
 
+            if (rect.color === "magenta") {
+                movingTargetX = rect.x + rect.width / 2;
+                movingTargetY = rect.y + rect.height / 2;
+            }
 
+            if (rollBY < movingTargetY) {
+                console.log("IS ABOVE");
+                winkelRollBToGoal = Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX));
+
+            } else if (rollBY >= movingTargetY) {
+                console.log("IS Drunter");
+                winkelRollBToGoal = -(Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX)));
+            }
+
+            context.strokeStyle = rect.color;
+            context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+            context.font = '40px Helvetica';
+            context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+            context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
+
+            middle.fillRect(rollBX, rollBY, 10, 10);
+
+            var festesDX = festesTargetX - rollBX;
+            var festesDY = festesTargetY - rollBY;
+
+            var changingDX = movingTargetX - rollBX;
+            var changingDY = movingTargetY - rollBY;
+
+            var distanceToMovingObjekt = Math.sqrt(changingDX * changingDX + changingDY * changingDY);
+
+            var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
+
+            sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
+            sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
 
         }
-
 
         tracker.on('track', function (event) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -93,67 +123,7 @@
                 if (event.data.length === 0) {
                     sendGetRequest("/movement/outOfBorder");
                 } else {
-                    event.data.forEach(function (rect) {
-
-                        if (rect.color === "yellow") {
-                            var rollBX = rect.x + rect.width / 2;
-                            var rollBY = rect.y + rect.height / 2;
-                        }
-
-                        if (rect.color === "magenta") {
-                            movingTargetX = rect.x + rect.width / 2;
-                            movingTargetY = rect.y + rect.height / 2;
-                        }
-
-                        if (rollBY < movingTargetY) {
-                            console.log("IS ABOVE");
-                            winkelRollBToGoal = Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX));
-
-                        } else if (rollBY >= movingTargetY) {
-                            console.log("IS Drunter");
-                            winkelRollBToGoal = - (Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX)));
-                        }
-
-                        context.strokeStyle = rect.color;
-                        context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                        context.font = '40px Helvetica';
-                        //context.fillStyle = "#fff";
-                        context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                        context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
-
-                        middle.fillRect(rollBX, rollBY, 10, 10);
-
-                        var festesDX = festesTargetX - rollBX;
-                        var festesDY = festesTargetY - rollBY;
-
-                        var changingDX = movingTargetX - rollBX;
-                        var changingDY = movingTargetY - rollBY;
-
-                        var distanceToMovingObjekt = Math.sqrt(changingDX * changingDX + changingDY * changingDY);
-
-                        var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
-
-                        console.log(winkelRollBToGoal);
-                        //sendGetRequest("/winkel/" + winkelRollBToGoal);
-
-
-                        sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
-                        sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
-
-                        /*
-                        if (distanceToMovingObjekt > 50) {
-                            if (distanceToMovingObjekt < oldDistance) {
-                                sendGetRequest("/movement/forward");
-                            } else if (distanceToMovingObjekt > oldDistance) {
-                                sendGetRequest("/movement/rotate");
-                            }
-                            oldDistance = (6 * oldDistance + distanceToMovingObjekt) / 7;
-                        } else {
-                            sendGetRequest("/movement/stop");
-                        }
-                        */
-
-                    });
+                    event.data.forEach(track);
                 }
             }
         )
