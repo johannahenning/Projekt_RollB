@@ -112,30 +112,9 @@ Cylon.robot({
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
-                                while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
-                                    if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
-                                        startCoordsRollBX = xKoordRollB;
-                                        startCoordsRollBY = yKoordRollB;
-                                        console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
-                                        setTimeout(function () {
-                                            my.bb8.roll(10, 0);
-                                        }, 500);
-                                        setTimeout(function () {
-                                            my.bb8.stop();
-                                        }, 1500);
-                                        setTimeout(function () {
-                                            directionCoordsRollBX = xKoordRollB;
-                                            directionCoordsRollBY = yKoordRollB;
-                                            console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
-                                        }, 2000);
-                                    }
-                                }
-
-
-
-                                //console.log("Drive right");
-                                //my.bb8.roll(100, 90);
-                                //break;
+                                console.log("Drive right");
+                                my.bb8.roll(100, 90);
+                                break;
                             case "vorwärts":
                                 console.log("Drive to front");
                                 my.bb8.roll(100, 0);
@@ -293,10 +272,30 @@ Cylon.robot({
                         });
                         break;
                     case ("x"):
-                        console.log("Play Sound File");
-                        player.sound('2.mp3', function () {
-                        });
-                        break;
+
+                        while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
+                            if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
+                                startCoordsRollBX = xKoordRollB;
+                                startCoordsRollBY = yKoordRollB;
+                                console.log("GOT STARTKOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
+                                setTimeout(function () {
+                                    my.bb8.roll(10, 0);
+                                }, 500);
+                                setTimeout(function () {
+                                    my.bb8.stop();
+                                }, 1500);
+                                setTimeout(function () {
+                                    directionCoordsRollBX = xKoordRollB;
+                                    directionCoordsRollBY = yKoordRollB;
+                                    console.log("GOT DIRECTIONKOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
+                                }, 2000);
+                            }
+                        }
+
+                        //console.log("Play Sound File");
+                        //player.sound('2.mp3', function () {
+                        //});
+                        //break;
                     case ("c"):
                         console.log("Play Sound File");
                         player.sound('3.mp3', function () {
