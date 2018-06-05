@@ -273,6 +273,29 @@ Cylon.robot({
                         break;
                     case ("x"):
 
+
+
+                        console.log("Play Sound File");
+                        player.sound('2.mp3', function () {
+                        });
+                        break;
+                    case ("c"):
+                        console.log("Play Sound File");
+                        player.sound('3.mp3', function () {
+                        });
+                        break;
+                    case ("v"):
+                        console.log("Play Sound File");
+                        player.sound('4.mp3', function () {
+                        });
+                        break;
+                    case ("b"):
+                        console.log("Play Sound File");
+                        player.sound('5.mp3', function () {
+                        });
+                        break;
+                    case ("n"):
+
                         while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
                             if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
                                 startCoordsRollBX = xKoordRollB;
@@ -292,30 +315,12 @@ Cylon.robot({
                             }
                         }
 
-                        //console.log("Play Sound File");
-                        //player.sound('2.mp3', function () {
-                        //});
-                        //break;
-                    case ("c"):
-                        console.log("Play Sound File");
-                        player.sound('3.mp3', function () {
-                        });
-                        break;
-                    case ("v"):
-                        console.log("Play Sound File");
-                        player.sound('4.mp3', function () {
-                        });
-                        break;
-                    case ("b"):
-                        console.log("Play Sound File");
-                        player.sound('5.mp3', function () {
-                        });
-                        break;
-                    case ("n"):
-                        console.log("Play Sound File");
+
+
+                        /*console.log("Play Sound File");
                         player.sound('6.mp3', function () {
                         });
-                        break;
+                        break;*/
                     case ("m"):
                         console.log("Play Sound File");
                         player.sound('7.mp3', function () {
