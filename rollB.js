@@ -196,11 +196,13 @@ Cylon.robot({
 
 
         function handle(ch, key) {
+            if (! key)
+                return;
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
                 process.exit();
             }
-            
+
             var player = new SoundPlayer();
 
             switch (key.name) {
