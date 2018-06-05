@@ -59,7 +59,7 @@
             }
         });
 
-        var tracker = new tracking.ColorTracker(["magenta", "yellow"]);
+        var tracker = new tracking.ColorTracker(["magenta", "yellow",]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -92,7 +92,7 @@
 
                         var winkelRollBToGoal = Math.atan2((movingTargetY - rollBY)/(movingTargetX - rollBX));
 
-                        if (rect.color === "magenta") {
+                        if (rect.color === "yellow") {
                             movingTargetX = rect.x + rect.width / 2;
                             movingTargetY = rect.y + rect.height / 2;
                         }
