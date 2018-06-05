@@ -8,10 +8,15 @@ var express = require('express');
 var app = express();
 
 app.get('/movement/:direction', function (req, res) {
-    res.send('Hello World!');
     uebermittelterString = req.params.direction;
     res.end();
 });
+
+app.get("/winkel/:winkelRollBToGoal", function (req, res) {
+    uebermittelterWinkel = req.params.winkelRollBToGoal;
+    res.end();
+});
+
 
 app.use(express.static('public'));
 
@@ -315,6 +320,7 @@ Cylon.robot({
         var counter = 0;
 
         function tracking() {
+            console.console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
             if (uebermittelterString.includes("forward")) {
                 my.bb8.roll(40, direction);

@@ -90,6 +90,8 @@
                         var rollBX = rect.x + rect.width / 2;
                         var rollBY = rect.y + rect.height / 2;
 
+                        var winkelRollBToGoal = Math.atan2((movingTargetY - rollBY)/(movingTargetX - rollBX));
+
                         if (rect.color === "magenta") {
                             movingTargetX = rect.x + rect.width / 2;
                             movingTargetY = rect.y + rect.height / 2;
@@ -113,6 +115,9 @@
                         var distanceToMovingObjekt = Math.sqrt(changingDX * changingDX + changingDY * changingDY);
 
                         var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
+
+
+                        sendGetRequest("/winkel/" + winkelRollBToGoal);
 
                         if (distanceToMovingObjekt > 50) {
                             if (distanceToMovingObjekt < oldDistance) {
