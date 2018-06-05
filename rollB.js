@@ -296,6 +296,7 @@ Cylon.robot({
                         break;
                     case ("n"):
 
+                        console.log("HIIIIIIIIIIIIIIIIIIIIIII");
                         while(xKoordRollB == null || xKoordRollB == 0 || xKoordRollB == undefined) {
                             if(xKoordRollB != null && xKoordRollB != 0 && xKoordRollB != undefined) {
                                 startCoordsRollBX = xKoordRollB;
@@ -314,6 +315,7 @@ Cylon.robot({
                                 }, 2000);
                             }
                         }
+                        break;
 
 
 
