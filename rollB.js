@@ -320,8 +320,6 @@ Cylon.robot({
         var oldString = "oldString";
         var counter = 0;
 
-        console.log (xKoordRollB, yKoordRollB);
-
         function tracking() {
             console.console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
@@ -360,6 +358,12 @@ Cylon.robot({
         }
 
         //var trackingInterval = setInterval(tracking, 2000);
+
+        function test() {
+            console.log (xKoordRollB, yKoordRollB);
+        }
+
+        var testInterval = setInterval((test, 1000));
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
