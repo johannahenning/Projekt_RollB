@@ -311,10 +311,12 @@ Cylon.robot({
                             winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
                             winkelStartDirection = winkelStartDirection * 180 / Math.PI;
                             console.log("WINKEL: " + winkelStartDirection);
-                            if (startKoordRollBY < stopKoordRollBY) {
+                            if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
                                 ausrichtung = 360 - winkelStartDirection;
-                            } else if (startKoordRollBY > stopKoordRollBY){
+                            } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
                                 ausrichtung = ausrichtung + (-winkelStartDirection);
+                            } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
+                                ausrichtung = 360 - (-winkelStartDirection);
                             }
                         }, 4000);
                         setTimeout(function () {
