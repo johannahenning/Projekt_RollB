@@ -41,10 +41,11 @@ var xKoordRollB = 0;
 var yKoordRollB = 0;
 var xKoordGoal = 0;
 var yKoordGoal = 0;
-var startCoordsRollBX = 0;
-var startCoordsRollBY = 0;
+var startKoordRollBX = 0;
+var startKoordRollBY = 0;
 var stopKoordRollBX = 0;
 var stopKoordRollBY = 0;
+var winkelStartDirection = 0;
 
 console.log('Server running');
 
@@ -290,8 +291,8 @@ Cylon.robot({
                 case ("n"):
 
                     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
-                        startCoordsRollBX = xKoordRollB;
-                        startCoordsRollBY = yKoordRollB;
+                        startKoordRollBX = xKoordRollB;
+                        startKoordRollBY = yKoordRollB;
                         console.log("GOT START KOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
 
                         my.bb8.roll(70, 0);
@@ -304,6 +305,8 @@ Cylon.robot({
                             stopKoordRollBX = xKoordRollB;
                             stopKoordRollBY = yKoordRollB;
                             console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
+                            winkelStartDirection = Math.atan((stopKoordRollBY - startCoordsRollBY) / (stopKoordRollBX - startCoordsRollBX));
+                            console.log(winkelStartDirection);
                         }, 4000);
 
 
