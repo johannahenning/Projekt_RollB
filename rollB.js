@@ -305,8 +305,9 @@ Cylon.robot({
                             stopKoordRollBX = xKoordRollB;
                             stopKoordRollBY = yKoordRollB;
                             console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
-                            winkelStartDirection = Math.atan((stopKoordRollBY - startKoordRollBY) / (stopKoordRollBX - startKoordRollBX));
-                            console.log(winkelStartDirection);
+                            winkelStartDirection = Math.acos(Math.abs(startKoordRollBX - stopKoordRollBX) / Math.abs(startKoordRollBY - stopKoordRollBY));
+                            // winkelStartDirection = Math.atan((stopKoordRollBY - startKoordRollBY) / (stopKoordRollBX - startKoordRollBX));
+                            console.log(winkelStartDirection * 180 / Math.PI);
                         }, 4000);
 
 

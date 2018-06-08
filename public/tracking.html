@@ -53,7 +53,7 @@
 
         });
 
-        var tracker = new tracking.ColorTracker(["yellow", "grey"]);
+        var tracker = new tracking.ColorTracker(["yellow", "magenta"]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -65,11 +65,13 @@
         var festesTargetX = 400;
         var festesTargetY = 400;
 
+        var winkelStartDirection = 0;
+
         var oldDistance = 5000;
 
         function track(rect) {
 
-            if (rect.color === "grey") {
+            if (rect.color === "magenta") {
                 var rollBX = rect.x + rect.width / 2;
                 var rollBY = rect.y + rect.height / 2;
             }
@@ -77,15 +79,6 @@
             if (rect.color === "yellow") {
                 movingTargetX = rect.x + rect.width / 2;
                 movingTargetY = rect.y + rect.height / 2;
-            }
-
-            if (rollBY < movingTargetY) {
-                console.log("IS ABOVE");
-                winkelRollBToGoal = Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX));
-
-            } else if (rollBY >= movingTargetY) {
-                console.log("IS Drunter");
-                winkelRollBToGoal = -(Math.atan((movingTargetY - rollBY) / (movingTargetX - rollBX)));
             }
 
             context.strokeStyle = rect.color;
@@ -106,8 +99,12 @@
 
             var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
 
-            sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
-            sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
+            //winkelStartDirection = Math.acos(Math.abs(rollBX - movingTargetX) / Math.abs(rollBY - movingTargetY));
+            winkelStartDirection = Math.atan((rollBY - movingTargetY) / (rollBX - movingTargetX));
+            console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
+
+            //sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
+           // sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
 
         }
 
@@ -121,7 +118,7 @@
                 ziel.fillRect(400, 400, 10, 10);
 
                 if (event.data.length === 0) {
-                    sendGetRequest("/movement/outOfBorder");
+                //    sendGetRequest("/movement/outOfBorder");
                 } else {
                     event.data.forEach(track);
                 }
@@ -132,6 +129,7 @@
     ;
 
 
+    /*
     function sendGetRequest(url) {
 
         var xmlhttp = new XMLHttpRequest();
@@ -141,6 +139,7 @@
         xmlhttp.send();
 
     }
+    */
 
 
 </script>
