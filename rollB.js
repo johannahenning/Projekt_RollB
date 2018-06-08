@@ -270,8 +270,6 @@ Cylon.robot({
                     });
                     break;
                 case ("x"):
-
-
                     console.log("Play Sound File");
                     player.sound('2.mp3', function () {
                     });
@@ -292,6 +290,7 @@ Cylon.robot({
                     });
                     break;
                 case ("n"):
+
                     var ausrichtung = 0;
 
                     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
@@ -312,7 +311,11 @@ Cylon.robot({
                             winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
                             winkelStartDirection = winkelStartDirection * 180 / Math.PI;
                             console.log("WINKEL: " + winkelStartDirection);
-                            ausrichtung = 360 - winkelStartDirection;
+                            if (startKoordRollBY < stopKoordRollBY) {
+                                ausrichtung = 360 - winkelStartDirection;
+                            } else if (startKoordRollBY > stopKoordRollBY){
+                                ausrichtung = ausrichtung + (-winkelStartDirection);
+                            }
                         }, 4000);
                         setTimeout(function () {
                             console.log("ausrichtung: " + ausrichtung);
@@ -322,6 +325,7 @@ Cylon.robot({
                         //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
 
                         setTimeout(function () {
+                            //Berechnung vom Winkel zum Ziel
                             winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
                             winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
