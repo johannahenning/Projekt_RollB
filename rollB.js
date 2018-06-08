@@ -328,6 +328,7 @@ Cylon.robot({
                             my.bb8.roll(30, (ausrichtung + winkelZumZiel) % 360);
                         }, 6000);
 
+
                     }
                     break;
 
