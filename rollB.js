@@ -46,6 +46,7 @@ var startKoordRollBY = 0;
 var stopKoordRollBX = 0;
 var stopKoordRollBY = 0;
 var winkelStartDirection = 0;
+var winkelZumZiel = 0;
 
 
 console.log('Server running');
@@ -315,10 +316,16 @@ Cylon.robot({
                         }, 4000);
                         setTimeout(function () {
                             console.log("ausrichtung: " + ausrichtung);
-                            my.bb8.roll(30, ausrichtung);
+                            my.bb8.roll(0, ausrichtung);
                         }, 5000);
 
+                        //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
 
+                        winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
+                        winkelZumZiel = winkelZumZiel * 180 / Math.PI;
+
+                        my.bb8.roll(30, (ausrichtung + winkelZumZiel)%360);
+                        
                     }
                     break;
 
