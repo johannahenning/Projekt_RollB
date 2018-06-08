@@ -53,7 +53,7 @@
 
         });
 
-        var tracker = new tracking.ColorTracker(["yellow", "magenta"]);
+        var tracker = new tracking.ColorTracker(["yellow", "grey"]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -71,7 +71,7 @@
 
         function track(rect) {
 
-            if (rect.color === "magenta") {
+            if (rect.color === "grey") {
                 var rollBX = rect.x + rect.width / 2;
                 var rollBY = rect.y + rect.height / 2;
             }
@@ -100,11 +100,11 @@
             var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
 
             //winkelStartDirection = Math.acos(Math.abs(rollBX - movingTargetX) / Math.abs(rollBY - movingTargetY));
-            winkelStartDirection = Math.atan((rollBY - movingTargetY) / (rollBX - movingTargetX));
-            console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
+            // winkelStartDirection = Math.atan((rollBY - movingTargetY) / (rollBX - movingTargetX));
+            //console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
 
-            //sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
-           // sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
+            sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
+            sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
 
         }
 
@@ -118,7 +118,7 @@
                 ziel.fillRect(400, 400, 10, 10);
 
                 if (event.data.length === 0) {
-                //    sendGetRequest("/movement/outOfBorder");
+                    sendGetRequest("/movement/outOfBorder");
                 } else {
                     event.data.forEach(track);
                 }
@@ -129,7 +129,6 @@
     ;
 
 
-    /*
     function sendGetRequest(url) {
 
         var xmlhttp = new XMLHttpRequest();
@@ -139,7 +138,6 @@
         xmlhttp.send();
 
     }
-    */
 
 
 </script>
