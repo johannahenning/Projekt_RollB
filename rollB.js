@@ -298,13 +298,13 @@ Cylon.robot({
 
                         setTimeout(function () {
                             my.bb8.stop();
-                        }, 1000);
+                        }, 2000);
 
                         setTimeout(function () {
                             stopKoordRollBX = xKoordRollB;
                             stopKoordRollBY = yKoordRollB;
                             console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
-                        }, 3000);
+                        }, 4000);
 
 
                     }
