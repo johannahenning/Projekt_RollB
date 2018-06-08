@@ -321,11 +321,13 @@ Cylon.robot({
 
                         //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
 
-                        winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
-                        winkelZumZiel = winkelZumZiel * 180 / Math.PI;
+                        setTimeout(function () {
+                            winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
+                            winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
-                        my.bb8.roll(30, (ausrichtung + winkelZumZiel)%360);
-                        
+                            my.bb8.roll(30, (ausrichtung + winkelZumZiel) % 360);
+                        }, 6000);
+
                     }
                     break;
 
