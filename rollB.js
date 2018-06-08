@@ -4,6 +4,21 @@ var keypress = require("keypress");
 var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
+var express = require('express');
+var app = express();
+
+app.get('/movement/:direction', function (req, res) {
+    res.send('Hello World!');
+    uebermittelterString = req.params.direction;
+    res.end();
+});
+
+app.use(express.static('public'));
+
+app.listen(8888, function () {
+    console.log('Example app listening on port 8888!');
+});
+
 var pubnub = new PubNub({
     subscribeKey: "sub-c-5357b764-077f-11e8-b7c9-024a5d295ade"
 });
@@ -13,14 +28,25 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 
+var uebermittelterString = "";
+
+console.log('Server running');
+
+var trackingInterval;
+
 
 Cylon.robot({
     connections: {
         bluetooth: {adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
     },
+
+
     devices: {
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
+
+
+
     work: function (my) {
         pubnub.addListener({
             status: function (statusEvent) {
@@ -56,11 +82,19 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
+                   // case TRACKING:
+                     //   switch (messageBefehl) {
+                       //     case "koordinaten":
+                         //       trackingInterval = setInterval(tracking, 2000);
+                          //  break;
+                       // }
+                       // break;
                     case RICHTUNG:
                         switch (messageBefehl) {
                             case "links":
-                                console.log("Drive left");
-                                my.bb8.roll(100, 270);
+                              //  console.log("Drive left");
+                              //  my.bb8.roll(100, 270);
+                                trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
                                 console.log("Drive right");
@@ -151,6 +185,7 @@ Cylon.robot({
                 process.stdin.pause();
                 process.exit();
             }
+
             var definedKeys = {
                 "r": 1, "k": 1, "w": 1,
                 "d": 1, "a": 1, "s": 1,
@@ -164,6 +199,7 @@ Cylon.robot({
                 switch (key.name) {
                     case "r":
                         console.log("Start random LED show");
+                        console.log(uebermittelterString);
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
                             i++;
@@ -271,7 +307,49 @@ Cylon.robot({
                     });
                 }, 6000);
             }
+
         }
+
+        var direction = 0;
+        var oldString = "oldString";
+        var counter = 0;
+
+        function tracking() {
+            console.log("OLD: " + oldString);
+            if (uebermittelterString.includes("forward")) {
+                my.bb8.roll(40, direction);
+                console.log(uebermittelterString);
+                oldString = "forward";
+            } else if (uebermittelterString.includes("rotate")) {
+                console.log(uebermittelterString);
+                direction = (direction + 90) % 360;
+                console.log(direction);
+                my.bb8.roll(40, direction);
+                oldString = "rotate";
+            } else if (uebermittelterString.includes("stop")) {
+                console.log("FERTIIIIIIIG");
+                my.bb8.stop();
+                clearInterval(trackingInterval);
+                oldString = "stop";
+            }
+            else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
+                console.log(uebermittelterString);
+                direction = (direction + 180 + counter) % 360;
+                console.log(direction);
+                my.bb8.roll(60, direction);
+                counter += 90;
+                oldString = "outOfBorder";
+            }
+            else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(uebermittelterString);
+                console.log(direction);
+                console.log("AusnahmeFall oldString = outOfBorder");
+                my.bb8.roll(50, direction);
+                oldString = "oldString";
+            }
+        }
+
+        //var trackingInterval = setInterval(tracking, 2000);
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
