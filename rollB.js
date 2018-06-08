@@ -322,12 +322,15 @@ Cylon.robot({
                                 console.log("rechts oben nach links unten");
                             } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
                                 console.log("links unten nach rechts oben");
-                                ausrichtung = 180 -winkelStartDirection;
+                                ausrichtung = 180 - winkelStartDirection;
                             }
                         }, 4000);
                         setTimeout(function () {
                             console.log("ausrichtung: " + ausrichtung);
                             my.bb8.roll(0, ausrichtung);
+                        }, 5000);
+                        setTimeout(function () {
+                            my.bb8.stop();
                         }, 5000);
 
                         //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
