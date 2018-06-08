@@ -294,17 +294,17 @@ Cylon.robot({
                         startCoordsRollBY = yKoordRollB;
                         console.log("GOT START KOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
 
-                        my.bb8.roll(50, 0);
+                        my.bb8.roll(70, 0);
 
                         setTimeout(function () {
                             my.bb8.stop();
-                        }, 2500);
-                        
+                        }, 1000);
+
                         setTimeout(function () {
                             stopKoordRollBX = xKoordRollB;
                             stopKoordRollBY = yKoordRollB;
                             console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
-                        }, 3500);
+                        }, 3000);
 
 
                     }
