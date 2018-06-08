@@ -313,6 +313,7 @@ Cylon.robot({
                             ausrichtung = 360 - winkelStartDirection;
                         }, 4000);
                         setTimeout(function () {
+                            console.log("ausrichtung: " + ausrichtung);
                             my.bb8.roll(30, ausrichtung);
                         }, 5000);
 
