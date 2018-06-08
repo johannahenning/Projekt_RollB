@@ -53,7 +53,7 @@
 
         });
 
-        var tracker = new tracking.ColorTracker(["magenta", "yellow"]);
+        var tracker = new tracking.ColorTracker(["yellow", "grey"]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -69,12 +69,12 @@
 
         function track(rect) {
 
-            if (rect.color === "yellow") {
+            if (rect.color === "grey") {
                 var rollBX = rect.x + rect.width / 2;
                 var rollBY = rect.y + rect.height / 2;
             }
 
-            if (rect.color === "magenta") {
+            if (rect.color === "yellow") {
                 movingTargetX = rect.x + rect.width / 2;
                 movingTargetY = rect.y + rect.height / 2;
             }

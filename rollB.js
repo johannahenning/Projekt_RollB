@@ -43,8 +43,8 @@ var xKoordGoal = 0;
 var yKoordGoal = 0;
 var startCoordsRollBX = 0;
 var startCoordsRollBY = 0;
-var directionCoordsRollBX = 0;
-var directionCoordsRollBY = 0;
+var stopKoordRollBX = 0;
+var stopKoordRollBY = 0;
 
 console.log('Server running');
 
@@ -293,20 +293,17 @@ Cylon.robot({
                         startCoordsRollBX = xKoordRollB;
                         startCoordsRollBY = yKoordRollB;
                         console.log("GOT START KOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
-                        setTimeout(function () {
-                            my.bb8.roll(30, 0);
-                        }, 1000);
+
+                        my.bb8.roll(50, 0);
+
                         setTimeout(function () {
                             my.bb8.stop();
+                            stopKoordRollBX = xKoordRollB;
+                            stopKoordRollBY = yKoordRollB;
+                            console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
                         }, 2500);
-                        setTimeout(function () {
-                            directionCoordsRollBX = xKoordRollB;
-                            directionCoordsRollBY = yKoordRollB;
-                            console.log("GOT DIRECTION KOORDINATEN " + directionCoordsRollBX + " " + directionCoordsRollBY);
-                        }, 2000);
                     }
                     break;
-
 
 
                 /*console.log("Play Sound File");
