@@ -318,7 +318,7 @@ Cylon.robot({
                                 ausrichtung = ausrichtung + (-winkelStartDirection);
                                 console.log("links unten nach rechts oben");
                             } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
-                                ausrichtung = 360 - (-winkelStartDirection);
+                                ausrichtung = 180 + (-winkelStartDirection);
                                 console.log("rechts oben nach links unten");
                             } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
                                 console.log("Hat nicht geklappt");
