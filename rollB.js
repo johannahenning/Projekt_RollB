@@ -317,6 +317,8 @@ Cylon.robot({
                                 ausrichtung = ausrichtung + (-winkelStartDirection);
                             } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
                                 ausrichtung = 360 - (-winkelStartDirection);
+                            } else {
+                                ausrichtung = 6666;
                             }
                         }, 4000);
                         setTimeout(function () {
