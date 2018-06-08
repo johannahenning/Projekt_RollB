@@ -6,12 +6,20 @@ var PubNub = require('pubnub');
 
 var express = require('express');
 var app = express();
+var uebermittelterWinkel;
 
-app.get('/movement/:direction', function (req, res) {
-    res.send('Hello World!');
-    uebermittelterString = req.params.direction;
+app.get('/movementRollB/:x/:y', function (req, res) {
+    xKoordRollB = req.params.x;
+    yKoordRollB = req.params.y;
     res.end();
 });
+
+app.get('/movementGoal/:x/:y', function (req, res) {
+    xKoordGoal = req.params.x;
+    yKoordGoal = req.params.y;
+    res.end();
+});
+
 
 app.use(express.static('public'));
 
@@ -27,8 +35,19 @@ const STOP = "stop";
 const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
+const TRACKING = "Tracking";
 
-var uebermittelterString = "";
+var xKoordRollB = 0;
+var yKoordRollB = 0;
+var xKoordGoal = 0;
+var yKoordGoal = 0;
+var startKoordRollBX = 0;
+var startKoordRollBY = 0;
+var stopKoordRollBX = 0;
+var stopKoordRollBY = 0;
+var winkelStartDirection = 0;
+var winkelZumZiel = 0;
+
 
 console.log('Server running');
 
@@ -44,7 +63,6 @@ Cylon.robot({
     devices: {
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
-
 
 
     work: function (my) {
@@ -82,18 +100,18 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
-                   // case TRACKING:
-                     //   switch (messageBefehl) {
-                       //     case "koordinaten":
-                         //       trackingInterval = setInterval(tracking, 2000);
-                          //  break;
-                       // }
-                       // break;
+                    case TRACKING:
+                        switch (messageBefehl) {
+                            case "koordinaten":
+                                trackingInterval = setInterval(tracking, 2000);
+                                break;
+                        }
+                        break;
                     case RICHTUNG:
                         switch (messageBefehl) {
                             case "links":
-                              //  console.log("Drive left");
-                              //  my.bb8.roll(100, 270);
+                                //  console.log("Drive left");
+                                //  my.bb8.roll(100, 270);
                                 trackingInterval = setInterval(tracking, 2000);
                                 break;
                             case "rechts":
@@ -181,131 +199,166 @@ Cylon.robot({
 
 
         function handle(ch, key) {
+
+            if (!key)
+                return;
             if (key.ctrl && key.name === "c") {
                 process.stdin.pause();
                 process.exit();
             }
 
-            var definedKeys = {
-                "r": 1, "k": 1, "w": 1,
-                "d": 1, "a": 1, "s": 1,
-                "space": 1, "o": 1, "p": 1,
-                "m": 1, "y": 1, "x": 1,
-                "c": 1, "v": 1, "b": 1, "n": 1
-            };
             var player = new SoundPlayer();
-            if (definedKeys[key.name] !== undefined) {
 
-                switch (key.name) {
-                    case "r":
-                        console.log("Start random LED show");
-                        console.log(uebermittelterString);
-                        for (var i = 0; i <= 200; i++) {
-                            my.bb8.randomColor();
-                            i++;
-                        }
-                        console.log("Play Sound File");
-                        player.sound('2.mp3', function () {
-                        });
-                        break;
-                    case "k":
-                        console.log("Change to random color");
+            switch (key.name) {
+                case "r":
+                    console.log("Start random LED show");
+                    for (var i = 0; i <= 200; i++) {
                         my.bb8.randomColor();
-                        break;
-                    case "w":
-                        console.log("Drive to front");
-                        my.bb8.roll(100, 0);
-                        break;
-                    case "d":
-                        console.log("Drive right");
-                        my.bb8.roll(100, 90);
-                        break;
-                    case "s":
-                        console.log("Drive back");
-                        my.bb8.roll(100, 180);
-                        break;
-                    case "a":
-                        console.log("Drive left");
-                        my.bb8.roll(100, 270);
-                        break;
-                    case "space":
-                        console.log("Stop");
-                        my.bb8.stop();
-                        break;
-                    case "o":
-                        console.log("Start drive in a circle");
-                        var count = 0;
-                        var dir = 0;
-                        var interval = setInterval(function () {
-                            console.log("drive to direction: " + dir);
-                            my.bb8.roll(30, dir);
-                            dir = dir + 5;
-                            if (dir >= 365) {
-                                dir = 0;
-                                console.log("Reset direction");
-                                count++;
-                            }
-                            if (count > 2) {
-                                clearInterval(interval);
-                                my.bb8.stop();
-                                console.log("STOP!");
-                            }
-                        }, 100);
-                        break;
-                    case ("y"):
-                        console.log("Play Sound File");
-                        player.sound('1.mp3', function () {
-                        });
-                        break;
-                    case ("x"):
-                        console.log("Play Sound File");
-                        player.sound('2.mp3', function () {
-                        });
-                        break;
-                    case ("c"):
-                        console.log("Play Sound File");
-                        player.sound('3.mp3', function () {
-                        });
-                        break;
-                    case ("v"):
-                        console.log("Play Sound File");
-                        player.sound('4.mp3', function () {
-                        });
-                        break;
-                    case ("b"):
-                        console.log("Play Sound File");
-                        player.sound('5.mp3', function () {
-                        });
-                        break;
-                    case ("n"):
-                        console.log("Play Sound File");
-                        player.sound('6.mp3', function () {
-                        });
-                        break;
-                    case ("m"):
-                        console.log("Play Sound File");
-                        player.sound('7.mp3', function () {
-                        });
-                        break;
-                    case ("p"):
-                        my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
-                            console.log("LED OFF!");
-                        });
-                        break;
-                }
-            }
-            else {
-                console.log("Key unknown, ROLLB SAYS NO");
-                player.sound('15.mp3', function () {
+                        i++;
+                    }
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
+                    break;
+                case "k":
+                    console.log("Change to random color");
+                    my.bb8.randomColor();
+                    break;
+                case "w":
+                    console.log("Drive to front");
+                    my.bb8.roll(100, 0);
+                    break;
+                case "d":
+                    console.log("Drive right");
+                    my.bb8.roll(100, 90);
+                    break;
+                case "s":
+                    console.log("Drive back");
+                    my.bb8.roll(100, 180);
+                    break;
+                case "a":
+                    console.log("Drive left");
+                    my.bb8.roll(100, 270);
+                    break;
+                case "space":
+                    console.log("Stop");
+                    my.bb8.stop();
+                    break;
+                case "o":
+                    console.log("Start drive in a circle");
+                    var count = 0;
+                    var dir = 0;
+                    var interval = setInterval(function () {
+                        console.log("drive to direction: " + dir);
+                        my.bb8.roll(30, dir);
+                        dir = dir + 5;
+                        if (dir >= 365) {
+                            dir = 0;
+                            console.log("Reset direction");
+                            count++;
+                        }
+                        if (count > 2) {
+                            clearInterval(interval);
+                            my.bb8.stop();
+                            console.log("STOP!");
+                        }
+                    }, 100);
+                    break;
+                case ("y"):
+                    console.log("Play Sound File");
+                    player.sound('1.mp3', function () {
+                    });
+                    break;
+                case ("x"):
+
+
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
+                    break;
+                case ("c"):
+                    console.log("Play Sound File");
+                    player.sound('3.mp3', function () {
+                    });
+                    break;
+                case ("v"):
+                    console.log("Play Sound File");
+                    player.sound('4.mp3', function () {
+                    });
+                    break;
+                case ("b"):
+                    console.log("Play Sound File");
+                    player.sound('5.mp3', function () {
+                    });
+                    break;
+                case ("n"):
+                    var ausrichtung = 0;
+
+                    if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
+                        startKoordRollBX = xKoordRollB;
+                        startKoordRollBY = yKoordRollB;
+                        console.log("GOT START KOORDINATEN " + startKoordRollBX + " " + startKoordRollBY);
+
+                        my.bb8.roll(70, 0);
+
+                        setTimeout(function () {
+                            my.bb8.stop();
+                        }, 2000);
+
+                        setTimeout(function () {
+                            stopKoordRollBX = xKoordRollB;
+                            stopKoordRollBY = yKoordRollB;
+                            console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
+                            winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
+                            winkelStartDirection = winkelStartDirection * 180 / Math.PI;
+                            console.log("WINKEL: " + winkelStartDirection);
+                            ausrichtung = 360 - winkelStartDirection;
+                        }, 4000);
+                        setTimeout(function () {
+                            console.log("ausrichtung: " + ausrichtung);
+                            my.bb8.roll(0, ausrichtung);
+                        }, 5000);
+
+                        //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
+
+                        setTimeout(function () {
+                            winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
+                            winkelZumZiel = winkelZumZiel * 180 / Math.PI;
+
+                            my.bb8.roll(30, (ausrichtung + winkelZumZiel) % 360);
+                        }, 6000);
+
+
+                    }
+                    break;
+
+
+                /*console.log("Play Sound File");
+                player.sound('6.mp3', function () {
                 });
-                my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
-                    console.log(err || "Color RED!");
-                });
-                setTimeout(function () {
+                break;*/
+                case ("m"):
+                    console.log("Play Sound File");
+                    player.sound('7.mp3', function () {
+                    });
+                    break;
+                case ("p"):
                     my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
                         console.log("LED OFF!");
                     });
-                }, 6000);
+                    break;
+                default:
+                    console.log("Key unknown, ROLLB SAYS NO");
+                    player.sound('15.mp3', function () {
+                    });
+                    my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                        console.log(err || "Color RED!");
+                    });
+                    setTimeout(function () {
+                        my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
+                            console.log("LED OFF!");
+                        });
+                    }, 6000);
             }
 
         }
@@ -315,33 +368,35 @@ Cylon.robot({
         var counter = 0;
 
         function tracking() {
+            console.console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
-            if (uebermittelterString.includes("forward")) {
+
+            if (xKoordRollB.includes("forward")) {
                 my.bb8.roll(40, direction);
-                console.log(uebermittelterString);
+                console.log(xKoordRollB);
                 oldString = "forward";
-            } else if (uebermittelterString.includes("rotate")) {
-                console.log(uebermittelterString);
+            } else if (xKoordRollB.includes("rotate")) {
+                console.log(xKoordRollB);
                 direction = (direction + 90) % 360;
                 console.log(direction);
                 my.bb8.roll(40, direction);
                 oldString = "rotate";
-            } else if (uebermittelterString.includes("stop")) {
+            } else if (xKoordRollB.includes("stop")) {
                 console.log("FERTIIIIIIIG");
                 my.bb8.stop();
                 clearInterval(trackingInterval);
                 oldString = "stop";
             }
-            else if (uebermittelterString.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
-                console.log(uebermittelterString);
+            else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
                 direction = (direction + 180 + counter) % 360;
                 console.log(direction);
                 my.bb8.roll(60, direction);
                 counter += 90;
                 oldString = "outOfBorder";
             }
-            else if (uebermittelterString.includes("outOfBorder") && oldString.includes("outOfBorder")) {
-                console.log(uebermittelterString);
+            else if (xKoordRollB.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
                 console.log(direction);
                 console.log("AusnahmeFall oldString = outOfBorder");
                 my.bb8.roll(50, direction);
@@ -350,6 +405,13 @@ Cylon.robot({
         }
 
         //var trackingInterval = setInterval(tracking, 2000);
+
+        /*function test() {
+            console.log ("RollB" + xKoordRollB, yKoordRollB);
+            console.log ("Goal" + xKoordGoal, yKoordGoal);
+        }
+        */
+
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
