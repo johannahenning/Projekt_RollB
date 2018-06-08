@@ -46,7 +46,7 @@ var startKoordRollBY = 0;
 var stopKoordRollBX = 0;
 var stopKoordRollBY = 0;
 var winkelStartDirection = 0;
-var ausrichtung = 0;
+
 
 console.log('Server running');
 
@@ -198,6 +198,7 @@ Cylon.robot({
 
 
         function handle(ch, key) {
+
             if (!key)
                 return;
             if (key.ctrl && key.name === "c") {
@@ -290,6 +291,7 @@ Cylon.robot({
                     });
                     break;
                 case ("n"):
+                    var ausrichtung = 0;
 
                     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
                         startKoordRollBX = xKoordRollB;
@@ -309,9 +311,6 @@ Cylon.robot({
                             winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
                             console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
                             ausrichtung = 360 - winkelStartDirection;
-                            //winkelStartDirection = Math.acos(Math.abs(startKoordRollBX - stopKoordRollBX) / Math.abs(startKoordRollBY - stopKoordRollBY));
-                            // winkelStartDirection = Math.atan((stopKoordRollBY - startKoordRollBY) / (stopKoordRollBX - startKoordRollBX));
-                            // console.log(winkelStartDirection * 180 / Math.PI);
                         }, 4000);
                         setTimeout(function () {
                             my.bb8.roll(30, ausrichtung);
