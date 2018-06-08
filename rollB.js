@@ -293,7 +293,7 @@ Cylon.robot({
                     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
                         startKoordRollBX = xKoordRollB;
                         startKoordRollBY = yKoordRollB;
-                        console.log("GOT START KOORDINATEN " + startCoordsRollBX + " " + startCoordsRollBY);
+                        console.log("GOT START KOORDINATEN " + startKoordRollBX + " " + startKoordRollBY);
 
                         my.bb8.roll(70, 0);
 
