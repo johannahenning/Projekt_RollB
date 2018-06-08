@@ -314,7 +314,7 @@ Cylon.robot({
                             // console.log(winkelStartDirection * 180 / Math.PI);
                         }, 4000);
                         setTimeout(function () {
-                            my.bb8.roll(0, ausrichtung);
+                            my.bb8.roll(30, ausrichtung);
                         }, 5000);
 
 
