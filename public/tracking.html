@@ -61,14 +61,6 @@
 
         var movingTargetY;
 
-        var winkelRollBToGoal = 0;
-        var festesTargetX = 400;
-        var festesTargetY = 400;
-
-        var winkelStartDirection = 0;
-
-        var oldDistance = 5000;
-
         function track(rect) {
 
             if (rect.color === "grey") {
@@ -88,20 +80,6 @@
             context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
 
             middle.fillRect(rollBX, rollBY, 10, 10);
-
-            var festesDX = festesTargetX - rollBX;
-            var festesDY = festesTargetY - rollBY;
-
-            var changingDX = movingTargetX - rollBX;
-            var changingDY = movingTargetY - rollBY;
-
-            var distanceToMovingObjekt = Math.sqrt(changingDX * changingDX + changingDY * changingDY);
-
-            var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
-
-            //winkelStartDirection = Math.acos(Math.abs(rollBX - movingTargetX) / Math.abs(rollBY - movingTargetY));
-            // winkelStartDirection = Math.atan((rollBY - movingTargetY) / (rollBX - movingTargetX));
-            //console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
 
             sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
             sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);

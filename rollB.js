@@ -47,6 +47,7 @@ var stopKoordRollBX = 0;
 var stopKoordRollBY = 0;
 var winkelStartDirection = 0;
 var winkelZumZiel = 0;
+var neuerWinkel;
 
 
 console.log('Server running');
@@ -311,19 +312,28 @@ Cylon.robot({
                             winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
                             winkelStartDirection = winkelStartDirection * 180 / Math.PI;
                             console.log("WINKEL: " + winkelStartDirection);
+
+                            //drives from top left to bottom right
                             if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
-                                ausrichtung = 360 - winkelStartDirection;
                                 console.log("links oben nach rechts unten");
+                                ausrichtung = 360 - winkelStartDirection;
+
+                                //drives from bottom left to top right
                             } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
-                                ausrichtung = ausrichtung + (-winkelStartDirection);
                                 console.log("links unten nach rechts oben");
+                                ausrichtung = (-winkelStartDirection);
+
+                                //drives from top right to bottom left
                             } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
-                                ausrichtung = 180 + (-winkelStartDirection);
                                 console.log("rechts oben nach links unten");
+                                ausrichtung = 180 + (-winkelStartDirection);
+
+                                //drives from bottom left to top right
                             } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
                                 console.log("links unten nach rechts oben");
                                 ausrichtung = 180 - winkelStartDirection;
                             }
+
                         }, 4000);
                         setTimeout(function () {
                             console.log("ausrichtung: " + ausrichtung);
@@ -340,7 +350,28 @@ Cylon.robot({
                             winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
                             winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
-                            my.bb8.roll(30, (ausrichtung + winkelZumZiel) % 360);
+                            //rollB: top left target: bottom right
+                            if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                                console.log("rollB: top left target: bottom right");
+                                neuerWinkel = 360 - winkelZumZiel;
+
+                                //rollB: bottom left target: top right
+                            } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                                console.log("rollB: bottom left target: top right");
+                                neuerWinkel = (-winkelZumZiel);
+
+                                //rollB: top right target: bottom left
+                            } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                                console.log("rollB: top right target: bottom left");
+                                neuerWinkel = 180 + (-winkelZumZiel);
+
+                                //rollB: bottom left target: top right
+                            } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                                console.log("rollB: bottom left target: top right");
+                                neuerWinkel = 180 - winkelZumZiel;
+                            }
+
+                            my.bb8.roll(30, (ausrichtung + neuerWinkel) % 360);
                         }, 6000);
 
 
