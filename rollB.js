@@ -351,7 +351,7 @@ Cylon.robot({
                             winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
                             //rollB: top left target: bottom right
-                            if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                            if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
                                 console.log("rollB: top left target: bottom right");
                                 neuerWinkel = 360 - winkelZumZiel;
 
@@ -366,7 +366,8 @@ Cylon.robot({
                                 neuerWinkel = 180 + (-winkelZumZiel);
 
                                 //rollB: bottom left target: top right
-                            } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                            } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
+
                                 console.log("rollB: bottom left target: top right");
                                 neuerWinkel = 180 - winkelZumZiel;
                             }
