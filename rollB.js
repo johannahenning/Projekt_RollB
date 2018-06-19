@@ -420,7 +420,7 @@ Cylon.robot({
 
                 setTimeout(function () {
                     my.bb8.stop();
-                }, 2000);
+                }, 1000);
 
                 setTimeout(function () {
                     stopKoordRollBX = xKoordRollB;
