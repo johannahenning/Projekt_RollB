@@ -405,7 +405,6 @@ Cylon.robot({
         function test() {
             aktuellesX = xKoordRollB;
             aktuellesY = yKoordRollB;
-
         }
 
 
@@ -510,26 +509,28 @@ Cylon.robot({
                         var distanceY = zielKoordY - aY;
 
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+                        console.log("aktuellesX: " + aX);
+                        console.log("aktuellesY: " + aY);
+
+                        console.log("Ziel Koord X: " + zielKoordX);
+                        console.log("Ziel Koord Y: " + zielKoordY);
+
+
+                        if (distanceToMovingObjekt < 100) {
+                            console.log("ICH STOPPE");
+                            my.bb8.stop();
+
+                            my.bb8.setHeading(0, function (err, data) {
+                                console.log("SET HEADING");
+                            });
+                            clearInterval(interval);
+                        }
                     }, 200);
 
 
 
-                    console.log("aktuellesX: " + aX);
-                    console.log("aktuellesY: " + aY);
 
-                    console.log("Ziel Koord X: " + zielKoordX);
-                    console.log("Ziel Koord Y: " + zielKoordY);
-
-
-                    if (distanceToMovingObjekt < 100) {
-                        console.log("ICH STOPPE");
-                        my.bb8.stop();
-
-                        my.bb8.setHeading(0, function (err, data) {
-                            console.log("SET HEADING");
-                        });
-                        clearInterval(interval);
-                    }
 
                 }, 6000);
 
