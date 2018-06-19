@@ -494,14 +494,12 @@ Cylon.robot({
 
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
-                    var interval = setInterval(test, 200);
-
                     var aX = 50;
                     var aY = 50;
 
                     var distanceToMovingObjekt = 10000;
 
-                    function test() {
+                    var interval = setInterval(function () {
                         aX = xKoordRollB;
 
                         aY = yKoordRollB;
@@ -510,15 +508,16 @@ Cylon.robot({
                         var distanceY = zielKoordY - aY;
 
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                    }, 200);
 
-                    }
+
 
                     console.log("aktuellesX: " + aX);
                     console.log("aktuellesY: " + aY);
 
                     console.log("Ziel Koord X: " + zielKoordX);
                     console.log("Ziel Koord Y: " + zielKoordY);
-                    
+
 
                     if (distanceToMovingObjekt < 100) {
                         console.log("ICH STOPPE");
