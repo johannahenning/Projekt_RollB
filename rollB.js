@@ -106,6 +106,7 @@ Cylon.robot({
         }, 1000);
 
 
+        /*
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
@@ -123,7 +124,7 @@ Cylon.robot({
                 const messageType = PubNubMessage.message.Message.type;
                 const messageBefehl = PubNubMessage.message.Message.befehl;
 
-                console.log(PubNubMessage);
+                //console.log(PubNubMessage);
                 switch (messageType) {
                     case TRACKING:
                         switch (messageBefehl) {
@@ -222,6 +223,7 @@ Cylon.robot({
             channels: ['RollB']
         });
 
+*/
 
         function handle(ch, key) {
 
