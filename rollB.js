@@ -495,8 +495,12 @@ Cylon.robot({
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
 
-                    console.log(aktuellesX);
-                    console.log(aktuellesY);
+                    console.log("aktuellesX: " + aktuellesX);
+                    console.log("aktuellesY: " + aktuellesY);
+
+                    console.log("Ziel Koord X: " + zielKoordX);
+                    console.log("Ziel Koord Y: " + zielKoordY);
+
 
                     var distanceX = zielKoordX - aktuellesX;
                     var distanceY = zielKoordY - aktuellesY;
