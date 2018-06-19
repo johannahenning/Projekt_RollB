@@ -501,7 +501,7 @@ Cylon.robot({
                     var distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
 
-                    if (distanceToMovingObjekt < 50) {
+                    if (distanceToMovingObjekt < 100) {
                         console.log("ICH STOPPE");
                         my.bb8.stop();
 
