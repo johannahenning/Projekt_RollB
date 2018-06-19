@@ -14,12 +14,25 @@ app.get('/movementRollB/:x/:y', function (req, res) {
     res.end();
 });
 
-app.get('/movementGoal/:x/:y', function (req, res) {
-    xKoordGoal = req.params.x;
-    yKoordGoal = req.params.y;
+app.get('/yellowTarget/:x/:y', function (req, res) {
+    yellowTargetX = req.params.x;
+    yellowTargetY = req.params.y;
     res.end();
 });
 
+app.get('/redTarget/:x/:y', function (req, res) {
+
+    redTargetX = req.params.x;
+    redTargetY = req.params.y;
+    res.end();
+});
+
+app.get('/greenTarget/:x/:y', function (req, res) {
+
+    greenTargetX = req.params.x;
+    greenTargetY = req.params.y;
+    res.end();
+});
 
 app.use(express.static('public'));
 
@@ -37,15 +50,24 @@ const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 const TRACKING = "Tracking";
 
+//TARGET
+var greenTargetX = 0;
+var greenTargetY = 0;
+var redTargetX = 0;
+var redTargetY = 0;
+var yellowTargetX = 0;
+var yellowTargetY = 0;
+
+
+//RollB
 var xKoordRollB = 0;
 var yKoordRollB = 0;
-var xKoordGoal = 0;
-var yKoordGoal = 0;
 var startKoordRollBX = 0;
 var startKoordRollBY = 0;
 var stopKoordRollBX = 0;
 var stopKoordRollBY = 0;
-var winkelStartDirection = 0;
+
+var ausrichtungWinkel = 0;
 var winkelZumZiel = 0;
 var neuerWinkel;
 
@@ -93,23 +115,7 @@ Cylon.robot({
                     pubnub.publish(
                         {
                             message: payload
-                        }//,
-                        /*    function (status) {
-                                console.log("Wake up RollB");
-                                var player = new SoundPlayer();
-                                player.sound('5.mp3', function () {
-                                });
-                                for (var i = 0; i <= 50; i++) {
-                                    my.bb8.randomColor();
-                                    i++;
-                                }
-                                setTimeout(function () {
-                                    my.bb8.setHeading(0, function (err, data) {
-                                        console.log("SET HEADING");
-                                    });
-                                }, 1000);
-                            }
-                            */
+                        }
                     );
                 }
             },
@@ -309,7 +315,7 @@ Cylon.robot({
                     });
                     break;
                 case ("n"):
-                    driveToKoord();
+                    driveToKoord(yellowTargetX, yellowTargetY);
                     break;
 
 
@@ -386,19 +392,19 @@ Cylon.robot({
 
         var aktuellesX = 0;
         var aktuellesY = 0;
-       // var trackingInterval = setInterval(tracking, 200);
+        // var trackingInterval = setInterval(tracking, 200);
 
-        var zielInterval = setInterval( test, 200);
+        var zielInterval = setInterval(test, 200);
 
         function test() {
-           aktuellesX = xKoordRollB;
-           aktuellesY = yKoordRollB;
-           console.log(aktuellesX);
-           console.log(aktuellesY);
+            aktuellesX = xKoordRollB;
+            aktuellesY = yKoordRollB;
+            console.log(aktuellesX);
+            console.log(aktuellesY);
         }
 
 
-        function driveToKoord() {
+        function driveToKoord(zielKoordX, zielKoordY) {
             var ausrichtung = 0;
 
             if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
@@ -416,29 +422,29 @@ Cylon.robot({
                     stopKoordRollBX = xKoordRollB;
                     stopKoordRollBY = yKoordRollB;
                     console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
-                    winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
-                    winkelStartDirection = winkelStartDirection * 180 / Math.PI;
-                    console.log("WINKEL: " + winkelStartDirection);
+                    ausrichtungWinkel = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
+                    ausrichtungWinkel = ausrichtungWinkel * 180 / Math.PI;
+                    console.log("WINKEL: " + ausrichtungWinkel);
 
                     //drives from top left to bottom right
                     if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
                         console.log("links oben nach rechts unten");
-                        ausrichtung = 360 - winkelStartDirection;
+                        ausrichtung = 360 - ausrichtungWinkel;
 
                         //drives from bottom left to top right
                     } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
                         console.log("links unten nach rechts oben");
-                        ausrichtung = (-winkelStartDirection);
+                        ausrichtung = (-ausrichtungWinkel);
 
                         //drives from top right to bottom left
                     } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
                         console.log("rechts oben nach links unten");
-                        ausrichtung = 180 + (-winkelStartDirection);
+                        ausrichtung = 180 + (-ausrichtungWinkel);
 
                         //drives from bottom left to top right
                     } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
                         console.log("links unten nach rechts oben");
-                        ausrichtung = 180 - winkelStartDirection;
+                        ausrichtung = 180 - ausrichtungWinkel;
                     }
 
                 }, 4000);
@@ -457,28 +463,28 @@ Cylon.robot({
                     stopKoordRollBY = yKoordRollB;
                     console.log("NeueStopKoords: " + stopKoordRollBX + stopKoordRollBY);
                     //Berechnung vom Winkel zum Ziel
-                    winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
+                    winkelZumZiel = Math.atan((stopKoordRollBY - zielKoordY) / (stopKoordRollBX - zielKoordX));
                     winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
                     console.log("Winkel zum Ziel: " + winkelZumZiel);
 
                     //rollB: bottom right target: top left
-                    if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                    if (stopKoordRollBY > zielKoordY && stopKoordRollBX > zielKoordX) {
                         console.log("rollB: bottom right target: top left");
                         neuerWinkel = ausrichtung + 180 + winkelZumZiel;
 
                         //rollB: bottom left target: top right
-                    } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                    } else if (stopKoordRollBY > zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: bottom left target: top right");
                         neuerWinkel = ausrichtung - (-winkelZumZiel);
 
                         //rollB: top left target: bottom right ??????
-                    } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                    } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: top left target: bottom right");
                         neuerWinkel = ausrichtung + winkelZumZiel;
 
                         //rollB: top right target: bottom left
-                    } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                    } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX > zielKoordX) {
 
                         console.log("rollB: top right target: bottom left");
                         neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
@@ -486,8 +492,8 @@ Cylon.robot({
 
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
-                    var distanceX = xKoordGoal - aktuellesX;
-                    var distanceY = yKoordGoal - aktuellesY;
+                    var distanceX = zielKoordX - aktuellesX;
+                    var distanceY = zielKoordY - aktuellesY;
 
                     var distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
