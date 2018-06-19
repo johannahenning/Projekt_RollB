@@ -48,6 +48,7 @@ var stopKoordRollBY = 0;
 var winkelStartDirection = 0;
 var winkelZumZiel = 0;
 var neuerWinkel;
+var player = new SoundPlayer();
 
 
 console.log('Server running');
@@ -79,7 +80,6 @@ Cylon.robot({
                         },
                         function (status) {
                             console.log("Wake up RollB");
-                            var player = new SoundPlayer();
                             player.sound('5.mp3', function () {
                             });
                             for (var i = 0; i <= 50; i++) {
@@ -184,7 +184,6 @@ Cylon.robot({
                     case TONAUSGABE:
                         if (messageBefehl === "tonausgabe" || messageBefehl === "sound") {
                             console.log("Play Sound File");
-                            var player = new SoundPlayer();
                             player.sound('7.mp3', function () {
                             });
                         }
@@ -207,8 +206,6 @@ Cylon.robot({
                 process.stdin.pause();
                 process.exit();
             }
-
-            var player = new SoundPlayer();
 
             switch (key.name) {
                 case "r":
@@ -459,6 +456,224 @@ Cylon.robot({
         }
         */
 
+        function freude (){
+            player.sound('name.mp3', function () {
+            });
+            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                console.log(err || "Color RED");
+            });
+            setTimeout(function () {
+                my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
+                    console.log(err || "Color BLUE");
+                });
+            }, 1000);
+            setTimeout(function () {
+                my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                    console.log(err || "Color GREEN");
+                });
+            }, 2000);
+            setTimeout(function () {
+                my.bb8.color({red: 255, green: 255, blue: 0}, function (err, data) {
+                    console.log(err || "Color DONTKNOW");
+                });
+            }, 3000);
+        }
+        
+        function trauer() {
+            player.sound('name.mp3', function () {
+            });
+            my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
+                console.log(err || "Color BLUE");
+            });
+        }
+        
+        function panikWut() {
+            player.sound('name.mp3', function () {
+            });
+            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                console.log(err || "Color Red");
+            });
+        }
+
+        function bestaetigungston(){
+            player.sound('name.mp3', function () {
+            });
+            my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                console.log(err || "Color GREEN");
+            });
+            setTimeout(function () {
+                my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                    console.log(err || "Color BLUE");
+                });
+            }, 2000);
+        }
+
+        function fertigton() {
+            player.sound('name.mp3', function () {
+            });
+        }
+
+        function kopfDrehen() {
+            my.bb8.roll(0, 270);
+            my.bb8.roll(0, 90);
+            my.bb8.roll(0, 270);
+        }
+
+        function verstecken () {
+            bestaetigungston(); //Bestaetigungston abspielen
+            driveToKord(); //fährt zu einem Versteck
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 6000); //wartet dort für 6 Sekunden; Zeitintervall
+            freude();
+            fertigton(); //Fertigton abspielen
+        }
+
+        function katzePerson() {
+            bestaetigungston();
+            function spielen() {
+                driveToKord();
+                console.log("Start drive in a circle");
+                var count = 0;
+                var dir = 0;
+                var interval = setInterval(function () {
+                    console.log("drive to direction: " + dir);
+                    my.bb8.roll(30, dir);
+                    dir = dir + 5;
+                    if (dir >= 365) {
+                        dir = 0;
+                        console.log("Reset direction");
+                        count++;
+                    }
+                    if (count > 2) {
+                        clearInterval(interval);
+                        my.bb8.stop();
+                        console.log("STOP!");
+                    }
+                }, 100); //Kreis
+                for (var i = 0; i <= 50; i++) {
+                    my.bb8.randomColor();
+                    i++;
+                }
+                player.sound('name.mp3', function () {
+                });
+            }
+            driveToKord(); //zurück fahren
+            fertigton();
+        }
+
+        function personImHaus (){
+            bestaetigungston();
+            /*if (person im Haus ){
+                freude();
+                driveToKord();
+            } else {
+                trauer();
+            }*/
+            fertigton();
+        }
+
+        function hindernisse(){
+            bestaetigungston();
+            driveToKord();
+            driveUmKord();
+            driveToKord();
+            fertigton();
+        }
+
+        function klo(){
+            bestaetigungston();
+            driveToKord();
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 6000);
+            player.sound('name.mp3', function () {
+            });
+            driveToKord();
+            fertigton();
+        }
+        
+        function einkaufen() {
+            bestaetigungston();
+            driveToKord();
+            kopfDrehen();
+            driveToKord();
+            fertigton();
+        }
+
+        function party(){
+            for (var i = 0; i <= 50; i++) {
+                my.bb8.randomColor();
+                i++;
+            }
+            player.sound('name.mp3', function () {
+            });
+            freude();
+        }
+
+        function verkehrspolizist (){
+            bestaetigungston();
+            driveToKord();
+            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                console.log(err || "Color RED");
+            });
+            kopfDrehen();
+            setTimeout(function () {
+                my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                    console.log(err || "Color GREEN");
+                });
+            }, 6000);
+            fertigton();
+        }
+        
+        function blickkontakt () {
+            
+        }
+
+        function karelBeeper(){
+            bestaetigungston();
+            driveToKord();
+            player.sound('name.mp3', function () {
+            });
+            driveToKord();
+            player.sound('name.mp3', function () {
+            });
+            driveToKord();
+            player.sound('name.mp3', function () {
+            });
+            freude();
+            fertigton();
+        }
+
+        //unsicher ob das funktioniert weil wir können keinem Ziel hinterherfahren
+        function lichtkegel(){
+            driveToKord();
+            my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                console.log(err || "Color GREEN");
+            });
+            setTimeout(function () {
+                driveAwayFromKord();
+            }, 8000);
+            panikWut();
+            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                console.log(err || "Color RED");
+            });
+        }
+        
+        function personLokalisieren () {
+            driveToKord();
+            freude();
+        }
+        
+        function machMalWas () {
+            bestaetigungston();
+            moveSquare();
+            for (var i = 0; i <= 200; i++) {
+                my.bb8.randomColor();
+                i++;
+            }
+            fertigton();
+        }
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
