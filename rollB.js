@@ -355,6 +355,7 @@ Cylon.robot({
         var oldString = "oldString";
         var counter = 0;
 
+        /*
         function tracking() {
             console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
@@ -391,7 +392,7 @@ Cylon.robot({
                 oldString = "oldString";
             }
         }
-
+*/
         var aktuellesX = 0;
         var aktuellesY = 0;
         // var trackingInterval = setInterval(tracking, 200);
@@ -401,8 +402,8 @@ Cylon.robot({
         function test() {
             aktuellesX = xKoordRollB;
             aktuellesY = yKoordRollB;
-            console.log(aktuellesX);
-            console.log(aktuellesY);
+           // console.log(aktuellesX);
+           // console.log(aktuellesY);
         }
 
 
