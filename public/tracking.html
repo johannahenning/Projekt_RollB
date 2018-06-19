@@ -66,11 +66,14 @@
         var greenTargetX;
         var greenTargetY;
 
+        var rollBX;
+        var rollBY;
+
         function track(rect) {
 
             if (rect.color === "grey") {
-                var rollBX = rect.x + rect.width / 2;
-                var rollBY = rect.y + rect.height / 2;
+                rollBX = rect.x + rect.width / 2;
+                rollBY = rect.y + rect.height / 2;
             }
 
             if (rect.color === "yellow") {
@@ -96,7 +99,7 @@
 
             middle.fillRect(rollBX, rollBY, 10, 10);
 
-            sendGetRequest("/movementRollB/" + 100 + "/" + 200);
+            sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
             sendGetRequest("/yellowTarget/" + yellowTargetX + "/" + yellowTargetY);
             sendGetRequest("/redTarget/" + redTargetX + "/" + redTargetY);
             sendGetRequest("/greenTarget/" + greenTargetX + "/" + greenTargetY);

@@ -402,8 +402,8 @@ Cylon.robot({
         function test() {
             aktuellesX = xKoordRollB;
             aktuellesY = yKoordRollB;
-           // console.log(aktuellesX);
-           // console.log(aktuellesY);
+            console.log(aktuellesX);
+            console.log(aktuellesY);
         }
 
 
