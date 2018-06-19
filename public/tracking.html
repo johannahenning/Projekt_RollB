@@ -36,11 +36,11 @@
 
 
         tracking.ColorTracker.registerColor('green', function (r, g, b) {
-            return (r < 50 && g > 200 && b < 50);
+            return (r < 20 && g > 220 && b < 30);
         });
 
         tracking.ColorTracker.registerColor('blue', function (r, g, b) {
-            return (r < 50 && g < 50 && b > 200);
+            return (r < 10 && g < 200 && b > 200);
 
         });
 
@@ -53,13 +53,18 @@
 
         });
 
-        var tracker = new tracking.ColorTracker(["yellow", "grey"]);
+        var tracker = new tracking.ColorTracker([ "grey", "yellow", "green"]);
 
         tracking.track('#video', tracker, {camera: true});
 
-        var movingTargetX;
+        var yellowTargetX;
+        var yellowTargetY;
 
-        var movingTargetY;
+        var redTargetX;
+        var redTargetY;
+
+        var greenTargetX;
+        var greenTargetY;
 
         function track(rect) {
 
@@ -69,8 +74,18 @@
             }
 
             if (rect.color === "yellow") {
-                movingTargetX = rect.x + rect.width / 2;
-                movingTargetY = rect.y + rect.height / 2;
+                yellowTargetX = rect.x + rect.width / 2;
+                yellowTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "red") {
+                redTargetX = rect.x + rect.width / 2;
+                redTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "green") {
+                greenTargetX = rect.x + rect.width / 2;
+                greenTargetY = rect.y + rect.height / 2;
             }
 
             context.strokeStyle = rect.color;
@@ -82,7 +97,9 @@
             middle.fillRect(rollBX, rollBY, 10, 10);
 
             sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
-            sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
+            sendGetRequest("/yellowTarget/" + yellowTargetX + "/" + yellowTargetY);
+            sendGetRequest("/redTarget/" + redTargetX + "/" + redTargetY);
+            sendGetRequest("/greenTarget/" + greenTargetX + "/" + greenTargetY);
 
         }
 
@@ -105,7 +122,6 @@
         ;
     }
     ;
-
 
     function sendGetRequest(url) {
 
