@@ -67,6 +67,23 @@ Cylon.robot({
 
 
     work: function (my) {
+
+
+        console.log("Wake up RollB");
+        var player = new SoundPlayer();
+        player.sound('5.mp3', function () {
+        });
+        for (var i = 0; i <= 50; i++) {
+            my.bb8.randomColor();
+            i++;
+        }
+        setTimeout(function () {
+            my.bb8.setHeading(0, function (err, data) {
+                console.log("SET HEADING");
+            });
+        }, 1000);
+
+
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
@@ -76,22 +93,23 @@ Cylon.robot({
                     pubnub.publish(
                         {
                             message: payload
-                        },
-                        function (status) {
-                            console.log("Wake up RollB");
-                            var player = new SoundPlayer();
-                            player.sound('5.mp3', function () {
-                            });
-                            for (var i = 0; i <= 50; i++) {
-                                my.bb8.randomColor();
-                                i++;
-                            }
-                            setTimeout(function () {
-                                my.bb8.setHeading(0, function (err, data) {
-                                    console.log("SET HEADING");
+                        }//,
+                        /*    function (status) {
+                                console.log("Wake up RollB");
+                                var player = new SoundPlayer();
+                                player.sound('5.mp3', function () {
                                 });
-                            }, 1000);
-                        }
+                                for (var i = 0; i <= 50; i++) {
+                                    my.bb8.randomColor();
+                                    i++;
+                                }
+                                setTimeout(function () {
+                                    my.bb8.setHeading(0, function (err, data) {
+                                        console.log("SET HEADING");
+                                    });
+                                }, 1000);
+                            }
+                            */
                     );
                 }
             },
@@ -291,92 +309,7 @@ Cylon.robot({
                     });
                     break;
                 case ("n"):
-
-                    var ausrichtung = 0;
-
-                    if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
-                        startKoordRollBX = xKoordRollB;
-                        startKoordRollBY = yKoordRollB;
-                        console.log("GOT START KOORDINATEN " + startKoordRollBX + " " + startKoordRollBY);
-
-                        my.bb8.roll(70, 0);
-
-                        setTimeout(function () {
-                            my.bb8.stop();
-                        }, 2000);
-
-                        setTimeout(function () {
-                            stopKoordRollBX = xKoordRollB;
-                            stopKoordRollBY = yKoordRollB;
-                            console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
-                            winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
-                            winkelStartDirection = winkelStartDirection * 180 / Math.PI;
-                            console.log("WINKEL: " + winkelStartDirection);
-
-                            //drives from top left to bottom right
-                            if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
-                                console.log("links oben nach rechts unten");
-                                ausrichtung = 360 - winkelStartDirection;
-
-                                //drives from bottom left to top right
-                            } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
-                                console.log("links unten nach rechts oben");
-                                ausrichtung = (-winkelStartDirection);
-
-                                //drives from top right to bottom left
-                            } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
-                                console.log("rechts oben nach links unten");
-                                ausrichtung = 180 + (-winkelStartDirection);
-
-                                //drives from bottom left to top right
-                            } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
-                                console.log("links unten nach rechts oben");
-                                ausrichtung = 180 - winkelStartDirection;
-                            }
-
-                        }, 4000);
-                        setTimeout(function () {
-                            console.log("ausrichtung: " + ausrichtung);
-                            my.bb8.roll(0, ausrichtung);
-                        }, 5000);
-                        setTimeout(function () {
-                            my.bb8.stop();
-                        }, 6000);
-
-                        //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
-
-                        setTimeout(function () {
-                            //Berechnung vom Winkel zum Ziel
-                            winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
-                            winkelZumZiel = winkelZumZiel * 180 / Math.PI;
-
-                            //rollB: top left target: bottom right
-                            if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
-                                console.log("rollB: top left target: bottom right");
-                                neuerWinkel = 360 - winkelZumZiel;
-
-                                //rollB: bottom left target: top right
-                            } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX < xKoordGoal) {
-                                console.log("rollB: bottom left target: top right");
-                                neuerWinkel = (-winkelZumZiel);
-
-                                //rollB: top right target: bottom left
-                            } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX > xKoordGoal) {
-                                console.log("rollB: top right target: bottom left");
-                                neuerWinkel = 180 + (-winkelZumZiel);
-
-                                //rollB: bottom left target: top right
-                            } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
-
-                                console.log("rollB: bottom left target: top right");
-                                neuerWinkel = 180 - winkelZumZiel;
-                            }
-
-                            my.bb8.roll(30, (ausrichtung + neuerWinkel) % 360);
-                        }, 6000);
-
-
-                    }
+                    driveToKoord();
                     break;
 
 
@@ -390,7 +323,7 @@ Cylon.robot({
                     });
                     break;
                 case ("p"):
-                    my.bb8.color({red: 0, green: 0, blue: 0}, function (err, data) {
+                    my.bb8.color({red: 0, green: 255, blue: 255}, function (err, data) {
                         console.log("LED OFF!");
                     });
                     break;
@@ -415,7 +348,7 @@ Cylon.robot({
         var counter = 0;
 
         function tracking() {
-            console.console.log(uebermittelterWinkel);
+            console.log(uebermittelterWinkel);
             console.log("OLD: " + oldString);
 
             if (xKoordRollB.includes("forward")) {
@@ -451,18 +384,133 @@ Cylon.robot({
             }
         }
 
-        //var trackingInterval = setInterval(tracking, 2000);
+        var aktuellesX = 0;
+        var aktuellesY = 0;
+       // var trackingInterval = setInterval(tracking, 200);
 
-        /*function test() {
-            console.log ("RollB" + xKoordRollB, yKoordRollB);
-            console.log ("Goal" + xKoordGoal, yKoordGoal);
+        var zielInterval = setInterval( test, 200);
+
+        function test() {
+           aktuellesX = xKoordRollB;
+           aktuellesY = yKoordRollB;
+           console.log(aktuellesX);
+           console.log(aktuellesY);
         }
-        */
 
+
+        function driveToKoord() {
+            var ausrichtung = 0;
+
+            if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
+                startKoordRollBX = xKoordRollB;
+                startKoordRollBY = yKoordRollB;
+                console.log("GOT START KOORDINATEN " + startKoordRollBX + " " + startKoordRollBY);
+
+                my.bb8.roll(70, 0);
+
+                setTimeout(function () {
+                    my.bb8.stop();
+                }, 2000);
+
+                setTimeout(function () {
+                    stopKoordRollBX = xKoordRollB;
+                    stopKoordRollBY = yKoordRollB;
+                    console.log("GOT DIRECTION KOORDINATEN " + stopKoordRollBX + " " + stopKoordRollBY);
+                    winkelStartDirection = Math.atan((startKoordRollBY - stopKoordRollBY) / (startKoordRollBX - stopKoordRollBX));
+                    winkelStartDirection = winkelStartDirection * 180 / Math.PI;
+                    console.log("WINKEL: " + winkelStartDirection);
+
+                    //drives from top left to bottom right
+                    if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
+                        console.log("links oben nach rechts unten");
+                        ausrichtung = 360 - winkelStartDirection;
+
+                        //drives from bottom left to top right
+                    } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
+                        console.log("links unten nach rechts oben");
+                        ausrichtung = (-winkelStartDirection);
+
+                        //drives from top right to bottom left
+                    } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
+                        console.log("rechts oben nach links unten");
+                        ausrichtung = 180 + (-winkelStartDirection);
+
+                        //drives from bottom left to top right
+                    } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
+                        console.log("links unten nach rechts oben");
+                        ausrichtung = 180 - winkelStartDirection;
+                    }
+
+                }, 4000);
+                setTimeout(function () {
+                    console.log("ausrichtung: " + ausrichtung);
+                    my.bb8.roll(0, ausrichtung);
+                }, 5000);
+                setTimeout(function () {
+                    my.bb8.stop();
+                }, 6000);
+
+                //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
+
+                setTimeout(function () {
+                    stopKoordRollBX = xKoordRollB;
+                    stopKoordRollBY = yKoordRollB;
+                    console.log("NeueStopKoords: " + stopKoordRollBX + stopKoordRollBY);
+                    //Berechnung vom Winkel zum Ziel
+                    winkelZumZiel = Math.atan((stopKoordRollBY - yKoordGoal) / (stopKoordRollBX - xKoordGoal));
+                    winkelZumZiel = winkelZumZiel * 180 / Math.PI;
+
+                    console.log("Winkel zum Ziel: " + winkelZumZiel);
+
+                    //rollB: bottom right target: top left
+                    if (stopKoordRollBY > yKoordGoal && stopKoordRollBX > xKoordGoal) {
+                        console.log("rollB: bottom right target: top left");
+                        neuerWinkel = ausrichtung + 180 + winkelZumZiel;
+
+                        //rollB: bottom left target: top right
+                    } else if (stopKoordRollBY > yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                        console.log("rollB: bottom left target: top right");
+                        neuerWinkel = ausrichtung - (-winkelZumZiel);
+
+                        //rollB: top left target: bottom right ??????
+                    } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX < xKoordGoal) {
+                        console.log("rollB: top left target: bottom right");
+                        neuerWinkel = ausrichtung + winkelZumZiel;
+
+                        //rollB: top right target: bottom left
+                    } else if (stopKoordRollBY < yKoordGoal && stopKoordRollBX > xKoordGoal) {
+
+                        console.log("rollB: top right target: bottom left");
+                        neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                    }
+
+                    my.bb8.roll(30, (neuerWinkel) % 360);
+
+                    var distanceX = xKoordGoal - aktuellesX;
+                    var distanceY = yKoordGoal - aktuellesY;
+
+                    var distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+
+                    if (distanceToMovingObjekt < 50) {
+                        console.log("ICH STOPPE");
+                        my.bb8.stop();
+
+                        my.bb8.setHeading(0, function (err, data) {
+                            console.log("SET HEADING");
+                        });
+                        clearInterval(zielInterval);
+                    }
+
+                }, 6000);
+
+            }
+        }
 
         keypress(process.stdin);
         process.stdin.on("keypress", handle);
         process.stdin.setRawMode(true);
         process.stdin.resume();
     }
+
 }).start();
