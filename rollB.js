@@ -71,6 +71,9 @@ var ausrichtungWinkel = 0;
 var winkelZumZiel = 0;
 var neuerWinkel;
 
+var aX = 50;
+var aY = 50;
+
 
 console.log('Server running');
 
@@ -494,8 +497,7 @@ Cylon.robot({
 
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
-                    var aX = 50;
-                    var aY = 50;
+
 
                     var distanceToMovingObjekt = 10000;
 
