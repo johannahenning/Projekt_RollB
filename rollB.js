@@ -6,7 +6,6 @@ var PubNub = require('pubnub');
 
 var express = require('express');
 var app = express();
-var uebermittelterWinkel;
 
 app.get('/movementRollB/:x/:y', function (req, res) {
     xKoordRollB = req.params.x;
@@ -49,6 +48,7 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 const TRACKING = "Tracking";
+const USECASE = "Usecase";
 
 //TARGET
 var greenTargetX = 0;
@@ -108,7 +108,7 @@ Cylon.robot({
             });
         }, 1000);
 
-        
+
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
@@ -177,6 +177,14 @@ Cylon.robot({
                         }
                         break;
 
+                    case USECASE:
+                        switch (messageBefehl) {
+                            case "TEST":
+                                driveToKoord(yellowTargetX, yellowTargetY);
+                                break;
+                        }
+                        break;
+
                     case STOP:
                         switch (messageBefehl) {
                             case "anhalten":
@@ -224,7 +232,6 @@ Cylon.robot({
         pubnub.subscribe({
             channels: ['RollB']
         });
-
 
 
         function handle(ch, key) {
@@ -321,8 +328,6 @@ Cylon.robot({
                 case ("n"):
                     driveToKoord(yellowTargetX, yellowTargetY);
                     break;
-
-
                 /*console.log("Play Sound File");
                 player.sound('6.mp3', function () {
                 });
@@ -375,16 +380,6 @@ Cylon.robot({
             }
         }
 */
-        var aktuellesX = 0;
-        var aktuellesY = 0;
-        // var trackingInterval = setInterval(tracking, 200);
-
-        var zielInterval = setInterval(test, 200);
-
-        function test() {
-            aktuellesX = xKoordRollB;
-            aktuellesY = yKoordRollB;
-        }
 
 
         function driveToKoord(zielKoordX, zielKoordY) {
@@ -479,7 +474,6 @@ Cylon.robot({
 
                     var interval = setInterval(function () {
                         aX = xKoordRollB;
-
                         aY = yKoordRollB;
 
                         var distanceX = zielKoordX - aX;

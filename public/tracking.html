@@ -9,8 +9,8 @@
 
     <style>
         video, canvas {
-            margin-left: 0px;
-            margin-top: 0px;
+            margin-left: auto;
+            margin-top: auto;
             position: absolute;
         }
     </style>
@@ -45,11 +45,11 @@
         });
 
         tracking.ColorTracker.registerColor('white', function (r, g, b) {
-            return (r > 240 && g > 240 && b > 240)
+            return (r > 190 && g > 190 && b > 190)
         });
 
         tracking.ColorTracker.registerColor('grey', function (r, g, b) {
-            return (r > 200 && g > 200 && b > 200);
+            return (r > 190 && g > 190 && b > 190);
 
         });
 

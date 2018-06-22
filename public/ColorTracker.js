@@ -75,7 +75,7 @@
    * @default 20
    * @type {number}
    */
-  tracking.ColorTracker.prototype.minDimension = 20;
+  tracking.ColorTracker.prototype.minDimension = 10;
 
   /**
    * Holds the maximum dimension to classify a rectangle.
@@ -90,7 +90,7 @@
    * @default 30
    * @type {number}
    */
-  tracking.ColorTracker.prototype.minGroupSize = 30;
+  tracking.ColorTracker.prototype.minGroupSize = 20;
 
   /**
    * Calculates the central coordinate from the cloud points. The cloud points
