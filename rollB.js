@@ -751,7 +751,9 @@ Cylon.robot({
                             my.bb8.setHeading(0, function (err, data) {
                                 console.log("SET HEADING");
                             });
+                            console.log("Ziel erreicht" + zielErreicht);
                             zielErreicht = true;
+                            console.log("Ziel erreicht" + zielErreicht);
                             clearInterval(interval);
                         }
                     }, 200);
