@@ -108,8 +108,7 @@ Cylon.robot({
             });
         }, 1000);
 
-
-        /*
+        
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
@@ -226,7 +225,7 @@ Cylon.robot({
             channels: ['RollB']
         });
 
-*/
+
 
         function handle(ch, key) {
 
@@ -359,26 +358,6 @@ Cylon.robot({
         var counter = 0;
 
         /*
-        function tracking() {
-            console.log(uebermittelterWinkel);
-            console.log("OLD: " + oldString);
-
-            if (xKoordRollB.includes("forward")) {
-                my.bb8.roll(40, direction);
-                console.log(xKoordRollB);
-                oldString = "forward";
-            } else if (xKoordRollB.includes("rotate")) {
-                console.log(xKoordRollB);
-                direction = (direction + 90) % 360;
-                console.log(direction);
-                my.bb8.roll(40, direction);
-                oldString = "rotate";
-            } else if (xKoordRollB.includes("stop")) {
-                console.log("FERTIIIIIIIG");
-                my.bb8.stop();
-                clearInterval(trackingInterval);
-                oldString = "stop";
-            }
             else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                 console.log(xKoordRollB);
                 direction = (direction + 180 + counter) % 360;
@@ -496,8 +475,6 @@ Cylon.robot({
 
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
-
-
                     var distanceToMovingObjekt = 10000;
 
                     var interval = setInterval(function () {
@@ -527,10 +504,6 @@ Cylon.robot({
                             clearInterval(interval);
                         }
                     }, 200);
-
-
-
-
 
                 }, 6000);
 
