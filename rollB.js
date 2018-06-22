@@ -148,7 +148,7 @@ Cylon.robot({
                 const messageType = PubNubMessage.message.Message.type;
                 const messageBefehl = PubNubMessage.message.Message.befehl;
 
-                //console.log(PubNubMessage);
+                console.log(PubNubMessage);
                 switch (messageType) {
                     case TRACKING:
                         switch (messageBefehl) {
@@ -201,13 +201,14 @@ Cylon.robot({
 
                     case USECASE:
                         switch (messageBefehl){
-                            case "verstecken":
+                            case "Verstecken":
                                 verstecken ();
                                 break;
                             case "toilettenpapier":
+				break;
                                 
                         }
-
+			break;
                     case STOP:
                         switch (messageBefehl) {
                             case "anhalten":
@@ -467,9 +468,6 @@ Cylon.robot({
         function verstecken () {
             bestaetigungston(); //Bestaetigungston abspielen
             driveToKoord(yellowTargetX,yellowTargetY); //fährt zu einem Versteck
-            setTimeout(function () {
-                my.bb8.stop();
-            }, 6000); //wartet dort für 6 Sekunden; Zeitintervall
             freude();
             fertigton(); //Fertigton abspielen
         }
@@ -718,13 +716,6 @@ Cylon.robot({
                         var distanceY = zielKoordY - aY;
 
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-                        console.log("aktuellesX: " + aX);
-                        console.log("aktuellesY: " + aY);
-
-                        console.log("Ziel Koord X: " + zielKoordX);
-                        console.log("Ziel Koord Y: " + zielKoordY);
-
 
                         if (distanceToMovingObjekt < 100) {
                             console.log("ICH STOPPE");
