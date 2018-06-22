@@ -487,7 +487,7 @@ Cylon.robot({
             }, 3000);
             setTimeout(function () {
                 freude();
-            }, 16000);
+            }, 20000);
             /*setTimeout(function () {
                 fertigton();
             }, 11000);*/
@@ -682,14 +682,14 @@ Cylon.robot({
                         ausrichtung = 180 - ausrichtungWinkel;
                     }
 
-                }, 4000);
+                }, 2000);
                 setTimeout(function () {
                     console.log("ausrichtung: " + ausrichtung);
                     my.bb8.roll(0, ausrichtung);
-                }, 5000);
+                }, 3000);
                 setTimeout(function () {
                     my.bb8.stop();
-                }, 6000);
+                }, 4000);
 
                 //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
 
@@ -725,7 +725,7 @@ Cylon.robot({
                         neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
                     }
 
-                    my.bb8.roll(30, (neuerWinkel) % 360);
+                    my.bb8.roll(70, (neuerWinkel) % 360);
 
                     var distanceToMovingObjekt = 10000;
 
