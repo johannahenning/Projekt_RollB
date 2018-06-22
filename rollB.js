@@ -63,6 +63,7 @@ const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
 const TONAUSGABE = "Tonausgabe";
 const TRACKING = "Tracking";
+const USECASE = "Usecase";
 
 //TARGET
 var greenTargetX = 0;
@@ -193,6 +194,15 @@ Cylon.robot({
                                 break;
                         }
                         break;
+
+                    case USECASE:
+                        switch (messageBefehl){
+                            case "verstecken":
+                                verstecken ();
+                                break;
+                            case "toilettenpapier":
+                                
+                        }
 
                     case STOP:
                         switch (messageBefehl) {
