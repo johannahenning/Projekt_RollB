@@ -90,7 +90,7 @@
    * @default 30
    * @type {number}
    */
-  tracking.ColorTracker.prototype.minGroupSize = 30;
+  tracking.ColorTracker.prototype.minGroupSize = 1;
 
   /**
    * Calculates the central coordinate from the cloud points. The cloud points
