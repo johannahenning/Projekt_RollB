@@ -487,8 +487,8 @@ Cylon.robot({
             setTimeout(function () {
                 driveToKoord(yellowTargetX, yellowTargetY);
             }, 3000);
-            if (zielErreicht) {
-
+            if (zielErreicht===true) {
+                console.log("bin da");
                 freude();
             }
 
