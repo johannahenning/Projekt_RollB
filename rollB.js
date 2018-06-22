@@ -6,7 +6,6 @@ var PubNub = require('pubnub');
 
 var express = require('express');
 var app = express();
-var uebermittelterWinkel;
 
 app.get('/movementRollB/:x/:y', function (req, res) {
     xKoordRollB = req.params.x;
@@ -91,6 +90,9 @@ var winkelZumZiel = 0;
 var neuerWinkel;
 var player = new SoundPlayer();
 
+var aX = 50;
+var aY = 50;
+
 
 console.log('Server running');
 
@@ -129,6 +131,7 @@ Cylon.robot({
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
+
                     var payload = {
                         my: 'payload'
                     };
@@ -136,15 +139,16 @@ Cylon.robot({
                         {
                             message: payload
 
-                        }
-                    );
+                        },
+                        function (status) {
+                        });
                 }
             },
             message: function (PubNubMessage) {
                 const messageType = PubNubMessage.message.Message.type;
                 const messageBefehl = PubNubMessage.message.Message.befehl;
 
-                console.log(PubNubMessage);
+                //console.log(PubNubMessage);
                 switch (messageType) {
                     case TRACKING:
                         switch (messageBefehl) {
@@ -344,8 +348,6 @@ Cylon.robot({
                 case ("n"):
                     driveToKoord(yellowTargetX, yellowTargetY);
                     break;
-
-
                 /*console.log("Play Sound File");
                 player.sound('6.mp3', function () {
                 });
@@ -380,26 +382,7 @@ Cylon.robot({
         var oldString = "oldString";
         var counter = 0;
 
-        function tracking() {
-            console.log(uebermittelterWinkel);
-            console.log("OLD: " + oldString);
-
-            if (xKoordRollB.includes("forward")) {
-                my.bb8.roll(40, direction);
-                console.log(xKoordRollB);
-                oldString = "forward";
-            } else if (xKoordRollB.includes("rotate")) {
-                console.log(xKoordRollB);
-                direction = (direction + 90) % 360;
-                console.log(direction);
-                my.bb8.roll(40, direction);
-                oldString = "rotate";
-            } else if (xKoordRollB.includes("stop")) {
-                console.log("FERTIIIIIIIG");
-                my.bb8.stop();
-                clearInterval(trackingInterval);
-                oldString = "stop";
-            }
+        /*
             else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
                 console.log(xKoordRollB);
                 direction = (direction + 180 + counter) % 360;
@@ -416,19 +399,7 @@ Cylon.robot({
                 oldString = "oldString";
             }
         }
-
-        var aktuellesX = 0;
-        var aktuellesY = 0;
-        // var trackingInterval = setInterval(tracking, 200);
-
-        var zielInterval = setInterval(test, 200);
-
-        function test() {
-            aktuellesX = xKoordRollB;
-            aktuellesY = yKoordRollB;
-            console.log(aktuellesX);
-            console.log(aktuellesY);
-        }
+*/
 
         function freude (){
             player.sound('10.mp3', function () {
@@ -661,7 +632,7 @@ Cylon.robot({
 
                 setTimeout(function () {
                     my.bb8.stop();
-                }, 2000);
+                }, 1000);
 
                 setTimeout(function () {
                     stopKoordRollBX = xKoordRollB;
@@ -737,21 +708,34 @@ Cylon.robot({
 
                     my.bb8.roll(30, (neuerWinkel) % 360);
 
-                    var distanceX = zielKoordX - aktuellesX;
-                    var distanceY = zielKoordY - aktuellesY;
+                    var distanceToMovingObjekt = 10000;
 
-                    var distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                    var interval = setInterval(function () {
+                        aX = xKoordRollB;
+                        aY = yKoordRollB;
+
+                        var distanceX = zielKoordX - aX;
+                        var distanceY = zielKoordY - aY;
+
+                        distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+                        console.log("aktuellesX: " + aX);
+                        console.log("aktuellesY: " + aY);
+
+                        console.log("Ziel Koord X: " + zielKoordX);
+                        console.log("Ziel Koord Y: " + zielKoordY);
 
 
-                    if (distanceToMovingObjekt < 50) {
-                        console.log("ICH STOPPE");
-                        my.bb8.stop();
+                        if (distanceToMovingObjekt < 100) {
+                            console.log("ICH STOPPE");
+                            my.bb8.stop();
 
-                        my.bb8.setHeading(0, function (err, data) {
-                            console.log("SET HEADING");
-                        });
-                        clearInterval(zielInterval);
-                    }
+                            my.bb8.setHeading(0, function (err, data) {
+                                console.log("SET HEADING");
+                            });
+                            clearInterval(interval);
+                        }
+                    }, 200);
 
                 }, 6000);
 

@@ -9,8 +9,8 @@
 
     <style>
         video, canvas {
-            margin-left: 0px;
-            margin-top: 0px;
+            margin-left: auto;
+            margin-top: auto;
             position: absolute;
         }
     </style>
@@ -45,11 +45,11 @@
         });
 
         tracking.ColorTracker.registerColor('white', function (r, g, b) {
-            return (r > 240 && g > 240 && b > 240)
+            return (r > 190 && g > 190 && b > 190)
         });
 
         tracking.ColorTracker.registerColor('grey', function (r, g, b) {
-            return (r > 200 && g > 200 && b > 200);
+            return (r > 250 && g > 250 && b > 250);
 
         });
 
@@ -82,12 +82,14 @@
         var purpleTargetX;
         var purpleTargetY;
 
+        var rollBX;
+        var rollBY;
 
         function track(rect) {
 
             if (rect.color === "grey") {
-                var rollBX = rect.x + rect.width / 2;
-                var rollBY = rect.y + rect.height / 2;
+                rollBX = rect.x + rect.width / 2;
+                rollBY = rect.y + rect.height / 2;
             }
 
             if (rect.color === "yellow") {
