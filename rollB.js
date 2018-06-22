@@ -419,9 +419,24 @@ Cylon.robot({
                 });
             }, 2000);
             setTimeout(function () {
-                my.bb8.color({red: 255, green: 255, blue: 0}, function (err, data) {
-                    console.log(err || "Color DONTKNOW");
-                });
+                console.log("Start drive in a circle");
+                var count = 0;
+                var dir = 0;
+                var interval = setInterval(function () {
+                    console.log("drive to direction: " + dir);
+                    my.bb8.roll(30, dir);
+                    dir = dir + 5;
+                    if (dir >= 365) {
+                        dir = 0;
+                        console.log("Reset direction");
+                        count++;
+                    }
+                    if (count > 2) {
+                        clearInterval(interval);
+                        my.bb8.stop();
+                        console.log("STOP!");
+                    }
+                }, 100);
             }, 3000);
         }
         
@@ -451,7 +466,7 @@ Cylon.robot({
                 my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                     console.log(err || "Color BLUE");
                 });
-            }, 2000);
+            }, 1000);
         }
 
         function fertigton() {
@@ -467,9 +482,15 @@ Cylon.robot({
 
         function verstecken () {
             bestaetigungston(); //Bestaetigungston abspielen
-            driveToKoord(yellowTargetX,yellowTargetY); //fährt zu einem Versteck
-            freude();
-            fertigton(); //Fertigton abspielen
+            setTimeout(function () {
+                driveToKoord(yellowTargetX, yellowTargetY);
+            }, 3000);
+            setTimeout(function () {
+                freude();
+            }, 16000);
+            /*setTimeout(function () {
+                fertigton();
+            }, 11000);*/
         }
 
         function katzePerson() {
