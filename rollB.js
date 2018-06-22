@@ -76,6 +76,8 @@ var blueTargetY = 0;
 var purpleTargetX = 0;
 var purpleTargetY = 0;
 
+var zielErreicht = false;
+
 
 //RollB
 var xKoordRollB = 0;
@@ -200,15 +202,15 @@ Cylon.robot({
                         break;
 
                     case USECASE:
-                        switch (messageBefehl){
+                        switch (messageBefehl) {
                             case "Verstecken":
-                                verstecken ();
+                                verstecken();
                                 break;
                             case "toilettenpapier":
-				break;
-                                
+                                break;
+
                         }
-			break;
+                        break;
                     case STOP:
                         switch (messageBefehl) {
                             case "anhalten":
@@ -402,7 +404,7 @@ Cylon.robot({
         }
 */
 
-        function freude (){
+        function freude() {
             player.sound('10.mp3', function () {
             });
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
@@ -439,7 +441,7 @@ Cylon.robot({
                 }, 100);
             }, 3000);
         }
-        
+
         function trauer() {
             player.sound('6.mp3', function () {
             });
@@ -447,7 +449,7 @@ Cylon.robot({
                 console.log(err || "Color BLUE");
             });
         }
-        
+
         function panikWut() {
             player.sound('7.mp3', function () {
             });
@@ -456,7 +458,7 @@ Cylon.robot({
             });
         }
 
-        function bestaetigungston(){
+        function bestaetigungston() {
             player.sound('14.mp3', function () {
             });
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
@@ -480,14 +482,16 @@ Cylon.robot({
             my.bb8.roll(0, 270);
         }
 
-        function verstecken () {
+        function verstecken() {
             bestaetigungston(); //Bestaetigungston abspielen
             setTimeout(function () {
                 driveToKoord(yellowTargetX, yellowTargetY);
             }, 3000);
-            setTimeout(function () {
+            if (zielErreicht) {
+
                 freude();
-            }, 20000);
+            }
+
             /*setTimeout(function () {
                 fertigton();
             }, 11000);*/
@@ -495,6 +499,7 @@ Cylon.robot({
 
         function katzePerson() {
             bestaetigungston();
+
             function spielen() {
                 driveToKoord(yellowTargetX, yellowTargetY);
                 console.log("Start drive in a circle");
@@ -522,11 +527,12 @@ Cylon.robot({
                 player.sound('8.mp3', function () {
                 });
             }
+
             driveToKoord(redTargetX, redTargetY); //zurück fahren
             fertigton();
         }
 
-        function personImHaus (){
+        function personImHaus() {
             bestaetigungston();
             /*if (person im Haus ){
                 freude();
@@ -537,7 +543,7 @@ Cylon.robot({
             fertigton();
         }
 
-        function hindernisse(){
+        function hindernisse() {
             bestaetigungston();
             driveToKoord(yellowTargetX, yellowTargetY);
             //driveUmKord();
@@ -545,7 +551,7 @@ Cylon.robot({
             fertigton();
         }
 
-        function klo(){
+        function klo() {
             bestaetigungston();
             driveToKoord(redTargetX, redTargetY);
             setTimeout(function () {
@@ -556,7 +562,7 @@ Cylon.robot({
             driveToKoord(greenTargetX, greenTargetY);
             fertigton();
         }
-        
+
         function einkaufen() {
             bestaetigungston();
             driveToKoord(greenTargetX, greenTargetY);
@@ -565,7 +571,7 @@ Cylon.robot({
             fertigton();
         }
 
-        function party(){
+        function party() {
             for (var i = 0; i <= 50; i++) {
                 my.bb8.randomColor();
                 i++;
@@ -575,7 +581,7 @@ Cylon.robot({
             freude();
         }
 
-        function verkehrspolizist (){
+        function verkehrspolizist() {
             bestaetigungston();
             driveToKoord(redTargetX, redTargetY);
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
@@ -589,12 +595,12 @@ Cylon.robot({
             }, 6000);
             fertigton();
         }
-        
-        function blickkontakt () {
-            
+
+        function blickkontakt() {
+
         }
 
-        function karelBeeper(){
+        function karelBeeper() {
             bestaetigungston();
             driveToKoord(yellowTargetX, yellowTargetY);
             player.sound('2.mp3', function () {
@@ -610,7 +616,7 @@ Cylon.robot({
         }
 
         //unsicher ob das funktioniert weil wir können keinem Ziel hinterherfahren
-        function lichtkegel(){
+        function lichtkegel() {
             driveToKoord(yellowTargetX, yellowTargetY);
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
@@ -623,13 +629,13 @@ Cylon.robot({
                 console.log(err || "Color RED");
             });
         }
-        
-        function personLokalisieren () {
+
+        function personLokalisieren() {
             driveToKoord(redTargetX, redTargetY);
             freude();
         }
-        
-        function machMalWas () {
+
+        function machMalWas() {
             bestaetigungston();
             //moveSquare();
             for (var i = 0; i <= 200; i++) {
@@ -745,6 +751,7 @@ Cylon.robot({
                             my.bb8.setHeading(0, function (err, data) {
                                 console.log("SET HEADING");
                             });
+                            zielErreicht = true;
                             clearInterval(interval);
                         }
                     }, 200);
