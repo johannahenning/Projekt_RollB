@@ -40,7 +40,7 @@
         });
 
         tracking.ColorTracker.registerColor('blue', function (r, g, b) {
-            return (r < 10 && g < 200 && b > 200);
+            return (r < 60 && g < 160 && b > 150);
 
         });
 
@@ -53,7 +53,17 @@
 
         });
 
-        var tracker = new tracking.ColorTracker([ "grey", "yellow", "green"]);
+        tracking.ColorTracker.registerColor('purple', function (r, g, b) {
+            return (r > 80 && g < 60 && b > 100);
+
+        });
+
+        tracking.ColorTracker.registerColor('red', function (r, g, b) {
+            return (r > 150 && g < 60 && b < 70);
+
+        });
+
+        var tracker = new tracking.ColorTracker([ "grey", "yellow", "green", "blue", "purple", "red"]);
 
         tracking.track('#video', tracker, {camera: true});
 
@@ -65,6 +75,13 @@
 
         var greenTargetX;
         var greenTargetY;
+
+        var blueTargetX;
+        var blueTargetY;
+
+        var purpleTargetX;
+        var purpleTargetY;
+
 
         function track(rect) {
 
@@ -88,6 +105,16 @@
                 greenTargetY = rect.y + rect.height / 2;
             }
 
+            if (rect.color === "blue") {
+                blueTargetX = rect.x + rect.width / 2;
+                blueTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "purple") {
+                purpleTargetX = rect.x + rect.width / 2;
+                purpleTargetY = rect.y + rect.height / 2;
+            }
+
             context.strokeStyle = rect.color;
             context.strokeRect(rect.x, rect.y, rect.width, rect.height);
             context.font = '40px Helvetica';
@@ -100,7 +127,8 @@
             sendGetRequest("/yellowTarget/" + yellowTargetX + "/" + yellowTargetY);
             sendGetRequest("/redTarget/" + redTargetX + "/" + redTargetY);
             sendGetRequest("/greenTarget/" + greenTargetX + "/" + greenTargetY);
-
+            sendGetRequest("/blueTarget/" + blueTargetX + "/" + blueTargetY);
+            sendGetRequest("/purpleTarget/" + purpleTargetX + "/" + purpleTargetY);
         }
 
         tracker.on('track', function (event) {
