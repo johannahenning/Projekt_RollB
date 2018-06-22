@@ -109,17 +109,20 @@ Cylon.robot({
         }, 1000);
 
 
+
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
+
                     var payload = {
                         my: 'payload'
                     };
                     pubnub.publish(
                         {
                             message: payload
-                        }
-                    );
+                        },
+function (status){
+});
                 }
             },
             message: function (PubNubMessage) {
