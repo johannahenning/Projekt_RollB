@@ -109,7 +109,6 @@ Cylon.robot({
         }, 1000);
 
 
-
         pubnub.addListener({
             status: function (statusEvent) {
                 if (statusEvent.category === "PNConnectedCategory") {
@@ -121,8 +120,8 @@ Cylon.robot({
                         {
                             message: payload
                         },
-function (status){
-});
+                        function (status) {
+                        });
                 }
             },
             message: function (PubNubMessage) {
