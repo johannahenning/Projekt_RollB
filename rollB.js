@@ -110,8 +110,8 @@ Cylon.robot({
 
     work: function (my) {
         console.log("Wake up RollB");
-        var player = new SoundPlayer();
-        player.sound('5.mp3', function () {
+        var playerzwei = new SoundPlayer();
+        playerzwei.sound('5.mp3', function () {
         });
         for (var i = 0; i <= 50; i++) {
             my.bb8.randomColor();
