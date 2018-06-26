@@ -481,9 +481,8 @@ Cylon.robot({
 
         function verstecken() {
             bestaetigungston(function () {
-                driveToKoord(yellowTargetX, yellowTargetY, function () {
-                    freude();
-                });
+                console.log("Drive To Koord");
+                driveToKoord(yellowTargetX, yellowTargetY);
             }); //Bestaetigungston abspielen
 
 
@@ -743,7 +742,7 @@ Cylon.robot({
                             console.log("ICH STOPPE");
                             my.bb8.stop();
 
-                            my.bb8.setHeading(0, function (err, data) {
+                            my.bb8.setHeading(0, function (serr, data) {
                                 console.log("SET HEADING");
                             });
                             clearInterval(interval);
