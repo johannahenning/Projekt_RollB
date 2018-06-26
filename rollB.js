@@ -76,9 +76,6 @@ var blueTargetY = 0;
 var purpleTargetX = 0;
 var purpleTargetY = 0;
 
-var zielErreicht = false;
-
-
 //RollB
 var xKoordRollB = 0;
 var yKoordRollB = 0;
@@ -113,8 +110,6 @@ Cylon.robot({
 
 
     work: function (my) {
-
-
         console.log("Wake up RollB");
         var player = new SoundPlayer();
         player.sound('5.mp3', function () {
@@ -208,7 +203,9 @@ Cylon.robot({
                                 break;
                             case "toilettenpapier":
                                 break;
-
+                            case "drehen":
+                                my.bb8.roll(0, 90);
+                                break;
                         }
                         break;
                     case STOP:
@@ -221,6 +218,7 @@ Cylon.robot({
                                 break;
                         }
                         break;
+
                     case FARBE:
                         switch (messageBefehl) {
                             case "rot":
@@ -239,7 +237,6 @@ Cylon.robot({
                                 });
                                 break;
                         }
-
                         break;
 
                     case TONAUSGABE:
@@ -483,14 +480,12 @@ Cylon.robot({
         }
 
         function verstecken() {
-            bestaetigungston(); //Bestaetigungston abspielen
-            setTimeout(function () {
-                driveToKoord(yellowTargetX, yellowTargetY);
-            }, 3000);
-            if (zielErreicht===true) {
-                console.log("bin da");
-                freude();
-            }
+            bestaetigungston(function () {
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                    freude();
+                });
+            }); //Bestaetigungston abspielen
+
 
             /*setTimeout(function () {
                 fertigton();
@@ -751,9 +746,6 @@ Cylon.robot({
                             my.bb8.setHeading(0, function (err, data) {
                                 console.log("SET HEADING");
                             });
-                            console.log("Ziel erreicht" + zielErreicht);
-                            zielErreicht = true;
-                            console.log("Ziel erreicht" + zielErreicht);
                             clearInterval(interval);
                         }
                     }, 200);
