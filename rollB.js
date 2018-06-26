@@ -455,15 +455,17 @@ Cylon.robot({
             });
         }
 
-        function bestaetigungston() {
+        function bestaetigungston(callback) {
             player.sound('14.mp3', function () {
+                console.log ("sound done?");
             });
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
             });
             setTimeout(function () {
-                my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                     console.log(err || "Color BLUE");
+                    callback();
                 });
             }, 1000);
         }
@@ -482,7 +484,9 @@ Cylon.robot({
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
-                driveToKoord(yellowTargetX, yellowTargetY);
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                    freude();
+                });
             }); //Bestaetigungston abspielen
 
 
@@ -639,7 +643,7 @@ Cylon.robot({
             fertigton();
         }
 
-        function driveToKoord(zielKoordX, zielKoordY) {
+        function driveToKoord(zielKoordX, zielKoordY, callback) {
             var ausrichtung = 0;
 
             if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
@@ -746,6 +750,7 @@ Cylon.robot({
                                 console.log("SET HEADING");
                             });
                             clearInterval(interval);
+                            callback();
                         }
                     }, 200);
 
