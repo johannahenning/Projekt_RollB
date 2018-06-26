@@ -198,13 +198,16 @@ Cylon.robot({
 
                     case USECASE:
                         switch (messageBefehl) {
-                            case "Verstecken":
+                            case "verstecken":
                                 verstecken();
                                 break;
                             case "toilettenpapier":
                                 break;
                             case "drehen":
                                 my.bb8.roll(0, 90);
+                                break;
+                            case "einbrecher":
+                                findeDenEinbrecher();
                                 break;
                         }
                         break;
@@ -417,26 +420,6 @@ Cylon.robot({
                     console.log(err || "Color GREEN");
                 });
             }, 2000);
-            setTimeout(function () {
-                console.log("Start drive in a circle");
-                var count = 0;
-                var dir = 0;
-                var interval = setInterval(function () {
-                    console.log("drive to direction: " + dir);
-                    my.bb8.roll(30, dir);
-                    dir = dir + 5;
-                    if (dir >= 365) {
-                        dir = 0;
-                        console.log("Reset direction");
-                        count++;
-                    }
-                    if (count > 2) {
-                        clearInterval(interval);
-                        my.bb8.stop();
-                        console.log("STOP!");
-                    }
-                }, 100);
-            }, 3000);
         }
 
         function trauer() {
@@ -481,6 +464,13 @@ Cylon.robot({
             my.bb8.roll(0, 270);
         }
 
+        function findeDenEinbrecher(){
+            bestaetigungston(function () {
+                driveToKoord(redTargetX, redTargetY, function () {
+                    panikWut();
+                })
+            })
+        }
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
@@ -495,39 +485,40 @@ Cylon.robot({
             }, 11000);*/
         }
 
-        function katzePerson() {
-            bestaetigungston();
-
-            function spielen() {
-                driveToKoord(yellowTargetX, yellowTargetY);
-                console.log("Start drive in a circle");
-                var count = 0;
-                var dir = 0;
-                var interval = setInterval(function () {
-                    console.log("drive to direction: " + dir);
-                    my.bb8.roll(30, dir);
-                    dir = dir + 5;
-                    if (dir >= 365) {
-                        dir = 0;
-                        console.log("Reset direction");
-                        count++;
-                    }
-                    if (count > 2) {
-                        clearInterval(interval);
-                        my.bb8.stop();
-                        console.log("STOP!");
-                    }
-                }, 100); //Kreis
-                for (var i = 0; i <= 50; i++) {
-                    my.bb8.randomColor();
-                    i++;
+        function kreisFahren(callback){
+            console.log("Start drive in a circle");
+            var count = 0;
+            var dir = 0;
+            var interval = setInterval(function () {
+                console.log("drive to direction: " + dir);
+                my.bb8.roll(30, dir);
+                dir = dir + 5;
+                if (dir >= 365) {
+                    dir = 0;
+                    console.log("Reset direction");
+                    count++;
                 }
-                player.sound('8.mp3', function () {
-                });
-            }
+                if (count > 2) {
+                    clearInterval(interval);
+                    my.bb8.stop();
+                    console.log("STOP!");
+                }
+            }, 100);
+        }
 
-            driveToKoord(redTargetX, redTargetY); //zurück fahren
-            fertigton();
+        function katzePerson() {
+            bestaetigungston(function () {
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                    kreisFahren();
+                    for (var i = 0; i <= 50; i++) {
+                        my.bb8.randomColor();
+                        i++;
+                    }
+                    player.sound('8.mp3', function () {
+                    });
+                });
+
+            });
         }
 
         function personImHaus() {
