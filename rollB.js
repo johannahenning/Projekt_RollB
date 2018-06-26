@@ -154,47 +154,6 @@ Cylon.robot({
                                 break;
                         }
                         break;
-                    case RICHTUNG:
-                        switch (messageBefehl) {
-                            case "links":
-                                //  console.log("Drive left");
-                                //  my.bb8.roll(100, 270);
-                                trackingInterval = setInterval(tracking, 2000);
-                                break;
-                            case "rechts":
-                                console.log("Drive right");
-                                my.bb8.roll(100, 90);
-                                break;
-                            case "vorwärts":
-                                console.log("Drive to front");
-                                my.bb8.roll(100, 0);
-                                break;
-                            case "rückwärts":
-                                console.log("Drive back");
-                                my.bb8.roll(100, 180);
-                                break;
-                            case "kreis":
-                                console.log("Start drive in a circle");
-                                var count = 0;
-                                var dir = 0;
-                                var interval = setInterval(function () {
-                                    console.log("drive to direction: " + dir);
-                                    my.bb8.roll(30, dir);
-                                    dir = dir + 5;
-                                    if (dir >= 365) {
-                                        dir = 0;
-                                        console.log("Reset direction");
-                                        count++;
-                                    }
-                                    if (count > 2) {
-                                        clearInterval(interval);
-                                        my.bb8.stop();
-                                        console.log("STOP!");
-                                    }
-                                }, 100);
-                                break;
-                        }
-                        break;
 
                     case USECASE:
                         switch (messageBefehl) {
@@ -241,15 +200,6 @@ Cylon.robot({
                                 break;
                         }
                         break;
-
-                    case TONAUSGABE:
-                        if (messageBefehl === "tonausgabe" || messageBefehl === "sound") {
-                            console.log("Play Sound File");
-                            player.sound('7.mp3', function () {
-                            });
-                        }
-                        break;
-
                 }
             }
 
@@ -440,7 +390,7 @@ Cylon.robot({
 
         function bestaetigungston(callback) {
             player.sound('14.mp3', function () {
-                console.log ("sound done?");
+                console.log("sound done?");
             });
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
@@ -449,6 +399,7 @@ Cylon.robot({
                 my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                     console.log(err || "Color BLUE");
                     callback();
+                    console.log("Bestaetigunston fertig");
                 });
             }, 1000);
         }
@@ -464,28 +415,24 @@ Cylon.robot({
             my.bb8.roll(0, 270);
         }
 
-        function findeDenEinbrecher(){
+        function findeDenEinbrecher() {
             bestaetigungston(function () {
                 driveToKoord(redTargetX, redTargetY, function () {
                     panikWut();
-                })
-            })
+                });
+            });
         }
+
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
                 driveToKoord(yellowTargetX, yellowTargetY, function () {
                     freude();
                 });
-            }); //Bestaetigungston abspielen
-
-
-            /*setTimeout(function () {
-                fertigton();
-            }, 11000);*/
+            });
         }
 
-        function kreisFahren(callback){
+        function kreisFahren(callback) {
             console.log("Start drive in a circle");
             var count = 0;
             var dir = 0;
