@@ -511,7 +511,7 @@ Cylon.robot({
                 }, 3000);
                 setTimeout(function () {
                     my.bb8.stop();
-                }, 3500);
+                }, 4000);
 
                 //AUSRICHTUNG ABGESCHLOSSEN!!! RollB schaut in der Kamera nach rechts
 
