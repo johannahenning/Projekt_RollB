@@ -1,6 +1,6 @@
 "use strict";
 
-var moduleKoordinaten = require('./koordinaten');
+const moduleKoordinaten = require('./koordinaten');
 
 var Cylon = require('cylon');
 var keypress = require("keypress");
@@ -11,9 +11,10 @@ var PubNub = require('pubnub');
 
 var player = new SoundPlayer();
 
+var app = moduleKoordinaten.app;
 
 
-moduleKoordinaten.app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.listen(8888, function () {
     console.log('Example app listening on port 8888!');
