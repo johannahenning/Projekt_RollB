@@ -1,6 +1,6 @@
 "use strict";
 
-require("koordinaten.js");
+var module = require('./koordinaten');
 
 var Cylon = require('cylon');
 var keypress = require("keypress");
