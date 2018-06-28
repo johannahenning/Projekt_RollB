@@ -25,8 +25,9 @@ var neuerWinkelZumZiel;
 var aktuellesX = 50;
 var aktuellesY = 50;
 
+module.exports = {
 
-function driveToKoord(zielKoordX, zielKoordY, callback) {
+driveToKoord: function(zielKoordX, zielKoordY, callback) {
     var ausrichtung = 0;
 
     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
@@ -131,4 +132,7 @@ function driveToKoord(zielKoordX, zielKoordY, callback) {
         }, 1000);
 
     }
+}
+
+
 }
