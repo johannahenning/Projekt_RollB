@@ -280,7 +280,7 @@ Cylon.robot({
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
-                moduleKoordinaten.driveToKoord(moduleZielKoordinaten.yellowTargetX, moduleZielKoordinaten.yellowTargetY, function () {
+                moduleKoordinaten.driveToKoord(yellowTargetX, yellowTargetY, function () {
                     freude();
                 });
             });
