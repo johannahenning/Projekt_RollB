@@ -234,7 +234,7 @@ Cylon.robot({
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
-                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                moduleKoordinaten.driveToKoord(yellowTargetX, yellowTargetY, function () {
                     freude();
                 });
             });
