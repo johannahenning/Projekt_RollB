@@ -1,3 +1,6 @@
+"use strict";
+
+
 function panikWut() {
     player.sound('7.mp3', function () {
     });
@@ -22,4 +25,12 @@ function freude() {
             console.log(err || "Color GREEN");
         });
     }, 2000);
+}
+
+function trauer() {
+    player.sound('6.mp3', function () {
+    });
+    my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
+        console.log(err || "Color BLUE");
+    });
 }
