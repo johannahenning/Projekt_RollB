@@ -11,7 +11,8 @@ var PubNub = require('pubnub');
 
 var player = new SoundPlayer();
 
-var app = moduleKoordinaten.app;
+var express = require('express');
+var app = express();
 
 
 app.use(express.static('public'));
