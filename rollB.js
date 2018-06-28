@@ -1,6 +1,7 @@
 "use strict";
 
 const moduleKoordinaten = require('./koordinaten');
+const moduleZielKoordinaten = require('./zielKoordinaten');
 
 var Cylon = require('cylon');
 var keypress = require("keypress");
