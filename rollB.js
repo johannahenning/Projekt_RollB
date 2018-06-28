@@ -58,7 +58,10 @@ var pubnub = new PubNub({
 });
 
 const STOP = "stop";
+const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
+const TONAUSGABE = "Tonausgabe";
+const TRACKING = "Tracking";
 const USECASE = "Usecase";
 
 //TARGET
@@ -83,14 +86,17 @@ var stopKoordRollBY = 0;
 
 var ausrichtungWinkel = 0;
 var winkelZumZiel = 0;
-var neuerWinkelZumZiel;
+var neuerWinkel;
 var player = new SoundPlayer();
 
-var aktuellesX = 50;
-var aktuellesY = 50;
+var aX = 50;
+var aY = 50;
 
 
 console.log('Server running');
+
+var trackingInterval;
+
 
 Cylon.robot({
     connections: {
@@ -102,10 +108,12 @@ Cylon.robot({
         bb8: {driver: 'bb8', module: 'cylon-sphero-ble'}
     },
 
+
     work: function (my) {
         console.log("Wake up RollB");
-
-        player.sound('5.mp3');
+        var player = new SoundPlayer();
+        player.sound('5.mp3', function () {
+        });
         for (var i = 0; i <= 50; i++) {
             my.bb8.randomColor();
             i++;
@@ -139,6 +147,14 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
+                    case TRACKING:
+                        switch (messageBefehl) {
+                            case "koordinaten":
+                                trackingInterval = setInterval(tracking, 2000);
+                                break;
+                        }
+                        break;
+
                     case USECASE:
                         switch (messageBefehl) {
                             case "verstecken":
@@ -154,7 +170,6 @@ Cylon.robot({
                                 break;
                         }
                         break;
-
                     case STOP:
                         switch (messageBefehl) {
                             case "anhalten":
@@ -210,8 +225,14 @@ Cylon.robot({
                         my.bb8.randomColor();
                         i++;
                     }
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
                     break;
-
+                case "k":
+                    console.log("Change to random color");
+                    my.bb8.randomColor();
+                    break;
                 case "w":
                     console.log("Drive to front");
                     my.bb8.roll(100, 0);
@@ -232,6 +253,68 @@ Cylon.robot({
                     console.log("Stop");
                     my.bb8.stop();
                     break;
+                case "o":
+                    console.log("Start drive in a circle");
+                    var count = 0;
+                    var dir = 0;
+                    var interval = setInterval(function () {
+                        console.log("drive to direction: " + dir);
+                        my.bb8.roll(30, dir);
+                        dir = dir + 5;
+                        if (dir >= 365) {
+                            dir = 0;
+                            console.log("Reset direction");
+                            count++;
+                        }
+                        if (count > 2) {
+                            clearInterval(interval);
+                            my.bb8.stop();
+                            console.log("STOP!");
+                        }
+                    }, 100);
+                    break;
+                case ("y"):
+                    console.log("Play Sound File");
+                    player.sound('1.mp3', function () {
+                    });
+                    break;
+                case ("x"):
+                    console.log("Play Sound File");
+                    player.sound('2.mp3', function () {
+                    });
+                    break;
+                case ("c"):
+                    console.log("Play Sound File");
+                    player.sound('3.mp3', function () {
+                    });
+                    break;
+                case ("v"):
+                    console.log("Play Sound File");
+                    player.sound('4.mp3', function () {
+                    });
+                    break;
+                case ("b"):
+                    console.log("Play Sound File");
+                    player.sound('5.mp3', function () {
+                    });
+                    break;
+                case ("n"):
+                    driveToKoord(yellowTargetX, yellowTargetY);
+                    break;
+                /*console.log("Play Sound File");
+                player.sound('6.mp3', function () {
+                });
+                break;*/
+                case ("m"):
+                    console.log("Play Sound File");
+                    player.sound('7.mp3', function () {
+                    });
+                    break;
+                case ("p"):
+                    my.bb8.color({red: 0, green: 255, blue: 255}, function (err, data) {
+                        console.log("LED OFF!");
+                    });
+                    break;
                 default:
                     console.log("Key unknown, ROLLB SAYS NO");
                     player.sound('15.mp3', function () {
@@ -247,6 +330,29 @@ Cylon.robot({
             }
 
         }
+
+        var direction = 0;
+        var oldString = "oldString";
+        var counter = 0;
+
+        /*
+            else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
+                direction = (direction + 180 + counter) % 360;
+                console.log(direction);
+                my.bb8.roll(60, direction);
+                counter += 90;
+                oldString = "outOfBorder";
+            }
+            else if (xKoordRollB.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
+                console.log(direction);
+                console.log("AusnahmeFall oldString = outOfBorder");
+                my.bb8.roll(50, direction);
+                oldString = "oldString";
+            }
+        }
+*/
 
         function freude() {
             player.sound('10.mp3', function () {
@@ -291,7 +397,6 @@ Cylon.robot({
             });
             setTimeout(function () {
                 my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
-
                     console.log(err || "Color BLUE");
                     callback();
                     console.log("Bestaetigunston fertig");
@@ -344,7 +449,6 @@ Cylon.robot({
                     clearInterval(interval);
                     my.bb8.stop();
                     console.log("STOP!");
-                    callback();
                 }
             }, 100);
         }
@@ -362,6 +466,17 @@ Cylon.robot({
                 });
 
             });
+        }
+
+        function personImHaus() {
+            bestaetigungston();
+            /*if (person im Haus ){
+                freude();
+                driveToKord();
+            } else {
+                trauer();
+            }*/
+            fertigton();
         }
 
         function hindernisse() {
@@ -488,25 +603,30 @@ Cylon.robot({
                     ausrichtungWinkel = ausrichtungWinkel * 180 / Math.PI;
                     console.log("WINKEL: " + ausrichtungWinkel);
 
-                    //links oben nach rechts unten
+                    //drives from top left to bottom right
                     if (startKoordRollBY < stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
+                        console.log("links oben nach rechts unten");
                         ausrichtung = 360 - ausrichtungWinkel;
 
-                        //links unten nach rechts oben
+                        //drives from bottom left to top right
                     } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX < stopKoordRollBX) {
+                        console.log("links unten nach rechts oben");
                         ausrichtung = (-ausrichtungWinkel);
 
-                        //rechts oben nach links unten
+                        //drives from top right to bottom left
                     } else if (startKoordRollBY < stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
+                        console.log("rechts oben nach links unten");
                         ausrichtung = 180 + (-ausrichtungWinkel);
 
-                        //links unten nach rechts oben
+                        //drives from bottom left to top right
                     } else if (startKoordRollBY > stopKoordRollBY && startKoordRollBX > stopKoordRollBX) {
+                        console.log("links unten nach rechts oben");
                         ausrichtung = 180 - ausrichtungWinkel;
                     }
 
                 }, 2000);
                 setTimeout(function () {
+                    console.log("ausrichtung: " + ausrichtung);
                     my.bb8.roll(0, ausrichtung);
                 }, 3000);
                 setTimeout(function () {
@@ -518,57 +638,61 @@ Cylon.robot({
                 setTimeout(function () {
                     stopKoordRollBX = xKoordRollB;
                     stopKoordRollBY = yKoordRollB;
-
-
+                    console.log("NeueStopKoords: " + stopKoordRollBX + stopKoordRollBY);
                     //Berechnung vom Winkel zum Ziel
                     winkelZumZiel = Math.atan((stopKoordRollBY - zielKoordY) / (stopKoordRollBX - zielKoordX));
                     winkelZumZiel = winkelZumZiel * 180 / Math.PI;
 
+                    console.log("Winkel zum Ziel: " + winkelZumZiel);
 
                     //rollB: bottom right target: top left
                     if (stopKoordRollBY > zielKoordY && stopKoordRollBX > zielKoordX) {
-                        neuerWinkelZumZiel = ausrichtung + 180 + winkelZumZiel;
+                        console.log("rollB: bottom right target: top left");
+                        neuerWinkel = ausrichtung + 180 + winkelZumZiel;
 
                         //rollB: bottom left target: top right
                     } else if (stopKoordRollBY > zielKoordY && stopKoordRollBX < zielKoordX) {
-                        neuerWinkelZumZiel = ausrichtung - (-winkelZumZiel);
+                        console.log("rollB: bottom left target: top right");
+                        neuerWinkel = ausrichtung - (-winkelZumZiel);
 
-                        //rollB: top left target: bottom right
+                        //rollB: top left target: bottom right ??????
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX < zielKoordX) {
-                        neuerWinkelZumZiel = ausrichtung + winkelZumZiel;
+                        console.log("rollB: top left target: bottom right");
+                        neuerWinkel = ausrichtung + winkelZumZiel;
 
                         //rollB: top right target: bottom left
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX > zielKoordX) {
-                        neuerWinkelZumZiel = ausrichtung + (180 - (-winkelZumZiel));
+
+                        console.log("rollB: top right target: bottom left");
+                        neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
                     }
 
-                    neuerWinkelZumZiel = neuerWinkelZumZiel % 360;
-
-                    my.bb8.roll(70, neuerWinkelZumZiel);
+                    my.bb8.roll(70, (neuerWinkel) % 360);
 
                     var distanceToMovingObjekt = 10000;
 
-                    var distanzInterval = setInterval(function () {
-                        aktuellesX = xKoordRollB;
-                        aktuellesY = yKoordRollB;
+                    var interval = setInterval(function () {
+                        aX = xKoordRollB;
+                        aY = yKoordRollB;
 
-                        var distanceX = zielKoordX - aktuellesX;
-                        var distanceY = zielKoordY - aktuellesY;
+                        var distanceX = zielKoordX - aX;
+                        var distanceY = zielKoordY - aY;
 
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-                        if (distanceToMovingObjekt < 50) {
+                        if (distanceToMovingObjekt < 100) {
+                            console.log("ICH STOPPE");
                             my.bb8.stop();
 
                             my.bb8.setHeading(0, function (serr, data) {
                                 console.log("SET HEADING");
                             });
-                            clearInterval(distanzInterval);
+                            clearInterval(interval);
                             callback();
                         }
                     }, 200);
 
-                }, 1000);
+                }, 6000);
 
             }
         }
