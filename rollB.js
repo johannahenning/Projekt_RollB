@@ -1,6 +1,6 @@
 "use strict";
 
-document.writeln("<script language='JavaScript' type='text/javascript' src='koordinaten.js'></script>");
+window.document.writeln("<script language='JavaScript' type='text/javascript' src='koordinaten.js'></script>");
 
 var Cylon = require('cylon');
 var keypress = require("keypress");
