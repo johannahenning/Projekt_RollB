@@ -23,7 +23,7 @@ var aktuellesX = 50;
 var aktuellesY = 50;
 
 
-function driveToKoord(zielKoordX, zielKoordY, callback) {
+var driveToKoord = function (zielKoordX, zielKoordY, callback) {
     var ausrichtung = 0;
 
     if (xKoordRollB !== null && xKoordRollB !== 0 && xKoordRollB !== undefined) {
