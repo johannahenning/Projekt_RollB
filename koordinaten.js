@@ -1,5 +1,7 @@
 "use strict";
 
+var app = express();
+
 app.get('/movementRollB/:x/:y', function (req, res) {
     xKoordRollB = req.params.x;
     yKoordRollB = req.params.y;

@@ -8,7 +8,7 @@ var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
 var express = require('express');
-var app = express();
+
 
 var player = new SoundPlayer();
 
