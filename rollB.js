@@ -201,13 +201,18 @@ Cylon.robot({
                             case "verstecken":
                                 verstecken();
                                 break;
-                            case "toilettenpapier":
+                            case "toilettenpapier": //klo
                                 break;
                             case "drehen":
                                 my.bb8.roll(0, 90);
                                 break;
                             case "einbrecher":
                                 findeDenEinbrecher();
+                                break;
+                            case "haustier": //katze/person
+                                break;
+                            case "einkaufen":
+                                einkaufen();
                                 break;
                         }
                         break;
