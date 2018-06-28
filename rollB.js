@@ -7,7 +7,6 @@ var keypress = require("keypress");
 var SoundPlayer = require('soundplayer');
 var PubNub = require('pubnub');
 
-var express = require('express');
 
 
 var player = new SoundPlayer();
