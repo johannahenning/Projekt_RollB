@@ -232,7 +232,7 @@ Cylon.robot({
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
-                koordinaten.driveToKoord(yellowTargetX, yellowTargetY, function () {
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
                     freude();
                 });
             });
