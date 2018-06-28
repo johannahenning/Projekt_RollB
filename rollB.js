@@ -7,6 +7,8 @@ var PubNub = require('pubnub');
 var express = require('express');
 var app = express();
 
+var player = new SoundPlayer();
+
 app.get('/movementRollB/:x/:y', function (req, res) {
     xKoordRollB = req.params.x;
     yKoordRollB = req.params.y;

@@ -11,7 +11,7 @@ var stopKoordRollBY = 0;
 var ausrichtungWinkel = 0;
 var winkelZumZiel = 0;
 var neuerWinkelZumZiel;
-var player = new SoundPlayer();
+
 
 var aktuellesX = 50;
 var aktuellesY = 50;
