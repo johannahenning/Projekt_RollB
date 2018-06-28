@@ -1,5 +1,11 @@
 "use strict";
 
+app.get('/movementRollB/:x/:y', function (req, res) {
+    xKoordRollB = req.params.x;
+    yKoordRollB = req.params.y;
+    res.end();
+});
+
 //RollB
 var xKoordRollB = 0;
 var yKoordRollB = 0;
