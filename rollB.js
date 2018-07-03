@@ -558,17 +558,20 @@ Cylon.robot({
         //UseCase7
         function party() {
             setTimeout(function () {
-                my.bb8.roll(20,90)
+                my.bb8.roll(20, 90)
             }, 500);
             setTimeout(function () {
-                my.bb8.roll(20,180)
+                my.bb8.roll(20, 180)
             }, 1000);
             setTimeout(function () {
-                my.bb8.roll(20,270)
+                my.bb8.roll(20, 270)
             }, 1500);
             setTimeout(function () {
-                my.bb8.roll(20,0)
+                my.bb8.roll(20, 0)
             }, 2000);
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 2500);
             player.sound('13.mp3', function () { //"disco disco party party"
                 for (var i = 0; i <= 50; i++) {
                     my.bb8.randomColor();
@@ -576,7 +579,7 @@ Cylon.robot({
                 }
                 player.sound('13.mp3', function () {
                     freude(function () {
-                        
+
                     });
                 });
             });
