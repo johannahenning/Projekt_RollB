@@ -92,6 +92,7 @@ var player = new SoundPlayer();
 var aX = 50;
 var aY = 50;
 
+var richtung =0;
 
 console.log('Server running');
 
@@ -185,8 +186,7 @@ Cylon.robot({
                                 machMalWas();
                                 break;
                             case "drehen":
-                                var richtung = 0;
-                                my.bb8.roll(0, richtung += 90);
+                                my.bb8.roll(0, richtung+=90);
                                 break;
                         }
                         break;
