@@ -480,6 +480,7 @@ Cylon.robot({
                     console.log("STOP!");
                 }
             }, 100);
+            callback();
         }
 
         //UseCase3
@@ -487,7 +488,7 @@ Cylon.robot({
             bestaetigungston(function () {
                 player.sound('8.mp3', function () {
                     driveToKoord(redTargetX, redTargetY, function () {
-                        kreisFahren();
+                        kreisFahren(callback);
                         for (var i = 0; i <= 50; i++) {
                             my.bb8.randomColor();
                             i++;
@@ -574,7 +575,7 @@ Cylon.robot({
                     i++;
                 }
                 player.sound('13.mp3', function () {
-                    freude();
+                    freude(callback);
                 });
             });
 
