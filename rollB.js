@@ -164,6 +164,7 @@ Cylon.robot({
                                 verstecken();
                                 break;
                             case "haustier": //katze/person
+                                katzePerson();
                                 break;
                             case "personimhaus":
                                 personImHaus();
@@ -561,8 +562,9 @@ Cylon.robot({
         }
 
         //UseCase8
-        function verkehrspolizist() {
-            bestaetigungston(driveToKoord(redTargetX, redTargetY, function () {
+        /*function verkehrspolizist() {
+            bestaetigungston(
+                driveToKoord(redTargetX, redTargetY, function () {
                 my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                     console.log(err || "Color RED");
                 }, function () {
@@ -574,7 +576,7 @@ Cylon.robot({
                 });
             }));
             fertigton();
-        }
+        }*/
 
         //UseCase9
         function machMalWas() {
