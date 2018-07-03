@@ -372,7 +372,7 @@ Cylon.robot({
         }
 */
 
-        function freude() {
+        function freude(callback) {
             player.sound('10.mp3', function () {
             });
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
@@ -388,6 +388,7 @@ Cylon.robot({
                     console.log(err || "Color GREEN");
                 });
             }, 2000);
+            callback();
         }
 
         function trauer() {
@@ -436,8 +437,10 @@ Cylon.robot({
         //UseCase1
         function findeDenEinbrecher() {
             bestaetigungston(function () {
-                driveToKoord(redTargetX, redTargetY, function () {
-                    panikWut();
+                player.sound('8.mp3', function () {
+                    driveToKoord(redTargetX, redTargetY, function () {
+                        panikWut();
+                    });
                 });
             });
         }
@@ -445,10 +448,16 @@ Cylon.robot({
         //UseCase2
         function verstecken() {
             bestaetigungston(function () {
-                console.log("Drive To Koord");
-                driveToKoord(yellowTargetX, yellowTargetY, function () {
-                    freude();
+                player.sound('8.mp3', function () {
+                    driveToKoord(yellowTargetX, yellowTargetY, function () {
+                        setTimeout(function () {
+                            freude(function () {
+                                player.sound('4.mp3');
+                            });
+                        }, 5000);
+                    });
                 });
+
             });
         }
 
@@ -476,12 +485,15 @@ Cylon.robot({
         //UseCase3
         function katzePerson() {
             bestaetigungston(function () {
-                driveToKoord(yellowTargetX, yellowTargetY, function () {
-                    kreisFahren();
-                    for (var i = 0; i <= 50; i++) {
-                        my.bb8.randomColor();
-                        i++;
-                    }
+                player.sound('8.mp3', function () {
+                    driveToKoord(purpleTargetX, purpleTargetY, function () {
+                        kreisFahren();
+                        for (var i = 0; i <= 50; i++) {
+                            my.bb8.randomColor();
+                            i++;
+                        }
+                        player.sound('9.mp3');
+                    });
                     player.sound('8.mp3', function () {
                     });
                 });
@@ -491,8 +503,8 @@ Cylon.robot({
 
         //UseCase4
         function personImHaus() {
-            bestaetigungston(function (){
-               // if ...
+            bestaetigungston(function () {
+                // if ...
                 driveToKoord(greenTargetX, greenTargetY, function () {
                     freude();
                 })
@@ -509,14 +521,18 @@ Cylon.robot({
         //UseCase5
         function klo() {
             bestaetigungston(function () {
-                driveToKoord(redTargetX, redTargetY, function () {
-                    my.bb8.stop();
-                    player.sound('11.mp3', function () {
-                    });
+                player.sound('8.mp3', function () {
+                    driveToKoord(blueTargetX, blueTargetY, function () {
+                        setTimeout(function () {
+                            player.sound('4.mp3', function () {
+                                driveToKoord(redTargetX, redTargetY, function () {
+                                    fertigton();
+                                });
+                            });
+                        });
+                    }, 5000);
                 })
             });
-            driveToKoord(greenTargetX, greenTargetY);
-            fertigton();
         }
 
         //UseCase6
@@ -575,13 +591,13 @@ Cylon.robot({
         function moveSquare() {
             my.bb8.roll(60, 0);
             setTimeout(function () {
-                my.bb8.roll(60,90);
+                my.bb8.roll(60, 90);
             }, 2000);
             setTimeout(function () {
-                my.bb8.roll(60,180);
+                my.bb8.roll(60, 180);
             }, 4000);
             setTimeout(function () {
-                my.bb8.roll(60,270);
+                my.bb8.roll(60, 270);
             }, 6000);
             setTimeout(function () {
                 my.bb8.stop();
