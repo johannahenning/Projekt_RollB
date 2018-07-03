@@ -95,6 +95,7 @@ var aY = 50;
 
 console.log('Server running');
 
+var trackingInterval;
 
 
 Cylon.robot({
@@ -111,7 +112,8 @@ Cylon.robot({
     work: function (my) {
         console.log("Wake up RollB");
         var player = new SoundPlayer();
-        player.sound('5.mp3');
+        player.sound('5.mp3', function () {
+        });
         for (var i = 0; i <= 50; i++) {
             my.bb8.randomColor();
             i++;
@@ -145,6 +147,14 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
+                    case TRACKING:
+                        switch (messageBefehl) {
+                            case "koordinaten":
+                                trackingInterval = setInterval(tracking, 2000);
+                                break;
+                        }
+                        break;
+
                     case USECASE:
                         switch (messageBefehl) {
                             case "einbrecher":
@@ -339,6 +349,29 @@ Cylon.robot({
 
         }
 
+        var direction = 0;
+        var oldString = "oldString";
+        var counter = 0;
+
+        /*
+            else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
+                direction = (direction + 180 + counter) % 360;
+                console.log(direction);
+                my.bb8.roll(60, direction);
+                counter += 90;
+                oldString = "outOfBorder";
+            }
+            else if (xKoordRollB.includes("outOfBorder") && oldString.includes("outOfBorder")) {
+                console.log(xKoordRollB);
+                console.log(direction);
+                console.log("AusnahmeFall oldString = outOfBorder");
+                my.bb8.roll(50, direction);
+                oldString = "oldString";
+            }
+        }
+*/
+
         function freude() {
             player.sound('10.mp3', function () {
             });
@@ -382,7 +415,6 @@ Cylon.robot({
             });
             setTimeout(function () {
                 my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
-
                     console.log(err || "Color BLUE");
                     callback();
                     console.log("Bestaetigunston fertig");
@@ -437,7 +469,6 @@ Cylon.robot({
                     clearInterval(interval);
                     my.bb8.stop();
                     console.log("STOP!");
-                    callback();
                 }
             }, 100);
         }
@@ -668,7 +699,7 @@ Cylon.robot({
                         }
                     }, 200);
 
-                }, 1000);
+                }, 6000);
 
             }
         }
