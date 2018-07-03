@@ -168,7 +168,7 @@ Cylon.robot({
                                 katzePerson();
                                 break;
                             case "personimhaus":
-                                personImHaus();
+                                personImHaus()
                                 break;
                             case "toilettenpapier": //klo
                                 klo();
@@ -503,18 +503,22 @@ Cylon.robot({
         //UseCase4
         function personImHaus() {
             bestaetigungston(function () {
-                // if ...
-                driveToKoord(greenTargetX, greenTargetY, function () {
-                    freude();
-                })
+                var aktuellesTarget = 0;
+                var istJemandDa = setInterval(function () {
+                    aktuellesTarget = blueTargetX;
+                    if(blueTargetX === null || blueTargetX === undefined){
+                        player.sound('8.mp3');
+                        console.log("hier ist niemand");
+                    } else {
+                        player.sound('9.mp3', function () {
+                            freude(function () {
+                            })
+                        });
+                        console.log("hier ist jemand");
+                        clearInterval(istJemandDa);
+                    }
             });
-            /*if (person im Haus ){
-                freude();
-                driveToKord();
-            } else {
-                trauer();
-            }*/
-            fertigton();
+                fertigton();
         }
 
         //UseCase5
