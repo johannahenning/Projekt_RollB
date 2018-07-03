@@ -575,7 +575,9 @@ Cylon.robot({
                     i++;
                 }
                 player.sound('13.mp3', function () {
-                    freude(callback);
+                    freude(function () {
+                        
+                    });
                 });
             });
 
