@@ -147,21 +147,34 @@ Cylon.robot({
                 switch (messageType) {
                     case USECASE:
                         switch (messageBefehl) {
-                            case "verstecken":
-                                verstecken();
-                                break;
-                            case "toilettenpapier": //klo
-                                break;
-                            case "drehen":
-                                my.bb8.roll(0, 90);
-                                break;
                             case "einbrecher":
                                 findeDenEinbrecher();
                                 break;
+                            case "verstecken":
+                                verstecken();
+                                break;
                             case "haustier": //katze/person
+                                break;
+                            case "personimhaus":
+                                personImHaus();
+                                break;
+                            case "toilettenpapier": //klo
+                                klo();
                                 break;
                             case "einkaufen":
                                 einkaufen();
+                                break;
+                            case "party":
+                                party();
+                                break;
+                            case "verkehrspolizist":
+                                verkehrspolizist();
+                                break;
+                            case "machwas":
+                                machMalWas();
+                                break;
+                            case "drehen":
+                                my.bb8.roll(0, 90);
                                 break;
                         }
                         break;
@@ -388,6 +401,7 @@ Cylon.robot({
             my.bb8.roll(0, 270);
         }
 
+        //UseCase1
         function findeDenEinbrecher() {
             bestaetigungston(function () {
                 driveToKoord(redTargetX, redTargetY, function () {
@@ -396,6 +410,7 @@ Cylon.robot({
             });
         }
 
+        //UseCase2
         function verstecken() {
             bestaetigungston(function () {
                 console.log("Drive To Koord");
@@ -427,6 +442,7 @@ Cylon.robot({
             }, 100);
         }
 
+        //UseCase3
         function katzePerson() {
             bestaetigungston(function () {
                 driveToKoord(yellowTargetX, yellowTargetY, function () {
@@ -442,8 +458,14 @@ Cylon.robot({
             });
         }
 
+        //UseCase4
         function personImHaus() {
-            bestaetigungston();
+            bestaetigungston(function (){
+               // if ...
+                driveToKoord(greenTargetX, greenTargetY, function () {
+                    freude();
+                })
+            });
             /*if (person im Haus ){
                 freude();
                 driveToKord();
@@ -453,106 +475,86 @@ Cylon.robot({
             fertigton();
         }
 
-        function hindernisse() {
-            bestaetigungston();
-            driveToKoord(yellowTargetX, yellowTargetY);
-            //driveUmKord();
-            //driveToKord();
-            fertigton();
-        }
-
+        //UseCase5
         function klo() {
-            bestaetigungston();
-            driveToKoord(redTargetX, redTargetY);
-            setTimeout(function () {
-                my.bb8.stop();
-            }, 6000);
-            player.sound('11.mp3', function () {
+            bestaetigungston(function () {
+                driveToKoord(redTargetX, redTargetY, function () {
+                    my.bb8.stop();
+                    player.sound('11.mp3', function () {
+                    });
+                })
             });
             driveToKoord(greenTargetX, greenTargetY);
             fertigton();
         }
 
+        //UseCase6
         function einkaufen() {
-            bestaetigungston();
-            driveToKoord(greenTargetX, greenTargetY);
-            kopfDrehen();
-            driveToKoord(redTargetX, redTargetY);
-            fertigton();
+            bestaetigungston(function () {
+                driveToKoord(greenTargetX, greenTargetY, function () {
+                    kopfDrehen(function () {
+                        driveToKoord(redTargetX, redTargetY, function () {
+                            fertigton();
+                        })
+                    })
+                })
+            });
         }
 
+        //UseCase7
         function party() {
             for (var i = 0; i <= 50; i++) {
                 my.bb8.randomColor();
                 i++;
             }
             player.sound('13.mp3', function () {
+                freude();
             });
-            freude();
+            //freude();
         }
 
+        //UseCase8
         function verkehrspolizist() {
-            bestaetigungston();
-            driveToKoord(redTargetX, redTargetY);
-            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
-                console.log(err || "Color RED");
-            });
-            kopfDrehen();
-            setTimeout(function () {
-                my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
-                    console.log(err || "Color GREEN");
+            bestaetigungston(driveToKoord(redTargetX, redTargetY, function () {
+                my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
+                    console.log(err || "Color RED");
+                }, function () {
+                    kopfDrehen(function () {
+                        my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
+                            console.log(err || "Color GREEN");
+                        });
+                    });
                 });
-            }, 6000);
+            }));
             fertigton();
         }
 
-        function blickkontakt() {
-
-        }
-
-        function karelBeeper() {
-            bestaetigungston();
-            driveToKoord(yellowTargetX, yellowTargetY);
-            player.sound('2.mp3', function () {
-            });
-            driveToKoord(redTargetX, redTargetY);
-            player.sound('2.mp3', function () {
-            });
-            driveToKoord(greenTargetX, greenTargetY);
-            player.sound('2.mp3', function () {
-            });
-            freude();
-            fertigton();
-        }
-
-        //unsicher ob das funktioniert weil wir können keinem Ziel hinterherfahren
-        function lichtkegel() {
-            driveToKoord(yellowTargetX, yellowTargetY);
-            my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
-                console.log(err || "Color GREEN");
-            });
-            setTimeout(function () {
-                //driveAwayFromKord();
-            }, 8000);
-            panikWut();
-            my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
-                console.log(err || "Color RED");
-            });
-        }
-
-        function personLokalisieren() {
-            driveToKoord(redTargetX, redTargetY);
-            freude();
-        }
-
+        //UseCase9
         function machMalWas() {
-            bestaetigungston();
-            //moveSquare();
-            for (var i = 0; i <= 200; i++) {
-                my.bb8.randomColor();
-                i++;
-            }
+            bestaetigungston(function () {
+                moveSquare();
+                for (var i = 0; i <= 200; i++) {
+                    my.bb8.randomColor();
+                    i++;
+                }
+            });
             fertigton();
+        }
+
+        function moveSquare() {
+            my.bb8.roll(60, 0);
+            setTimeout(function () {
+                my.bb8.roll(60,90);
+            }, 2000);
+            setTimeout(function () {
+                my.bb8.roll(60,180);
+            }, 4000);
+            setTimeout(function () {
+                my.bb8.roll(60,270);
+            }, 6000);
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 8000);
         }
 
         function driveToKoord(zielKoordX, zielKoordY, callback) {
