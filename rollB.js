@@ -185,7 +185,8 @@ Cylon.robot({
                                 machMalWas();
                                 break;
                             case "drehen":
-                                my.bb8.roll(0, 90);
+                                var richtung = 0;
+                                my.bb8.roll(0, richtung += 90);
                                 break;
                         }
                         break;
@@ -542,6 +543,13 @@ Cylon.robot({
                 driveToKoord(greenTargetX, greenTargetY, function () {
                     kopfDrehen(function () {
                         driveToKoord(redTargetX, redTargetY, function () {
+                            player.sound('13.mp3', function () {
+                                setTimeout(function () {
+                                    freude(function () {
+                                        player.sound('4.mp3');
+                                    });
+                                }, 5000);
+                            });
                             fertigton();
                         })
                     })
