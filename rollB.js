@@ -486,7 +486,7 @@ Cylon.robot({
         function katzePerson() {
             bestaetigungston(function () {
                 player.sound('8.mp3', function () {
-                    driveToKoord(purpleTargetX, purpleTargetY, function () {
+                    driveToKoord(redTargetX, redTargetY, function () {
                         kreisFahren();
                         for (var i = 0; i <= 50; i++) {
                             my.bb8.randomColor();
