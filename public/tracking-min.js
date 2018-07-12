@@ -15,7 +15,11 @@
             return r.prototype[n].apply(t, e)
         }
     }, tracking.initUserMedia_ = function (r, n) {
-        t.navigator.mediaDevices.getUserMedia({video: !0, audio: !(!n || !n.audio)}).then(function (t) {
+        const fullHdConstraints = {
+            video: {width: {exact: 1920}, height: {exact: 1080}}
+        };
+        //t.navigator.mediaDevices.getUserMedia({video: !0, audio: !(!n || !n.audio)}).then(function (t) {
+        t.navigator.mediaDevices.getUserMedia(fullHdConstraints).then(function (t) {
             r.srcObject = t
         })["catch"](function (t) {
             throw Error("Cannot capture user camera.")
