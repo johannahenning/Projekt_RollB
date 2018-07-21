@@ -409,7 +409,7 @@ Cylon.robot({
                              i++;
                          }
                          */
-                    player.sound('\\soundfiles\\Tier\\duziduzi.mp3');
+                    player.sound('soundfiles/Tier/duziduzi.mp3');
                 });
 
 
