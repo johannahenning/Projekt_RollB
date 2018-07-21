@@ -400,7 +400,7 @@ Cylon.robot({
         //Kuscheltier Person
         function tierPerson() {
             bestaetigungsFarbe(function () {
-                driveToKoord(redTargetX, redTargetY, function () {
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
                     kreisFahren(function () {
                         player.sound('/soundfiles/Tier/dasHatSpaßGemacht6.mp3');
                     });
