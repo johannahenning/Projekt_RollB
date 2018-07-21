@@ -348,10 +348,10 @@ Cylon.robot({
                         player.sound('/soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3'); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
                         setTimeout(function () {
                             player.sound('/soundfiles/Einbrecher/hauAb.mp3');
-                        },2000);
-                        setTimeout(function(){
+                        }, 2000);
+                        setTimeout(function () {
                             player.sound('/soundfiles/Einbrecher/verschwinde2.mp3');
-                        },4000);
+                        }, 4000);
                     });
                 });
             });
@@ -390,10 +390,10 @@ Cylon.robot({
                 if (count > 2) {
                     clearInterval(interval);
                     my.bb8.stop();
+                    callback();
                     console.log("STOP!");
                 }
             }, 100);
-            callback();
         }
 
         //Kuscheltier Person
