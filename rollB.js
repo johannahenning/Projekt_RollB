@@ -381,13 +381,14 @@ Cylon.robot({
             var interval = setInterval(function () {
                 console.log("drive to direction: " + dir);
                 my.bb8.roll(30, dir);
-                dir = dir + 5;
+                dir = dir + 7;
+                my.bb8.randomColor();
                 if (dir >= 365) {
                     dir = 0;
                     console.log("Reset direction");
                     count++;
                 }
-                if (count > 2) {
+                if (count > 1) {
                     clearInterval(interval);
                     my.bb8.stop();
                     callback();
@@ -403,11 +404,12 @@ Cylon.robot({
                     kreisFahren(function () {
                         player.sound("dasHatSpassGemacht6.mp3");
                     });
-                    for (var i = 0; i <= 50; i++) {
-                        my.bb8.randomColor();
-                        i++;
-                    }
-                    player.sound('/soundfiles/Tier/duziduzi.mp3');
+                    /*     for (var i = 0; i <= 50; i++) {
+                             my.bb8.randomColor();
+                             i++;
+                         }
+                         */
+                    player.sound('\\soundfiles\\Tier\\duziduzi.mp3');
                 });
 
 
