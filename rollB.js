@@ -347,6 +347,12 @@ Cylon.robot({
                     driveToKoord(redTargetX, redTargetY, function () {
                         panik();
                         player.sound('/soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3'); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
+                        setTimeout(function () {
+                            player.sound('/soundfiles/Einbrecher/hauAb.mp3');
+                            setTimeout(function(){
+                                player.sound('/soundfiles/Einbrecher/verschwinde2.mp3');
+                            },4000);
+                        },2000);
                     });
                 });
             });
