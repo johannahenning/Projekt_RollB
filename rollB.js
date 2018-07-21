@@ -345,13 +345,11 @@ Cylon.robot({
                 player.sound('soundfiles/Einbrecher/ichFindeDenEinbrecher.mp3', function () { //"ich finde den einbrecher"
                     driveToKoord(redTargetX, redTargetY, function () {
                         panik();
-                        player.sound('soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3'); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
-                        setTimeout(function () {
-                            player.sound('soundfiles/Einbrecher/hauAb.mp3');
-                        }, 2000);
-                        setTimeout(function () {
-                            player.sound('soundfiles/Einbrecher/verschwinde2.mp3');
-                        }, 4000);
+                        player.sound('soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3', function () {
+                            player.sound('soundfiles/Einbrecher/hauAb.mp3', function () {
+                                player.sound('soundfiles/Einbrecher/verschwinde2.mp3');
+                            });
+                        }); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
                     });
                 });
             });
