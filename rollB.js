@@ -325,13 +325,15 @@ Cylon.robot({
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
             });
+            /*
             setTimeout(function () {
-               /* my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
+                my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                     console.log(err || "Color BLUE");
                     callback();
                 });
-            */
+
             }, 1000);
+            */
         }
 
         function kopfDrehen() {
