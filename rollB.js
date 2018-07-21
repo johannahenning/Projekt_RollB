@@ -423,6 +423,7 @@ Cylon.robot({
                 player.sound("/soundfiles/PersonImHaus/okIchPrüfeDas2.mp3");
                 var istJemandDa = setInterval(function () {
                     aktuellesTarget = blueTargetX;
+                    console.log("DAS BLAUE ZIEL" + blueTargetX); 
                     if (blueTargetX === null || blueTargetX === undefined) {
                         player.sound('/soundfiles/Trauer/auwwh.mp3', function () {
                                 player.sound('/soundfiles/PersonImHaus/niemandenGefunden3.mp3');
