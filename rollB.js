@@ -329,7 +329,6 @@ Cylon.robot({
                 my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                     console.log(err || "Color BLUE");
                     callback();
-                    console.log("Bestaetigunston fertig");
                 });
             }, 1000);
         }
@@ -402,7 +401,7 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 driveToKoord(yellowTargetX, yellowTargetY, function () {
                     kreisFahren(function () {
-                        player.sound('/soundfiles/Tier/dasHatSpaßGemacht6.mp3');
+                        player.sound("\soundfiles\Tier\dasHatSpassGemacht6.mp3");
                     });
                     for (var i = 0; i <= 50; i++) {
                         my.bb8.randomColor();
