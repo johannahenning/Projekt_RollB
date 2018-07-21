@@ -438,7 +438,7 @@ Cylon.robot({
                             });
                             clearInterval(istJemandDa);
                         }
-                    });
+                    };
                 });
             });
         }
