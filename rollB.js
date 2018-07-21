@@ -20,28 +20,24 @@ app.get('/yellowTarget/:x/:y', function (req, res) {
 });
 
 app.get('/redTarget/:x/:y', function (req, res) {
-
     redTargetX = req.params.x;
     redTargetY = req.params.y;
     res.end();
 });
 
 app.get('/greenTarget/:x/:y', function (req, res) {
-
     greenTargetX = req.params.x;
     greenTargetY = req.params.y;
     res.end();
 });
 
 app.get('/blueTarget/:x/:y', function (req, res) {
-
     blueTargetX = req.params.x;
     blueTargetY = req.params.y;
     res.end();
 });
 
 app.get('/purpleTarget/:x/:y', function (req, res) {
-
     purpleTargetX = req.params.x;
     purpleTargetY = req.params.y;
     res.end();
@@ -113,8 +109,6 @@ Cylon.robot({
     work: function (my) {
         console.log("Wake up RollB");
         var player = new SoundPlayer();
-        player.sound('5.mp3', function () {
-        });
         for (var i = 0; i <= 50; i++) {
             my.bb8.randomColor();
             i++;
@@ -164,11 +158,11 @@ Cylon.robot({
                             case "verstecken":
                                 verstecken();
                                 break;
-                            case "haustier": //katze/person
-                                katzePerson();
+                            case "haustier": //Tier/person
+                                tierPerson();
                                 break;
                             case "personimhaus":
-                                personImHaus()
+                                personImHaus();
                                 break;
                             case "toilettenpapier": //klo
                                 klo();
@@ -187,6 +181,9 @@ Cylon.robot({
                                 break;
                             case "drehen":
                                 my.bb8.roll(0, richtung += 90);
+                                break;
+                            case "gefuehl":
+                                randomGefuehl();
                                 break;
                         }
                         break;
@@ -239,20 +236,6 @@ Cylon.robot({
             }
 
             switch (key.name) {
-                case "r":
-                    console.log("Start random LED show");
-                    for (var i = 0; i <= 200; i++) {
-                        my.bb8.randomColor();
-                        i++;
-                    }
-                    console.log("Play Sound File");
-                    player.sound('2.mp3', function () {
-                    });
-                    break;
-                case "k":
-                    console.log("Change to random color");
-                    my.bb8.randomColor();
-                    break;
                 case "w":
                     console.log("Drive to front");
                     my.bb8.roll(100, 0);
@@ -273,71 +256,9 @@ Cylon.robot({
                     console.log("Stop");
                     my.bb8.stop();
                     break;
-                case "o":
-                    console.log("Start drive in a circle");
-                    var count = 0;
-                    var dir = 0;
-                    var interval = setInterval(function () {
-                        console.log("drive to direction: " + dir);
-                        my.bb8.roll(30, dir);
-                        dir = dir + 5;
-                        if (dir >= 365) {
-                            dir = 0;
-                            console.log("Reset direction");
-                            count++;
-                        }
-                        if (count > 2) {
-                            clearInterval(interval);
-                            my.bb8.stop();
-                            console.log("STOP!");
-                        }
-                    }, 100);
-                    break;
-                case ("y"):
-                    console.log("Play Sound File");
-                    player.sound('1.mp3', function () {
-                    });
-                    break;
-                case ("x"):
-                    console.log("Play Sound File");
-                    player.sound('2.mp3', function () {
-                    });
-                    break;
-                case ("c"):
-                    console.log("Play Sound File");
-                    player.sound('3.mp3', function () {
-                    });
-                    break;
-                case ("v"):
-                    console.log("Play Sound File");
-                    player.sound('4.mp3', function () {
-                    });
-                    break;
-                case ("b"):
-                    console.log("Play Sound File");
-                    player.sound('5.mp3', function () {
-                    });
-                    break;
-                case ("n"):
-                    driveToKoord(yellowTargetX, yellowTargetY);
-                    break;
-                /*console.log("Play Sound File");
-                player.sound('6.mp3', function () {
-                });
-                break;*/
-                case ("m"):
-                    console.log("Play Sound File");
-                    player.sound('7.mp3', function () {
-                    });
-                    break;
-                case ("p"):
-                    my.bb8.color({red: 0, green: 255, blue: 255}, function (err, data) {
-                        console.log("LED OFF!");
-                    });
-                    break;
                 default:
                     console.log("Key unknown, ROLLB SAYS NO");
-                    player.sound('15.mp3', function () {
+                    player.sound('ichHasseEs.mp3', function () {
                     });
                     my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                         console.log(err || "Color RED!");
@@ -351,32 +272,8 @@ Cylon.robot({
 
         }
 
-        var direction = 0;
-        var oldString = "oldString";
-        var counter = 0;
-
-        /*
-            else if (xKoordRollB.includes("outOfBorder") && !oldString.includes("outOfBorder")) {
-                console.log(xKoordRollB);
-                direction = (direction + 180 + counter) % 360;
-                console.log(direction);
-                my.bb8.roll(60, direction);
-                counter += 90;
-                oldString = "outOfBorder";
-            }
-            else if (xKoordRollB.includes("outOfBorder") && oldString.includes("outOfBorder")) {
-                console.log(xKoordRollB);
-                console.log(direction);
-                console.log("AusnahmeFall oldString = outOfBorder");
-                my.bb8.roll(50, direction);
-                oldString = "oldString";
-            }
-        }
-*/
-
         function freude(callback) {
-            player.sound('10.mp3', function () {
-            });
+            player.sound('wuhuu.mp3');
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                 console.log(err || "Color RED");
             });
@@ -393,23 +290,38 @@ Cylon.robot({
             callback();
         }
 
+        function randomGefuehl() {
+            var gefuehlsFunktionen = [trauer(), wut(), freude()];
+
+            function randomNumber(n) {
+                return Math.floor(Math.random() * n);
+            }
+
+            gefuehlsFunktionen[randomNumber(gefuehlsFunktionen.length)]();
+        }
+
+        function wut() {
+            player.sound('scheiße.mp3');
+        }
+
         function trauer() {
-            player.sound('6.mp3', function () {
+            player.sound('auwwh.mp3', function () {
+                player.sound('ouuuh2.mp3');
             });
             my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                 console.log(err || "Color BLUE");
             });
         }
 
-        function panikWut() {
-            player.sound('7.mp3', function () {
+        function panik() {
+            player.sound('dasDarfDochNichtWahrSein.mp3', function () {
             });
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                 console.log(err || "Color Red");
             });
         }
 
-        function bestaetigungston(callback) {
+        function bestaetigungsFarbe(callback) {
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
             });
@@ -422,43 +334,39 @@ Cylon.robot({
             }, 1000);
         }
 
-        function fertigton() {
-            player.sound('16.mp3', function () {
-            });
-        }
-
         function kopfDrehen() {
             my.bb8.roll(0, 270);
             my.bb8.roll(0, 90);
             my.bb8.roll(0, 270);
         }
 
-        //UseCase1
+        //Einbrecher Usecase
         function findeDenEinbrecher() {
-            bestaetigungston(function () {
-                player.sound('8.mp3', function () { //"ich finde den einbrecher"
+            bestaetigungsFarbe(function () {
+                player.sound('ichFindeDenEinbrecher.mp3', function () { //"ich finde den einbrecher"
                     driveToKoord(redTargetX, redTargetY, function () {
-                        panikWut();
-                        player.sound('7.mp3'); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
+                        panik();
+                        player.sound('verschwindeDuDummerEinbrecher.mp3'); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
                     });
                 });
             });
         }
 
-        //UseCase2
+        //Verstecken Usecase
         function verstecken() {
-            bestaetigungston(function () {
-                player.sound('8.mp3', function () { //"klar, fang an zu zählen!"
+            bestaetigungsFarbe(function () {
+                player.sound('klarFangAnZuZählen2.mp3', function () { //"klar, fang an zu zählen!"
                     driveToKoord(yellowTargetX, yellowTargetY, function () {
                         setTimeout(function () {
-                            freude(function () {
-                                player.sound('4.mp3'); //"oh du hast mich gefunden ..."
-                            });
+                            player.sound('ohDuHastMichgefundenJetztBinIchDran.mp3'); //"oh du hast mich gefunden ..."
                         }, 5000);
                     });
                 });
 
             });
+            setTimeout((function () {
+                player.sound('oderWirSpielenWasAnderes2.mp3');
+            }), 8000)
         }
 
         function kreisFahren(callback) {
@@ -483,73 +391,76 @@ Cylon.robot({
             callback();
         }
 
-        //UseCase3
-        function katzePerson() {
-            bestaetigungston(function () {
-                player.sound('8.mp3', function () {
-                    driveToKoord(redTargetX, redTargetY, function () {
-                        kreisFahren(callback);
-                        for (var i = 0; i <= 50; i++) {
-                            my.bb8.randomColor();
-                            i++;
-                        }
-                        player.sound('9.mp3');
+        //Kuscheltier Person
+        function tierPerson() {
+            bestaetigungsFarbe(function () {
+
+                driveToKoord(redTargetX, redTargetY, function () {
+                    kreisFahren(function () {
+                        player.sound('dasHatSpaßGemacht6.mp3');
                     });
+                    for (var i = 0; i <= 50; i++) {
+                        my.bb8.randomColor();
+                        i++;
+                    }
+                    player.sound('duziduzimiezimiezi.mp3');
                 });
+
 
             });
         }
 
         //UseCase4
         function personImHaus() {
-            bestaetigungston(function () {
+            bestaetigungsFarbe(function () {
                 var aktuellesTarget = 0;
+                player.sound("okIchPrüfeDasMalFürDich2.mp3");
                 var istJemandDa = setInterval(function () {
                     aktuellesTarget = blueTargetX;
-                    if(blueTargetX === null || blueTargetX === undefined){
-                        player.sound('8.mp3');
-                        console.log("hier ist niemand");
+                    if (blueTargetX === null || blueTargetX === undefined) {
+                        player.sound('auwwh.mp3', function () {
+                                player.sound('ichKonnteNiemandenFindenWirSindGanzAllein3.mp3');
+                            }
+                        );
                     } else {
-                        player.sound('9.mp3', function () {
-                            freude(function () {
-                            })
+                        player.sound('heyHierIstJemand5.mp3', function () {
+                            player.sound('juhuu.mp3');
+                            freude(callback);
                         });
-                        console.log("hier ist jemand");
                         clearInterval(istJemandDa);
                     }
+                });
             });
-                fertigton();
         }
 
         //UseCase5
         function klo() {
-            bestaetigungston(function () {
-                player.sound('8.mp3', function () { //"oh ich merke ich muss aufs klo..."
+            bestaetigungsFarbe(function () {
+                player.sound('ohIchMerkeIchMussAufDieToiletteEntschuldigeMichKurz.mp3', function () { //"oh ich merke ich muss aufs klo..."
                     driveToKoord(blueTargetX, blueTargetY, function () {
                         setTimeout(function () {
-                            player.sound('4.mp3', function () { //"das war erleichternd"
+                            player.sound('piss.mp3');
+                            player.sound('flushing-the-toilet.mp3', function () {
                                 driveToKoord(redTargetX, redTargetY, function () {
-                                    fertigton();
+                                    player.sound('dasWarErleichternd.mp3');
                                 });
                             });
-                        });
-                    }, 5000);
+                        }, 5000);
+                    });
                 })
             });
         }
 
-        //UseCase6
+        //Einkaufen
         function einkaufen() {
-            bestaetigungston(function () {
+            bestaetigungsFarbe(function () {
                 driveToKoord(blueTargetX, blueTargetY, function () {
                     kopfDrehen(function () {
                         driveToKoord(redTargetX, redTargetY, function () {
-                            player.sound('13.mp3', function () { //"ich hätte gerne milch, eier..."
+                            player.sound('ichHätteGerneMilchEierUndZucker.mp3', function () { //"ich hätte gerne milch, eier..."
                                 setTimeout(function () {
-                                    driveToKoord(blueTargetX, blueTargetY, function () {
-                                        player.sound('4.mp3', function () { //"ich habe ein paar sachen eingelauft..."
-                                            fertigton();
-                                        });
+                                    driveToKoord(yellowTargetX, yellowTargetY, function () {
+                                        player.sound('sachenEingekauft.mp3');
                                     });
                                 }, 5000);
                             });
@@ -576,15 +487,13 @@ Cylon.robot({
             setTimeout(function () {
                 my.bb8.stop();
             }, 2500);
-            player.sound('13.mp3', function () { //"disco disco party party"
+            player.sound('kommLassUnsTanzen2.mp3', function () { //"disco disco party party"
                 for (var i = 0; i <= 50; i++) {
                     my.bb8.randomColor();
                     i++;
                 }
-                player.sound('13.mp3', function () {
-                    freude(function () {
-
-                    });
+                player.sound('lied.mp3', function () {
+                    freude(callback);
                 });
             });
 
@@ -592,14 +501,14 @@ Cylon.robot({
 
         //UseCase8
         function verkehrspolizist() {
-            bestaetigungston(function () {
-                driveToKoord(redTargetX, redTargetY, function () {
+            bestaetigungsFarbe(function () {
+                driveToKoord(redTargetX, redTargetY, function () { //Straße AUTO!!!!
                     my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                         console.log(err || "Color RED");
                     }, function () {
-                        player.sound('13.mp3', function () { //"bitte anhalten!"
+                        player.sound('bitteBleibenSieStehen2.mp3', function () { //"bitte anhalten!"
                             kopfDrehen(function () {
-                                player.sound('15.mp3'); //"jetzt weiterfahren"
+                                player.sound('jetztKönnenSieWeiterFahren.mp3'); //"jetzt weiterfahren"
                                 my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                                     console.log(err || "Color GREEN");
                                 });
@@ -612,8 +521,8 @@ Cylon.robot({
 
         //UseCase9
         function machMalWas() {
-            bestaetigungston(function () {
-                player.sound('15.mp3', function () { //„ich kann im viereck fahren zum beispiel“
+            bestaetigungsFarbe(function () {
+                player.sound('ichKannImViereckFahrenZumBeispiel.mp3', function () { //„ich kann im viereck fahren zum beispiel“
                     moveSquare(function () {
                         for (var i = 0; i <= 200; i++) {
                             my.bb8.randomColor();
@@ -621,9 +530,6 @@ Cylon.robot({
                         }
                     });
                 });
-            });
-            player.sound('15.mp3', function () { //"aber ich kann auch verstecken blabla ..."
-                fertigton();
             });
         }
 
@@ -754,9 +660,7 @@ Cylon.robot({
                             callback();
                         }
                     }, 200);
-
                 }, 6000);
-
             }
         }
 
