@@ -401,7 +401,7 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 driveToKoord(yellowTargetX, yellowTargetY, function () {
                     kreisFahren(function () {
-                        player.sound("\soundfiles\Tier\dasHatSpassGemacht6.mp3");
+                        player.sound("dasHatSpassGemacht6.mp3");
                     });
                     for (var i = 0; i <= 50; i++) {
                         my.bb8.randomColor();
