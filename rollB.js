@@ -314,8 +314,8 @@ Cylon.robot({
         }
 
         function panik() {
-            player.sound('soundfiles/WutPanik/dasDarfDochNichtWahrSein.mp3', function () {
-            });
+            /*player.sound('soundfiles/WutPanik/dasDarfDochNichtWahrSein.mp3', function () {
+            });*/
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                 console.log(err || "Color Red");
             });
