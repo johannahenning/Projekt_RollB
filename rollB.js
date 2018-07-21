@@ -418,10 +418,16 @@ Cylon.robot({
         function personImHaus() {
             bestaetigungsFarbe(function () {
                 var aktuellesTarget = 0;
+
                 player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
+<<<<<<< HEAD
                         if (blueTargetX === null || blueTargetX === undefined || blueTargetX === 0 || blueTargetX===1223.5) {
+=======
+                        console.log("BLAUESZIEL!!!" + blueTargetX);
+                        if (blueTargetX === null || blueTargetX === undefined || blueTargetX === 0) {
+>>>>>>> a657d07d1aa061928388fa004c111e30da9ab7dd
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                                     player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
                                 }
