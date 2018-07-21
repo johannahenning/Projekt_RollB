@@ -429,7 +429,9 @@ Cylon.robot({
                     } else {
                         player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
                             player.sound('soundfiles/Freude/juhuu.mp3');
-                            freude(callback);
+                            freude(function () {
+                                
+                            });
                         });
                         clearInterval(istJemandDa);
                     }
