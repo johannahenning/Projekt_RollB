@@ -418,23 +418,23 @@ Cylon.robot({
         function personImHaus() {
             bestaetigungsFarbe(function () {
                 var aktuellesTarget = 0;
-                player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3");
-                var istJemandDa = setInterval(function () {
-                    aktuellesTarget = blueTargetX;
-                    if (blueTargetX === null || blueTargetX === undefined) {
-                        player.sound('soundfiles/Trauer/auwwh.mp3', function () {
-                                player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                            }
-                        );
-                    } else {
-                        player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
-                            player.sound('soundfiles/Freude/juhuu.mp3');
-                            freude(function () {
-                                
+                player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
+                    var istJemandDa = setInterval(function () {
+                        aktuellesTarget = blueTargetX;
+                        if (blueTargetX === null || blueTargetX === undefined) {
+                            player.sound('soundfiles/Trauer/auwwh.mp3', function () {
+                                    player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
+                                }
+                            );
+                        } else {
+                            player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
+                                player.sound('soundfiles/Freude/juhuu.mp3');
+                                freude(function () {
+                                });
                             });
-                        });
-                        clearInterval(istJemandDa);
-                    }
+                            clearInterval(istJemandDa);
+                        }
+                    });
                 });
             });
         }
