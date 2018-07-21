@@ -402,7 +402,7 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 driveToKoord(yellowTargetX, yellowTargetY, function () {
                     kreisFahren(function () {
-                        player.sound("dasHatSpassGemacht6.mp3");
+                        player.sound("soundfiles/Tier/dasHatSpassGemacht6.mp3");
                     });
                     /*     for (var i = 0; i <= 50; i++) {
                              my.bb8.randomColor();
@@ -655,7 +655,7 @@ Cylon.robot({
 
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-                        if (distanceToMovingObjekt < 100) {
+                        if (distanceToMovingObjekt < 200) {
                             console.log("ICH STOPPE");
                             my.bb8.stop();
 
