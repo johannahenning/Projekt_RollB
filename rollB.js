@@ -450,6 +450,7 @@ Cylon.robot({
                     driveToKoord(blueTargetX, blueTargetY, function () {
                         player.sound('soundfiles/Klo/piss.mp3', function () {
                             player.sound('soundfiles/Klo/flushing-the-toilet.mp3', function () {
+                                my.bb8.roll(30, 90);
                                 driveToKoord(redTargetX, redTargetY, function () {
                                     player.sound('soundfiles/Klo/dasWarErleichternd.mp3');
                                 });
@@ -502,7 +503,8 @@ Cylon.robot({
                     i++;
                 }
                 player.sound('lied.mp3', function () {
-                    freude(callback);
+                    freude(function () {
+                    });
                 });
             });
 
