@@ -429,7 +429,7 @@ Cylon.robot({
                         aktuellesTarget = blueTargetX;
                         console.log("BLAUESZIEL!!!" + aktuellesTarget);
                         console.log("ALTES TARGET" + altesTarget);
-                        if (typeof aktuellesTarget === "undefined") {
+                        if (typeof aktuellesTarget === "undefined" || aktuellesTarget === 0) {
                             altesTarget = "ja";
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                                     player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
