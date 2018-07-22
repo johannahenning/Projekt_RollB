@@ -432,13 +432,13 @@ Cylon.robot({
                         if (typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) {
                             altesTarget = "ja";
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
-                                    player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                                });
+                                player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
+                            });
                         } else if (aktuellesTarget !== 0) {
+                            clearInterval(istJemandDa);
                             player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
                                 //player.sound('soundfiles/Freude/juhuu.mp3');
                                 freude(function () {
-                                    clearInterval(istJemandDa);
                                 });
                             });
                             altesTarget = "falsch";
