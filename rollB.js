@@ -285,9 +285,9 @@ Cylon.robot({
             setTimeout(function () {
                 my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                     console.log(err || "Color GREEN");
+                    callback();
                 });
             }, 2000);
-            callback();
         }
 
         function randomGefuehl() {
