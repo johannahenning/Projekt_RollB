@@ -421,7 +421,7 @@ Cylon.robot({
         //UseCase4
         function personImHaus() {
             bestaetigungsFarbe(function () {
-                var aktuellesTarget = 0;
+                var aktuellesTarget = blueTargetX;
                 var altesTarget = "falsch";
                 var istJemandDa = setInterval(function () {
                     aktuellesTarget = blueTargetX;
