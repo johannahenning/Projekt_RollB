@@ -164,7 +164,7 @@ Cylon.robot({
                             case "personimhaus":
                                 personImHaus();
                                 break;
-                            case "toilettenpapier": //klo
+                            case "toilette": //klo
                                 klo();
                                 break;
                             case "einkaufen":
