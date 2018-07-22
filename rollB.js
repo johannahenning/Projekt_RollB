@@ -638,16 +638,16 @@ Cylon.robot({
                         //rollB: top left target: bottom right
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: top left target: bottom right");
-                        //neuerWinkel = ausrichtung + winkelZumZiel;
-                        neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                        neuerWinkel = ausrichtung + winkelZumZiel;
+                        //neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
 
 
                         //rollB: top right target: bottom left
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX > zielKoordX) {
 
                         console.log("rollB: top right target: bottom left");
-                        neuerWinkel = ausrichtung + winkelZumZiel;
-                        // neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                        //neuerWinkel = ausrichtung + winkelZumZiel;
+                         neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
                     }
 
                     my.bb8.roll(70, (neuerWinkel) % 360);
