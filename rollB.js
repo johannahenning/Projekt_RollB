@@ -427,13 +427,13 @@ Cylon.robot({
                     var altesTarget = false;
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
-                        console.log("BLAUESZIEL!!!" + blueTargetX);
+                        console.log("BLAUESZIEL!!!" + aktuellesTarget);
+                        console.log("ALTES TARGET" + altesTarget);
                         if ((aktuellesTarget === undefined || aktuellesTarget === 0) && altesTarget === false) {
                             altesTarget = true;
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                                     player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                                }
-                            );
+                                });
                         } else if (altesTarget === true && aktuellesTarget !== 0) {
                             player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
                                 //player.sound('soundfiles/Freude/juhuu.mp3');
@@ -441,6 +441,9 @@ Cylon.robot({
                                     clearInterval(istJemandDa);
                                 });
                             });
+                            altesTarget = false;
+                        } else {
+                            console.log("ELSE");
                         }
                     });
                 });
