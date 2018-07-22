@@ -291,7 +291,7 @@ Cylon.robot({
         }
 
         function randomGefuehl() {
-            var gefuehlsFunktionen = [trauer(), wut(), freude()];
+            var gefuehlsFunktionen = [trauer, wut, freude];
 
             var randomNumber = function(n) {
                 return Math.floor(Math.random() * n);
@@ -303,14 +303,14 @@ Cylon.robot({
             player.sound('soundfiles/WutPanik/scheiße.mp3');
         }
 
-        var trauer = function () {
+        function trauer() {
             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                 player.sound('soundfiles/Trauer/ouuuh2.mp3');
             });
             my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                 console.log(err || "Color BLUE");
             });
-        };
+        }
 
         function panik() {
             /*player.sound('soundfiles/WutPanik/dasDarfDochNichtWahrSein.mp3', function () {
