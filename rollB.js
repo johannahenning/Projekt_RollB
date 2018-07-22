@@ -424,13 +424,13 @@ Cylon.robot({
                 var aktuellesTarget = 0;
 
                 player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
-                    var altesTarget = "falsch";
+                    var counter = 0;
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
                         console.log("BLAUESZIEL!!!" + aktuellesTarget);
                         console.log("ALTES TARGET" + altesTarget);
-                        if (typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) {
-                            altesTarget = "ja";
+                        if ((typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) && counter === 0) {
+                            counter = 1;
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                                 player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
                             });
@@ -441,7 +441,6 @@ Cylon.robot({
                                 freude(function () {
                                 });
                             });
-                            altesTarget = "falsch";
                         } else {
                             console.log("ELSE");
                         }
