@@ -632,7 +632,7 @@ Cylon.robot({
                         console.log("rollB: bottom left target: top right");
                         neuerWinkel = ausrichtung - (-winkelZumZiel);
 
-                        //rollB: top left target: bottom right ??????
+                        //rollB: top left target: bottom right
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: top left target: bottom right");
                         neuerWinkel = ausrichtung + winkelZumZiel;
