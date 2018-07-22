@@ -434,7 +434,7 @@ Cylon.robot({
                                     player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
                                 }
                             );
-                        } else {
+                        } else if (altesTarget==="tonKamSchonMal" && aktuellesTarget !== 0){
                             player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
                                 //player.sound('soundfiles/Freude/juhuu.mp3');
                                 freude(function () {
