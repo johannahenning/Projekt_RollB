@@ -324,6 +324,7 @@ Cylon.robot({
         function bestaetigungsFarbe(callback) {
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
+                callback();
             });
             /*
             setTimeout(function () {
@@ -350,9 +351,9 @@ Cylon.robot({
                         panik();
                         player.sound('soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3', function () {
                             player.sound('soundfiles/Einbrecher/hauAb.mp3', function () {
-                                player.sound('soundfiles/Einbrecher/verschwinde2.mp3');
+                                player.sound('soundfiles/Einbrecher/verschwinde2.mp3');//„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
                             });
-                        }); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
+                        });
                     });
                 });
             });
