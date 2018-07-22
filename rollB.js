@@ -422,13 +422,13 @@ Cylon.robot({
         function personImHaus() {
             bestaetigungsFarbe(function () {
                 var aktuellesTarget = 0;
+                var altesTarget = "falsch";
                 var istJemandDa = setInterval(function () {
                     aktuellesTarget = blueTargetX;
                     console.log("BLAUESZIEL!!!" + aktuellesTarget);
                     console.log("ALTES TARGET" + altesTarget);
                 });
                 player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
-                    var altesTarget = "falsch";
                     if (typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) {
                         altesTarget = "ja";
                         player.sound('soundfiles/Trauer/auwwh.mp3', function () {
