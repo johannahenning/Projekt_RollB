@@ -324,12 +324,13 @@ Cylon.robot({
         function bestaetigungsFarbe(callback) {
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
+                callback();
             });
             /*
             setTimeout(function () {
                 my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
                     console.log(err || "Color BLUE");
-                    callback();
+
                 });
             }, 1000);
             */
