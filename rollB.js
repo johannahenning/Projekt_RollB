@@ -164,7 +164,7 @@ Cylon.robot({
                             case "personimhaus":
                                 personImHaus();
                                 break;
-                            case "toilette": //klo
+                            case "toilettenpapier": //klo
                                 klo();
                                 break;
                             case "einkaufen":
@@ -324,7 +324,6 @@ Cylon.robot({
         function bestaetigungsFarbe(callback) {
             my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                 console.log(err || "Color GREEN");
-                callback();
             });
             /*
             setTimeout(function () {
@@ -332,7 +331,6 @@ Cylon.robot({
                     console.log(err || "Color BLUE");
                     callback();
                 });
-
             }, 1000);
             */
         }
@@ -351,9 +349,9 @@ Cylon.robot({
                         panik();
                         player.sound('soundfiles/Einbrecher/verschwindeDuDummerEinbrecher.mp3', function () {
                             player.sound('soundfiles/Einbrecher/hauAb.mp3', function () {
-                                player.sound('soundfiles/Einbrecher/verschwinde2.mp3');//„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
+                                player.sound('soundfiles/Einbrecher/verschwinde2.mp3');
                             });
-                        });
+                        }); //„verschwinde du dummer Einbrecher“, „hau ab“, „geh bitte wieder weg“
                     });
                 });
             });
@@ -424,26 +422,22 @@ Cylon.robot({
                 var aktuellesTarget = 0;
 
                 player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
-                    var counter = 0;
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
-                        console.log("BLAUESZIEL!!!" + aktuellesTarget);
-                        console.log("ALTES TARGET" + counter);
-                        if ((typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) && counter === 0) {
-                            counter = 1;
+                        console.log("BLAUESZIEL!!!" + blueTargetX);
+                        var aktBlueTargetX = blueTargetX;
+                        if (aktuellesTarget === undefined) {
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
-                                player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                            });
-                        } else if (aktuellesTarget >= 0) {
-                            counter = 0;
-                            clearInterval(istJemandDa);
+                                    player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
+                                }
+                            );
+                        } else {
                             player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
-                                //player.sound('soundfiles/Freude/juhuu.mp3');
+                                player.sound('soundfiles/Freude/juhuu.mp3');
                                 freude(function () {
                                 });
                             });
-                        } else {
-                            console.log("ELSE");
+                            clearInterval(istJemandDa);
                         }
                     });
                 });
