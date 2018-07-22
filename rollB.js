@@ -182,7 +182,7 @@ Cylon.robot({
                             case "drehen":
                                 my.bb8.roll(0, richtung += 90);
                                 break;
-                            case "gefuehl":
+                            case "gefuehle":
                                 randomGefuehl();
                                 break;
                         }
