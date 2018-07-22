@@ -428,7 +428,7 @@ Cylon.robot({
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
                         console.log("BLAUESZIEL!!!" + aktuellesTarget);
-                        console.log("ALTES TARGET" + altesTarget);
+                        console.log("ALTES TARGET" + counter);
                         if ((typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) && counter === 0) {
                             counter = 1;
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
