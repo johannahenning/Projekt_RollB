@@ -421,31 +421,31 @@ Cylon.robot({
         //UseCase4
         function personImHaus() {
             bestaetigungsFarbe(function () {
-                var aktuellesTarget = blueTargetX;
-                var altesTarget = "falsch";
-                var istJemandDa = setInterval(function () {
-                    aktuellesTarget = blueTargetX;
-                    console.log("BLAUESZIEL!!!" + aktuellesTarget);
-                    console.log("ALTES TARGET" + altesTarget);
-                });
-                player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
-                    if (typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) {
-                        altesTarget = "ja";
-                        player.sound('soundfiles/Trauer/auwwh.mp3', function () {
-                            player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                        });
-                    } else if (altesTarget === true && aktuellesTarget !== 0) {
-                        player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
-                            //player.sound('soundfiles/Freude/juhuu.mp3');
-                            freude(function () {
-                                clearInterval(istJemandDa);
-                            });
-                        });
-                        altesTarget = "falsch";
-                    } else {
-                        console.log("ELSE");
-                    }
+                var aktuellesTarget = 0;
 
+                player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
+                    var altesTarget = "falsch";
+                    var istJemandDa = setInterval(function () {
+                        aktuellesTarget = blueTargetX;
+                        console.log("BLAUESZIEL!!!" + aktuellesTarget);
+                        console.log("ALTES TARGET" + altesTarget);
+                        if (typeof aktuellesTarget === "undefined" || aktuellesTarget === undefined || aktuellesTarget === 0) {
+                            altesTarget = "ja";
+                            player.sound('soundfiles/Trauer/auwwh.mp3', function () {
+                                    player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
+                                });
+                        } else if (altesTarget === "ja" && aktuellesTarget !== 0) {
+                            player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
+                                //player.sound('soundfiles/Freude/juhuu.mp3');
+                                freude(function () {
+                                    clearInterval(istJemandDa);
+                                });
+                            });
+                            altesTarget = "falsch";
+                        } else {
+                            console.log("ELSE");
+                        }
+                    });
                 });
             });
         }
