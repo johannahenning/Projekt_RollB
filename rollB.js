@@ -272,7 +272,7 @@ Cylon.robot({
 
         }
 
-        function freude(callback) {
+        function freude() {
             player.sound('soundfiles/Freude/wuhuu.mp3');
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                 console.log(err || "Color RED");
@@ -285,7 +285,6 @@ Cylon.robot({
             setTimeout(function () {
                 my.bb8.color({red: 0, green: 255, blue: 0}, function (err, data) {
                     console.log(err || "Color GREEN");
-                    callback();
                 });
             }, 2000);
         }
@@ -434,8 +433,7 @@ Cylon.robot({
                         } else {
                             player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
                                 player.sound('soundfiles/Freude/juhuu.mp3');
-                                freude(function () {
-                                });
+                                freude();
                             });
                             clearInterval(istJemandDa);
                         }
