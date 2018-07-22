@@ -291,11 +291,11 @@ Cylon.robot({
         }
 
         function randomGefuehl() {
-            var gefuehlsFunktionen = [trauer, wut, freude];
+            var gefuehlsFunktionen = [wut, trauer, freude];
 
-            var randomNumber = function(n) {
+            function randomNumber(n) {
                 return Math.floor(Math.random() * n);
-            };
+            }
             gefuehlsFunktionen[randomNumber(gefuehlsFunktionen.length)]();
         }
 
