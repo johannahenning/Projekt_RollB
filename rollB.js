@@ -427,8 +427,7 @@ Cylon.robot({
                     var istJemandDa = setInterval(function () {
                         aktuellesTarget = blueTargetX;
                         console.log("BLAUESZIEL!!!" + blueTargetX);
-                        var aktBlueTargetX = blueTargetX;
-                        if (aktuellesTarget === undefined) {
+                        if (aktuellesTarget === undefined || aktuellesTarget===0) {
                             player.sound('soundfiles/Trauer/auwwh.mp3', function () {
                                     player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
                                 }
