@@ -450,14 +450,13 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Klo/aufToilette.mp3', function () { //"oh ich merke ich muss aufs klo..."
                     driveToKoord(blueTargetX, blueTargetY, function () {
-                        setTimeout(function () {
-                            player.sound('soundfiles/Klo/piss.mp3');
+                        player.sound('soundfiles/Klo/piss.mp3', function () {
                             player.sound('soundfiles/Klo/flushing-the-toilet.mp3', function () {
                                 driveToKoord(redTargetX, redTargetY, function () {
                                     player.sound('soundfiles/Klo/dasWarErleichternd.mp3');
                                 });
                             });
-                        }, 5000);
+                        });
                     });
                 })
             });
