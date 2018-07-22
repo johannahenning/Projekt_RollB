@@ -615,7 +615,7 @@ Cylon.robot({
                 setTimeout(function () {
                     stopKoordRollBX = xKoordRollB;
                     stopKoordRollBY = yKoordRollB;
-                    console.log("NeueStopKoords: " + stopKoordRollBX + stopKoordRollBY);
+                    console.log("NeueStopKoords: " + stopKoordRollBX + "Y: " + stopKoordRollBY);
                     //Berechnung vom Winkel zum Ziel
                     winkelZumZiel = Math.atan((stopKoordRollBY - zielKoordY) / (stopKoordRollBX - zielKoordX));
                     winkelZumZiel = winkelZumZiel * 180 / Math.PI;
