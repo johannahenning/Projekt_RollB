@@ -152,6 +152,19 @@ Cylon.robot({
 
                     case USECASE:
                         switch (messageBefehl) {
+                            case "rot":
+                                driveToKoord(redTargetX, redTargetY);
+                                break;
+                            case "blau":
+                                driveToKoord(blueTargetX, blueTargetY);
+                                break;
+                            case "gelb":
+                                driveToKoord(yellowTargetX, yellowTargetY);
+                                break;
+                            case "radiosprache":
+                                player.sound("radio.mp3");
+                                break;
+                            //case "text"
                             case "einbrecher":
                                 findeDenEinbrecher();
                                 break;
@@ -449,10 +462,10 @@ Cylon.robot({
                 player.sound('soundfiles/Klo/aufToilette.mp3', function () { //"oh ich merke ich muss aufs klo..."
                     driveToKoord(blueTargetX, blueTargetY, function () {
                         player.sound('soundfiles/Klo/pissAndFlush.mp3', function () {
-                                my.bb8.roll(30, 90);
-                                driveToKoord(redTargetX, redTargetY, function () {
-                                    player.sound('soundfiles/Klo/dasWarErleichternd.mp3');
-                                });
+                            my.bb8.roll(30, 90);
+                            driveToKoord(redTargetX, redTargetY, function () {
+                                player.sound('soundfiles/Klo/dasWarErleichternd.mp3');
+                            });
                         });
                     });
                 })
@@ -462,7 +475,7 @@ Cylon.robot({
         //Einkaufen
         function einkaufen() {
             bestaetigungsFarbe(function () {
-                driveToKoord(blueTargetX, blueTargetY, function () {
+                driveToKoord(yellowTargetX, yellowTargetY, function () {
                     kopfDrehen(function () {
                         driveToKoord(redTargetX, redTargetY, function () {
                             player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
@@ -631,21 +644,30 @@ Cylon.robot({
                         //rollB: bottom left target: top right
                     } else if (stopKoordRollBY > zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: bottom left target: top right");
-                        neuerWinkel = ausrichtung - (-winkelZumZiel);
+                        if (zielKoordX <= 960 && stopKoordRollBX > 960) {
+                            neuerWinkel = ausrichtung - (-winkelZumZiel) + 180;
+                        } else {
+                            neuerWinkel = ausrichtung - (-winkelZumZiel);
+                        }
 
                         //rollB: top left target: bottom right
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX < zielKoordX) {
                         console.log("rollB: top left target: bottom right");
-                        neuerWinkel = ausrichtung + winkelZumZiel;
-                        //neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                        if (zielKoordX <= 960 && stopKoordRollBX > 960) {
+                            neuerWinkel = ausrichtung + winkelZumZiel + 180;
+                        } else {
+                            neuerWinkel = ausrichtung + winkelZumZiel;
+                        }
 
 
                         //rollB: top right target: bottom left
                     } else if (stopKoordRollBY < zielKoordY && stopKoordRollBX > zielKoordX) {
-
                         console.log("rollB: top right target: bottom left");
-                        //neuerWinkel = ausrichtung + winkelZumZiel;
-                         neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                        if (stopKoordRollBX <= 960 && zielKoordX > 960) {
+                            neuerWinkel = ausrichtung + (180 - (-winkelZumZiel)) + 180;
+                        } else {
+                            neuerWinkel = ausrichtung + (180 - (-winkelZumZiel));
+                        }
                     }
 
                     my.bb8.roll(70, (neuerWinkel) % 360);
