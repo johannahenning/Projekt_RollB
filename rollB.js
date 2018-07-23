@@ -153,13 +153,16 @@ Cylon.robot({
                     case USECASE:
                         switch (messageBefehl) {
                             case "rot":
-                                driveToKoord(redTargetX, redTargetY);
+                                driveToKoord(redTargetX, redTargetY, function () {
+                                });
                                 break;
                             case "blau":
-                                driveToKoord(blueTargetX, blueTargetY);
+                                driveToKoord(blueTargetX, blueTargetY, function () {
+                                });
                                 break;
                             case "gelb":
-                                driveToKoord(yellowTargetX, yellowTargetY);
+                                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                                });
                                 break;
                             case "radiosprache":
                                 player.sound("soundfiles/radiostimme.mp3");
