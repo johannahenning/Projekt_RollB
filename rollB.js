@@ -462,7 +462,7 @@ Cylon.robot({
                 player.sound('soundfiles/Klo/aufToilette.mp3', function () { //"oh ich merke ich muss aufs klo..."
                     driveToKoord(blueTargetX, blueTargetY, function () {
                         player.sound('soundfiles/Klo/pissAndFlush.mp3', function () {
-                            my.bb8.roll(30, 90);
+                            my.bb8.roll(0, 180);
                             driveToKoord(redTargetX, redTargetY, function () {
                                 player.sound('soundfiles/Klo/dasWarErleichternd.mp3');
                             });
