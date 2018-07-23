@@ -375,16 +375,12 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Verstecken/klarFangAnZuZählen2.mp3', function () { //"klar, fang an zu zählen!"
                     driveToKoord(yellowTargetX, yellowTargetY, function () {
-                        setTimeout(function () {
-                            player.sound('soundfiles/Verstecken/duHastMichGefunden.mp3'); //"oh du hast mich gefunden ..."
-                        }, 5000);
+                        setTimeout(player.sound('soundfiles/Verstecken/duHastMichGefunden.mp3', function () {
+                            player.sound('soundfiles/Verstecken/oderWirSpielenWasAnderes2.mp3');
+                        }), 5000);//"oh du hast mich gefunden ..."
                     });
                 });
-
             });
-            setTimeout((function () {
-                player.sound('soundfiles/Verstecken/oderWirSpielenWasAnderes2.mp3');
-            }), 8000)
         }
 
         function kreisFahren(callback) {
@@ -417,11 +413,6 @@ Cylon.robot({
                     kreisFahren(function () {
                         player.sound("soundfiles/Tier/dasHatSpassGemacht6.mp3");
                     });
-                    /*     for (var i = 0; i <= 50; i++) {
-                             my.bb8.randomColor();
-                             i++;
-                         }
-                         */
                     player.sound('soundfiles/Tier/duziduzi.mp3');
                 });
 
@@ -475,7 +466,7 @@ Cylon.robot({
         //Einkaufen
         function einkaufen() {
             bestaetigungsFarbe(function () {
-                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                driveToKoord(purpleTargetX, purpleTargetY, function () {
                     kopfDrehen(function () {
                         driveToKoord(redTargetX, redTargetY, function () {
                             player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
@@ -524,7 +515,7 @@ Cylon.robot({
         //UseCase8
         function verkehrspolizist() {
             bestaetigungsFarbe(function () {
-                driveToKoord(yellowTargetX, yellowTargetY, function () { //Straße AUTO!!!!
+                driveToKoord(purpleTargetX, purpleTargetY, function () { //Straße AUTO!!!!
                     my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                         console.log(err || "Color RED");
                     }, function () {

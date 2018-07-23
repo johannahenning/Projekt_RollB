@@ -32,10 +32,6 @@
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
 
-        tracking.ColorTracker.registerColor('green', function (r, g, b) {
-            return (r < 20 && g > 220 && b < 30);
-        });
-
         tracking.ColorTracker.registerColor('blue', function (r, g, b) {
             return (r < 60 && g < 160 && b > 150);
 
@@ -60,7 +56,7 @@
 
         });
 
-        var tracker = new tracking.ColorTracker([ "grey", "yellow", "green", "blue", "purple", "red"]);
+        var tracker = new tracking.ColorTracker([ "grey", "yellow", "blue", "purple", "red"]);
 
         tracking.track('#video', tracker, {camera: true});
 
