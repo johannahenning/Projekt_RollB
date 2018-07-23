@@ -165,7 +165,7 @@ Cylon.robot({
                                 player.sound("soundfiles/radiostimme.mp3");
                                 break;
                             case "stimmetts":
-                                player.sound("soundfiles/ttsstimme.wav");
+                                player.sound("soundfiles/textStimme.mp3");
                                 break;
                             case "einbrecher":
                                 findeDenEinbrecher();
@@ -468,9 +468,7 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 driveToKoord(purpleTargetX, purpleTargetY, function () {
                     driveToKoord(redTargetX, redTargetY, function () {
-                        player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
-                            player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3');
-                        });
+                        player.sound('soundfiles/Einkaufen/ichHätteGerneMilchEierUndZuckerOHH.mp3');
                     })
                 })
             });
