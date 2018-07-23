@@ -534,9 +534,23 @@ Cylon.robot({
                 my.bb8.roll(20, 0)
             }, 8000);
             setTimeout(function () {
-                my.bb8.stop();
+                my.bb8.roll(20, 0)
             }, 8500);
-
+            setTimeout(function () {
+                my.bb8.roll(20, 90)
+            }, 9000);
+            setTimeout(function () {
+                my.bb8.roll(20, 180)
+            }, 9500);
+            setTimeout(function () {
+                my.bb8.roll(20, 270)
+            }, 10000);
+            setTimeout(function () {
+                my.bb8.roll(20, 0)
+            }, 10500);
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 11000);
         }
 
         //UseCase8
@@ -575,20 +589,20 @@ Cylon.robot({
             my.bb8.roll(60, 0);
             setTimeout(function () {
                 my.bb8.roll(60, 90);
-            }, 1000);
+            }, 2000);
             setTimeout(function () {
                 my.bb8.roll(60, 180);
-            }, 2500);
-            setTimeout(function () {
-                my.bb8.roll(60, 270);
             }, 4000);
             setTimeout(function () {
                 my.bb8.roll(60, 270);
-            }, 5500);
+            }, 5000);
+            setTimeout(function () {
+                my.bb8.roll(60, 0);
+            }, 6000);
             setTimeout(function () {
                 my.bb8.stop();
                 callback();
-            }, 4000);
+            }, 7000);
         }
 
         function driveToKoord(zielKoordX, zielKoordY, callback) {
