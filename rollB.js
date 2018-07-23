@@ -377,6 +377,7 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Verstecken/klarFangAnZuZählen2.mp3', function () { //"klar, fang an zu zählen!"
                     driveToKoord(yellowTargetX, yellowTargetY, function () {
+                        player.sound('soundfiles/Verstecken/DuHastMichGefundenSchnitt.mp3');
                     });
                 });
             });
@@ -468,9 +469,7 @@ Cylon.robot({
                 driveToKoord(purpleTargetX, purpleTargetY, function () {
                     driveToKoord(redTargetX, redTargetY, function () {
                         player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
-                            driveToKoord(purpleTargetX, purpleTargetY, function () {
-                                player.sound('soundfiles/Einkaufen/sachenEingekauft.mp3');
-                            });
+                            player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3');
                         });
                     })
                 })
