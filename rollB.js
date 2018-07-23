@@ -338,14 +338,6 @@ Cylon.robot({
                 console.log(err || "Color GREEN");
                 callback();
             });
-            /*
-            setTimeout(function () {
-                my.bb8.color({red: 0, green: 0, blue: 255}, function (err, data) {
-                    console.log(err || "Color BLUE");
-
-                });
-            }, 1000);
-            */
         }
 
         function kopfDrehen(callback) {
@@ -555,17 +547,17 @@ Cylon.robot({
             my.bb8.roll(60, 0);
             setTimeout(function () {
                 my.bb8.roll(60, 90);
-            }, 2000);
+            }, 1000);
             setTimeout(function () {
                 my.bb8.roll(60, 180);
-            }, 4000);
+            }, 2000);
             setTimeout(function () {
                 my.bb8.roll(60, 270);
-            }, 6000);
+            }, 3000);
             setTimeout(function () {
                 my.bb8.stop();
-            }, 8000);
-            callback();
+                callback();
+            }, 4000);
         }
 
         function driveToKoord(zielKoordX, zielKoordY, callback) {
