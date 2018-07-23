@@ -468,11 +468,9 @@ Cylon.robot({
                 driveToKoord(purpleTargetX, purpleTargetY, function () {
                     driveToKoord(redTargetX, redTargetY, function () {
                         player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
-                            setTimeout(function () {
-                                driveToKoord(yellowTargetX, yellowTargetY, function () {
-                                    player.sound('soundfiles/Einkaufen/sachenEingekauft.mp3');
-                                });
-                            }, 5000);
+                            driveToKoord(purpleTargetX, purpleTargetY, function () {
+                                player.sound('soundfiles/Einkaufen/sachenEingekauft.mp3');
+                            });
                         });
                     })
                 })
