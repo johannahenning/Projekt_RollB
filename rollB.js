@@ -375,17 +375,9 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Verstecken/klarFangAnZuZählen2.mp3', function () { //"klar, fang an zu zählen!"
                     driveToKoord(yellowTargetX, yellowTargetY, function () {
-                        playVersteckenSoundFiles();
                     });
                 });
             });
-        }
-
-        function playVersteckenSoundFiles() {
-            my.bb8.roll(0, 90);
-            setTimeout(player.sound('soundfiles/Verstecken/duHastMichGefunden.mp3', function () {
-                player.sound('soundfiles/Verstecken/oderWirSpielenWasAnderes2.mp3');
-            }), 5000);//"oh du hast mich gefunden ..."
         }
 
         function kreisFahren(callback) {
