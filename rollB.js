@@ -466,16 +466,14 @@ Cylon.robot({
         function einkaufen() {
             bestaetigungsFarbe(function () {
                 driveToKoord(purpleTargetX, purpleTargetY, function () {
-                    kopfDrehen(function () {
-                        driveToKoord(redTargetX, redTargetY, function () {
-                            player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
-                                setTimeout(function () {
-                                    driveToKoord(yellowTargetX, yellowTargetY, function () {
-                                        player.sound('soundfiles/Einkaufen/sachenEingekauft.mp3');
-                                    });
-                                }, 5000);
-                            });
-                        })
+                    driveToKoord(redTargetX, redTargetY, function () {
+                        player.sound('soundfiles/Einkaufen/einkaufenGehen.mp3', function () { //"ich hätte gerne milch, eier..."
+                            setTimeout(function () {
+                                driveToKoord(yellowTargetX, yellowTargetY, function () {
+                                    player.sound('soundfiles/Einkaufen/sachenEingekauft.mp3');
+                                });
+                            }, 5000);
+                        });
                     })
                 })
             });
@@ -515,9 +513,7 @@ Cylon.robot({
         function verkehrspolizist() {
             bestaetigungsFarbe(function () {
                 driveToKoord(purpleTargetX, purpleTargetY, function () { //Straße AUTO!!!!
-                    my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
-                        console.log(err || "Color RED");
-                    }, function () {
+                    my.bb8.color({red: 255, green: 0, blue: 0}, function () {
                         player.sound('soundfiles/Verkehrspolizist/stehenBleiben2.mp3', function () { //"bitte anhalten!"
                             kopfDrehen(function () {
                                 player.sound('soundfiles/Verkehrspolizist/weiterFahren.mp3'); //"jetzt weiterfahren"
