@@ -413,7 +413,9 @@ Cylon.robot({
                     kreisFahren(function () {
                         player.sound("soundfiles/Tier/dasHatSpassGemacht6.mp3");
                     });
-                    player.sound('soundfiles/Tier/duziduzi.mp3');
+                    player.sound('soundfiles/Tier/duziduzi.mp3', function () {
+                        player.sound('soundfiles/Tier/duziduzi.mp3');
+                    });
                 });
 
 
@@ -452,7 +454,9 @@ Cylon.robot({
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Klo/aufToilette.mp3', function () { //"oh ich merke ich muss aufs klo..."
                     driveToKoord(blueTargetX, blueTargetY, function () {
-                        player.sound('soundfiles/Klo/pissAndFlush.mp3');
+                        player.sound('soundfiles/Klo/pissAndFlush.mp3', function () {
+                            player.sound('soundfiles/Klo/puuuhDasWarErleichternd.mp3');
+                        });
                     });
                 })
             });
@@ -483,19 +487,55 @@ Cylon.robot({
             });
             setTimeout(function () {
                 my.bb8.roll(20, 90)
-            }, 1000);
+            }, 500);
             setTimeout(function () {
                 my.bb8.roll(20, 180)
-            }, 2000);
+            }, 1000);
             setTimeout(function () {
                 my.bb8.roll(20, 270)
+            }, 1500);
+            setTimeout(function () {
+                my.bb8.roll(20, 0)
+            }, 2000);
+            setTimeout(function () {
+                my.bb8.roll(20, 90)
+            }, 2500);
+            setTimeout(function () {
+                my.bb8.roll(20, 180)
             }, 3000);
+            setTimeout(function () {
+                my.bb8.roll(20, 270)
+            }, 3500);
             setTimeout(function () {
                 my.bb8.roll(20, 0)
             }, 4000);
             setTimeout(function () {
-                my.bb8.stop();
+                my.bb8.roll(20, 90)
+            }, 4500);
+            setTimeout(function () {
+                my.bb8.roll(20, 180)
             }, 5000);
+            setTimeout(function () {
+                my.bb8.roll(20, 270)
+            }, 5500);
+            setTimeout(function () {
+                my.bb8.roll(20, 0)
+            }, 6000);
+            setTimeout(function () {
+                my.bb8.roll(20, 90)
+            }, 6500);
+            setTimeout(function () {
+                my.bb8.roll(20, 180)
+            }, 7000);
+            setTimeout(function () {
+                my.bb8.roll(20, 270)
+            }, 7500);
+            setTimeout(function () {
+                my.bb8.roll(20, 0)
+            }, 8000);
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 8500);
 
         }
 
@@ -538,10 +578,13 @@ Cylon.robot({
             }, 1000);
             setTimeout(function () {
                 my.bb8.roll(60, 180);
-            }, 2000);
+            }, 2500);
             setTimeout(function () {
                 my.bb8.roll(60, 270);
-            }, 3000);
+            }, 4000);
+            setTimeout(function () {
+                my.bb8.roll(60, 270);
+            }, 5500);
             setTimeout(function () {
                 my.bb8.stop();
                 callback();
