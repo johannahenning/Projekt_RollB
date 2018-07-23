@@ -471,31 +471,31 @@ Cylon.robot({
 
         //UseCase7
         function party() {
-            setTimeout(function () {
-                my.bb8.roll(20, 90)
-            }, 500);
-            setTimeout(function () {
-                my.bb8.roll(20, 180)
-            }, 1000);
-            setTimeout(function () {
-                my.bb8.roll(20, 270)
-            }, 1500);
-            setTimeout(function () {
-                my.bb8.roll(20, 0)
-            }, 2000);
-            setTimeout(function () {
-                my.bb8.stop();
-            }, 2500);
             player.sound('soundfiles/Tanzen/lassUnsTanzen2.mp3', function () { //"disco disco party party"
-                for (var i = 0; i <= 50; i++) {
-                    my.bb8.randomColor();
-                    i++;
-                }
                 player.sound('soundfiles/Tanzen/dancemusik.mp3', function () {
                     freude(function () {
                     });
                 });
+                for (var i = 0; i <= 100; i++) {
+                    my.bb8.randomColor();
+                    i++;
+                }
             });
+            setTimeout(function () {
+                my.bb8.roll(20, 90)
+            }, 1000);
+            setTimeout(function () {
+                my.bb8.roll(20, 180)
+            }, 2000);
+            setTimeout(function () {
+                my.bb8.roll(20, 270)
+            }, 3000);
+            setTimeout(function () {
+                my.bb8.roll(20, 0)
+            }, 4000);
+            setTimeout(function () {
+                my.bb8.stop();
+            }, 5000);
 
         }
 
