@@ -350,9 +350,16 @@ Cylon.robot({
 
         function kopfDrehen(callback) {
             my.bb8.roll(0, 270);
-            my.bb8.roll(0, 90);
-            my.bb8.roll(0, 270);
-            callback();
+            setTimeout(function () {
+                my.bb8.roll(0, 90);
+            }, 1000);
+            setTimeout(function () {
+                my.bb8.roll(0, 270);
+            }, 2000);
+            setTimeout(function () {
+                my.bb8.stop();
+                callback();
+            }, 3000);
         }
 
         //Einbrecher Usecase
