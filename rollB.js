@@ -376,7 +376,7 @@ Cylon.robot({
                 player.sound('soundfiles/Verstecken/klarFangAnZuZählen2.mp3', function () { //"klar, fang an zu zählen!"
                     driveToKoord(yellowTargetX, yellowTargetY, function () {
                         setTimeout(player.sound('soundfiles/Verstecken/duHastMichGefunden.mp3', function () {
-                            player.sound('soundfiles/Verstecken/oderWirSpielenWasAnderes2.mp3');
+                           // player.sound('soundfiles/Verstecken/oderWirSpielenWasAnderes2.mp3');
                         }), 5000);//"oh du hast mich gefunden ..."
                     });
                 });
