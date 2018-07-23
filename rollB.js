@@ -162,9 +162,11 @@ Cylon.robot({
                                 driveToKoord(yellowTargetX, yellowTargetY);
                                 break;
                             case "radiosprache":
-                                player.sound("radio.mp3");
+                                player.sound("soundfiles/radiostimme.mp3");
                                 break;
-                            //case "text"
+                            case "stimmetts":
+                                player.sound("soundfiles/ttsstimme.wav");
+                                break;
                             case "einbrecher":
                                 findeDenEinbrecher();
                                 break;
@@ -271,7 +273,7 @@ Cylon.robot({
                     break;
                 default:
                     console.log("Key unknown, ROLLB SAYS NO");
-                    player.sound('ichHasseEs.mp3', function () {
+                    player.sound('soundfiles/WutPanik/ichHasseEs.mp3', function () {
                     });
                     my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                         console.log(err || "Color RED!");
