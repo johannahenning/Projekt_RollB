@@ -331,8 +331,6 @@ Cylon.robot({
         }
 
         function panik() {
-            /*player.sound('soundfiles/WutPanik/dasDarfDochNichtWahrSein.mp3', function () {
-            });*/
             my.bb8.color({red: 255, green: 0, blue: 0}, function (err, data) {
                 console.log(err || "Color Red");
             });
@@ -387,24 +385,20 @@ Cylon.robot({
         }
 
         function kreisFahren(callback) {
-            console.log("Start drive in a circle");
             var count = 0;
             var dir = 0;
             var interval = setInterval(function () {
-                console.log("drive to direction: " + dir);
                 my.bb8.roll(30, dir);
                 dir = dir + 7;
                 my.bb8.randomColor();
                 if (dir >= 365) {
                     dir = 0;
-                    console.log("Reset direction");
                     count++;
                 }
                 if (count > 1) {
                     clearInterval(interval);
                     my.bb8.stop();
                     callback();
-                    console.log("STOP!");
                 }
             }, 100);
         }
@@ -724,11 +718,9 @@ Cylon.robot({
                         distanceToMovingObjekt = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
                         if (distanceToMovingObjekt < 200) {
-                            console.log("ICH STOPPE");
                             my.bb8.stop();
 
                             my.bb8.setHeading(0, function (serr, data) {
-                                console.log("SET HEADING");
                             });
                             clearInterval(interval);
                             callback();
