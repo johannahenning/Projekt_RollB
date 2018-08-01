@@ -15,7 +15,11 @@
             return r.prototype[n].apply(t, e)
         }
     }, tracking.initUserMedia_ = function (r, n) {
-        t.navigator.mediaDevices.getUserMedia({video: !0, audio: !(!n || !n.audio)}).then(function (t) {
+        const fullHdConstraints = {
+            video: {width: {exact: 1920}, height: {exact: 1080}}
+        };
+        //t.navigator.mediaDevices.getUserMedia({video: !0, audio: !(!n || !n.audio)}).then(function (t) {
+        t.navigator.mediaDevices.getUserMedia(fullHdConstraints).then(function (t) {
             r.srcObject = t
         })["catch"](function (t) {
             throw Error("Cannot capture user camera.")
@@ -431,7 +435,7 @@
         tracking.ColorTracker.knownColors_[t] = r
     }, tracking.ColorTracker.getColor = function (t) {
         return tracking.ColorTracker.knownColors_[t]
-    }, tracking.ColorTracker.prototype.colors = ["magenta"], tracking.ColorTracker.prototype.minDimension = 20, tracking.ColorTracker.prototype.maxDimension = 1 / 0, tracking.ColorTracker.prototype.minGroupSize = 30, tracking.ColorTracker.prototype.calculateDimensions_ = function (t, r) {
+    }, tracking.ColorTracker.prototype.colors = ["magenta"], tracking.ColorTracker.prototype.minDimension = 20, tracking.ColorTracker.prototype.maxDimension = 1 / 0, tracking.ColorTracker.prototype.minGroupSize = 10, tracking.ColorTracker.prototype.calculateDimensions_ = function (t, r) {
         for (var n = -1, e = -1, a = 1 / 0, i = 1 / 0, o = 0; o < r; o += 2) {
             var c = t[o], s = t[o + 1];
             c < a && (a = c), c > n && (n = c), s < i && (i = s), s > e && (e = s)

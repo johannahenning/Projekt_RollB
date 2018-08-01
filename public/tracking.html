@@ -9,10 +9,11 @@
 
     <style>
         video, canvas {
-            margin-left: 0px;
-            margin-top: 0px;
+            margin: auto;
             position: absolute;
+
         }
+
     </style>
 </head>
 <body>
@@ -20,8 +21,8 @@
 
 <div class="demo-frame">
     <div class="demo-container">
-        <video id="video" width="1000" height="850" preload autoplay loop muted controls></video>
-        <canvas id="canvas" width="1000" height="850"></canvas>
+        <video id="video" width="1920" height="1080" preload autoplay loop muted></video>
+        <canvas id="canvas" width="1920" height="1080"></canvas>
     </div>
 </div>
 
@@ -30,55 +31,71 @@
         var video = document.getElementById('video');
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
-        var middle = canvas.getContext('2d');
-        var rahmen = canvas.getContext('2d');
-        var ziel = canvas.getContext('2d');
-
-
-        tracking.ColorTracker.registerColor('green', function (r, g, b) {
-            return (r < 50 && g > 200 && b < 50);
-        });
 
         tracking.ColorTracker.registerColor('blue', function (r, g, b) {
-            return (r < 50 && g < 50 && b > 200);
+            return (r < 60 && g < 160 && b > 150);
 
-        });
-
-        tracking.ColorTracker.registerColor('white', function (r, g, b) {
-            return (r > 240 && g > 240 && b > 240)
         });
 
         tracking.ColorTracker.registerColor('grey', function (r, g, b) {
-            return (r > 200 && g > 200 && b > 200);
+            return (r > 240 && g > 240 && b > 240);
 
         });
 
-        var tracker = new tracking.ColorTracker(["yellow", "grey"]);
+        tracking.ColorTracker.registerColor('purple', function (r, g, b) {
+            return (r > 80 && g < 60 && b > 100);
+
+        });
+
+        tracking.ColorTracker.registerColor('red', function (r, g, b) {
+            return (r > 150 && g < 60 && b < 70);
+
+        });
+
+        var tracker = new tracking.ColorTracker([ "grey", "yellow", "blue", "purple", "red"]);
 
         tracking.track('#video', tracker, {camera: true});
 
-        var movingTargetX;
+        var yellowTargetX;
+        var yellowTargetY;
 
-        var movingTargetY;
+        var redTargetX;
+        var redTargetY;
 
-        var winkelRollBToGoal = 0;
-        var festesTargetX = 400;
-        var festesTargetY = 400;
+        var blueTargetX;
+        var blueTargetY;
 
-        var winkelStartDirection = 0;
+        var purpleTargetX;
+        var purpleTargetY;
 
-        var oldDistance = 5000;
+        var rollBX;
+        var rollBY;
 
         function track(rect) {
 
             if (rect.color === "grey") {
-                var rollBX = rect.x + rect.width / 2;
-                var rollBY = rect.y + rect.height / 2;
+                rollBX = rect.x + rect.width / 2;
+                rollBY = rect.y + rect.height / 2;
             }
 
             if (rect.color === "yellow") {
-                movingTargetX = rect.x + rect.width / 2;
-                movingTargetY = rect.y + rect.height / 2;
+                yellowTargetX = rect.x + rect.width / 2;
+                yellowTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "red") {
+                redTargetX = rect.x + rect.width / 2;
+                redTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "blue") {
+                blueTargetX = rect.x + rect.width / 2;
+                blueTargetY = rect.y + rect.height / 2;
+            }
+
+            if (rect.color === "purple") {
+                purpleTargetX = rect.x + rect.width / 2;
+                purpleTargetY = rect.y + rect.height / 2;
             }
 
             context.strokeStyle = rect.color;
@@ -87,35 +104,16 @@
             context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
             context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 40);
 
-            middle.fillRect(rollBX, rollBY, 10, 10);
-
-            var festesDX = festesTargetX - rollBX;
-            var festesDY = festesTargetY - rollBY;
-
-            var changingDX = movingTargetX - rollBX;
-            var changingDY = movingTargetY - rollBY;
-
-            var distanceToMovingObjekt = Math.sqrt(changingDX * changingDX + changingDY * changingDY);
-
-            var distanceToFixPoint = Math.sqrt(festesDX * festesDX + festesDY * festesDY);
-
-            //winkelStartDirection = Math.acos(Math.abs(rollBX - movingTargetX) / Math.abs(rollBY - movingTargetY));
-            // winkelStartDirection = Math.atan((rollBY - movingTargetY) / (rollBX - movingTargetX));
-            //console.log("WINKEL: " + winkelStartDirection * 180 / Math.PI);
 
             sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
-            sendGetRequest("/movementGoal/" + movingTargetX + "/" + movingTargetY);
-
+            sendGetRequest("/yellowTarget/" + yellowTargetX + "/" + yellowTargetY);
+            sendGetRequest("/redTarget/" + redTargetX + "/" + redTargetY);
+            sendGetRequest("/blueTarget/" + blueTargetX + "/" + blueTargetY);
+            sendGetRequest("/purpleTarget/" + purpleTargetX + "/" + purpleTargetY);
         }
 
         tracker.on('track', function (event) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
-
-                rahmen.strokeStyle = "#ff0000";
-                rahmen.strokeRect(100, 150, 800, 550);
-
-                ziel.strokeStyle = "#ff0000";
-                ziel.fillRect(400, 400, 10, 10);
 
                 if (event.data.length === 0) {
                     sendGetRequest("/movement/outOfBorder");
@@ -128,9 +126,7 @@
     }
     ;
 
-
     function sendGetRequest(url) {
-
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
         };
