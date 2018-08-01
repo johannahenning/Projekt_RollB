@@ -46,7 +46,6 @@ app.get('/purpleTarget/:x/:y', function (req, res) {
 app.use(express.static('public'));
 
 app.listen(8888, function () {
-    console.log('Example app listening on port 8888!');
 });
 
 var pubnub = new PubNub({
@@ -54,10 +53,7 @@ var pubnub = new PubNub({
 });
 
 const STOP = "stop";
-const RICHTUNG = "Richtung";
 const FARBE = "Farbe";
-const TONAUSGABE = "Tonausgabe";
-const TRACKING = "Tracking";
 const USECASE = "Usecase";
 
 //TARGET
@@ -91,9 +87,6 @@ var aY = 50;
 var richtung = 0;
 
 console.log('Server running');
-
-var trackingInterval;
-
 
 Cylon.robot({
     connections: {
@@ -142,14 +135,6 @@ Cylon.robot({
 
                 console.log(PubNubMessage);
                 switch (messageType) {
-                    case TRACKING:
-                        switch (messageBefehl) {
-                            case "koordinaten":
-                                trackingInterval = setInterval(tracking, 2000);
-                                break;
-                        }
-                        break;
-
                     case USECASE:
                         switch (messageBefehl) {
                             case "rot":
@@ -178,9 +163,6 @@ Cylon.robot({
                                 break;
                             case "haustier": //Tier/person
                                 tierPerson();
-                                break;
-                            case "personimhaus":
-                                personImHaus();
                                 break;
                             case "toilette": //klo
                                 klo();
@@ -419,34 +401,7 @@ Cylon.robot({
             });
         }
 
-        //UseCase4
-        function personImHaus() {
-            bestaetigungsFarbe(function () {
-                var aktuellesTarget = 0;
 
-                player.sound("soundfiles/PersonImHaus/okIchPrüfeDas2.mp3", function () {
-                    var istJemandDa = setInterval(function () {
-                        aktuellesTarget = blueTargetX;
-                        console.log("BLAUESZIEL!!!" + blueTargetX);
-                        var aktBlueTargetX = blueTargetX;
-                        if (aktuellesTarget === undefined) {
-                            player.sound('soundfiles/Trauer/auwwh.mp3', function () {
-                                    player.sound('soundfiles/PersonImHaus/niemandenGefunden3.mp3');
-                                }
-                            );
-                        } else {
-                            player.sound('soundfiles/PersonImHaus/hierIstJemand5.mp3', function () {
-                                player.sound('soundfiles/Freude/juhuu.mp3');
-                                freude();
-                            });
-                            clearInterval(istJemandDa);
-                        }
-                    });
-                });
-            });
-        }
-
-        //UseCase5
         function klo() {
             bestaetigungsFarbe(function () {
                 player.sound('soundfiles/Klo/aufToilette.mp3', function () { //"oh ich merke ich muss aufs klo..."

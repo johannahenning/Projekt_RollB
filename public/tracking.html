@@ -37,10 +37,6 @@
 
         });
 
-        tracking.ColorTracker.registerColor('white', function (r, g, b) {
-            return (r > 190 && g > 190 && b > 190)
-        });
-
         tracking.ColorTracker.registerColor('grey', function (r, g, b) {
             return (r > 240 && g > 240 && b > 240);
 
@@ -65,9 +61,6 @@
 
         var redTargetX;
         var redTargetY;
-
-        var greenTargetX;
-        var greenTargetY;
 
         var blueTargetX;
         var blueTargetY;
@@ -95,11 +88,6 @@
                 redTargetY = rect.y + rect.height / 2;
             }
 
-            if (rect.color === "green") {
-                greenTargetX = rect.x + rect.width / 2;
-                greenTargetY = rect.y + rect.height / 2;
-            }
-
             if (rect.color === "blue") {
                 blueTargetX = rect.x + rect.width / 2;
                 blueTargetY = rect.y + rect.height / 2;
@@ -120,7 +108,6 @@
             sendGetRequest("/movementRollB/" + rollBX + "/" + rollBY);
             sendGetRequest("/yellowTarget/" + yellowTargetX + "/" + yellowTargetY);
             sendGetRequest("/redTarget/" + redTargetX + "/" + redTargetY);
-            sendGetRequest("/greenTarget/" + greenTargetX + "/" + greenTargetY);
             sendGetRequest("/blueTarget/" + blueTargetX + "/" + blueTargetY);
             sendGetRequest("/purpleTarget/" + purpleTargetX + "/" + purpleTargetY);
         }
@@ -140,7 +127,6 @@
     ;
 
     function sendGetRequest(url) {
-
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
         };
